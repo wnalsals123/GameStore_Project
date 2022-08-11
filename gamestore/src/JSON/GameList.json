@@ -1,0 +1,86 @@
+[
+  {
+    "게임명" : "GTA5",
+    "이미지" : "https://post-phinf.pstatic.net/MjAxOTEyMDlfMTE2/MDAxNTc1ODU1MjI2MDk5.FRFPU4hRmTSm4dbU9P7AwyRkhBY0cu2ZHHDGzDOL9Y4g.A62Be94UyxxatbHgcllJkfbMofNCbqTZQED94tr_d4cg.JPEG/1.jpg?type=w1200",
+    "가격" : 50000,
+    "할인" : 0.5,
+    "신작" : false
+  },
+  {
+    "게임명" : "메이플스토리",
+    "이미지" : "https://nxcache.nexon.net/maplestory/assets-new/maplestoryfest/2021/src/images/global/share/facebook.jpg",
+    "가격" : 0,
+    "할인" : false,
+    "신작" : false
+  },
+  {
+    "게임명" : "레프트4데드2",
+    "이미지" : "https://cdn.vox-cdn.com/thumbor/m-D5qAKVkTJ8Pr5mgQ44hq6uCwo=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/21907835/laststand_embed.jpg",
+    "가격" : 10000,
+    "할인" : 0.5,
+    "신작" : false
+  },
+  {
+    "게임명" : "로스트아크",
+    "이미지" : "http://geimgaideu.com/wp-content/uploads/2021/06/Lost-Ark%EC%9D%98-%EC%B6%9C%EC%8B%9C%EC%9D%BC%EC%9D%80-%EC%96%B8%EC%A0%9C%EC%9D%B8%EA%B0%80%EC%9A%94.jpg",
+    "가격" : 0,
+    "할인" : false,
+    "신작" : false
+  },
+  {
+    "게임명" : "배틀필드2042",
+    "이미지" : "https://cdn1.epicgames.com/offer/52f57f57120c440fad9bfa0e6c279317/EGS_Battlefield2042_DICE_S1_2560x1440-36f16374c9c29a18a46872795b483d72_2560x1440-36f16374c9c29a18a46872795b483d72",
+    "가격" : 70000,
+    "할인" : false,
+    "신작" : true
+  },
+  {
+    "게임명" : "이블위딘",
+    "이미지" : "https://t1.daumcdn.net/cfile/tistory/24745B3956BF774002",
+    "가격" : 45000,
+    "할인" : 0.3,
+    "신작" : false
+  },
+  {
+    "게임명" : "FIFA23",
+    "이미지" : "https://www.fifaultimateteam.it/en/wp-content/uploads/2022/07/FIFA23-cover.jpg",
+    "가격" : 70000,
+    "할인" : false,
+    "신작" : true
+  },
+  {
+    "게임명" : "사이버펑크2077",
+    "이미지" : "https://cdn1.epicgames.com/offer/77f2b98e2cef40c8a7437518bf420e47/KR_CDProjektRED_Cyberpunk2077NG_S1_2560x1440_2560x1440-288702f4e6b60f12346e87559201a8ae",
+    "가격" : 50000,
+    "할인" : 0.7,
+    "신작" : false
+  },
+  {
+    "게임명" : "DJMAX",
+    "이미지" : "https://store-images.s-microsoft.com/image/apps.43739.14576235444726870.3e2b0155-ca8d-4075-bc12-04165b7144c1.0463db0d-2611-4b62-9622-423dfb90e56b",
+    "가격" : 40000,
+    "할인" : 0.3,
+    "신작" : false
+  },
+  {
+    "게임명" : "마인크래프트",
+    "이미지" : "https://cdn.mos.cms.futurecdn.net/UP5XKspW58q2ksTCYbAuv.jpg",
+    "가격" : 33000,
+    "할인" : false,
+    "신작" : false
+  },
+  {
+    "게임명" : "젤다의전설:야생의숨결",
+    "이미지" : "https://assets-prd.ignimgs.com/2022/06/14/zelda-breath-of-the-wild-1655249167687.jpg",
+    "가격" : 70000,
+    "할인" : 0.2,
+    "신작" : false
+  },
+  {
+    "게임명" : "포탈2",
+    "이미지" : "https://archive.org/download/Portal2OST/Portal_AlbumCover.jpg",
+    "가격" : 30000,
+    "할인" : 0.6,
+    "신작" : false
+  }
+]
