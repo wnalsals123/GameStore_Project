@@ -20,7 +20,11 @@ module.exports = {
       '2xl': '1536px',
       // => @media (min-width: 1536px) { ... }
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'close-btn': "url('https://cdn-icons-png.flaticon.com/512/1828/1828778.png')",
+      }
+    },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar-hide")],
 }
