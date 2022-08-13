@@ -12,7 +12,6 @@ const ItemDetail = () => {
   }
 
   return (
-    // 모달이 열릴때 openModal 클래스가 생성된다.
     <div className='fixed top-0 left-0 w-full h-full z-50'>
       <div className='flex justify-center items-center w-full h-full bg-neutral-500 bg-opacity-70'>
         <div className='relative max-w-screen-lg w-[calc(100%-5rem)] h-[calc(100%-5rem)] bg-neutral-900 rounded-xl'>
@@ -38,6 +37,7 @@ const ItemDetail = () => {
               <button className='w-full sm:w-1/4 h-fit py-2 sm:py-5 bg-sky-500 rounded-xl'>장바구니</button>
               <button className='w-full sm:w-1/4 h-fit py-2 sm:py-5 bg-sky-500 rounded-xl'>구매하기</button>
             </div>
+
           </div>
         </div>
       </div>
