@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './index.css';
 import App from './main/App';
+import ItemDetail from './modal/ItemDetail';
+import NotFound from './etc/NotFound'
 import reportWebVitals from './test/reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -11,8 +13,8 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}></Route>
-        {/* <Route path="/games/:gameid" element={<Product />}></Route>
-        <Route path="*" element={<NotFound />}></Route> */}
+        <Route path="/games/:gameid" element={<ItemDetail />}></Route>
+        <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

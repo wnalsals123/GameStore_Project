@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import GameList from '../json/GameList.json'
 
 const GameFlex = (props) => {
-  const { cart, setCart, setModalOpen } = props
+  const { cart, setCart } = props
   const [gameData, setGameData] = useState([])
+  const navigate = useNavigate();
 
   useEffect(() => {
     setGameData(GameList)
@@ -13,6 +15,11 @@ const GameFlex = (props) => {
     const id = 'gl-' + name
     const elemet = document.getElementById(id)
     mode && elemet.style.display !== 'flex' ? elemet.style.display = 'flex' : elemet.style.display = 'none'
+  }
+
+  const toDetail = (gameid) => {
+    document.body.style.overflow = 'hidden'
+    navigate("/games/" + gameid);
   }
 
   const gameFlexBox = () => {
@@ -35,7 +42,7 @@ const GameFlex = (props) => {
             </div>
           </div>
           <div className='hidden flex-col justify-center items-center absolute top-0 left-0 rounded-xl bg-neutral-100 bg-opacity-70 w-full h-full' id={'gl-' + item.게임명}>
-            <button className='mb-10 px-5 py-2 bg-sky-500 rounded-xl' onMouseDown={() => { setModalOpen(true); document.body.style.overflow = 'hidden'; }}>상세보기</button>
+            <button className='mb-10 px-5 py-2 bg-sky-500 rounded-xl' onMouseDown={() => { toDetail(item.게임명) }}>상세보기</button>
             <button className='px-5 py-2 bg-sky-500 rounded-xl' onMouseDown={() => { setCart(cart + 1) }}>장바구니</button>
           </div>
         </div>
