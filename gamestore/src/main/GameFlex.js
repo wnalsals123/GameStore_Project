@@ -17,9 +17,9 @@ const GameFlex = (props) => {
     mode && elemet.style.display !== 'flex' ? elemet.style.display = 'flex' : elemet.style.display = 'none'
   }
 
-  const toDetail = (gameid) => {
+  const toDetail = (item) => {
     document.body.style.overflow = 'hidden'
-    navigate("/games/" + gameid);
+    navigate("/games/" + item.게임명, {state: {item}});
   }
 
   const gameFlexBox = () => {
@@ -42,7 +42,7 @@ const GameFlex = (props) => {
             </div>
           </div>
           <div className='hidden flex-col justify-center items-center absolute top-0 left-0 rounded-xl bg-neutral-100 bg-opacity-70 w-full h-full' id={'gl-' + item.게임명}>
-            <button className='mb-10 px-5 py-2 bg-sky-500 rounded-xl' onMouseDown={() => { toDetail(item.게임명) }}>상세보기</button>
+            <button className='mb-10 px-5 py-2 bg-sky-500 rounded-xl' onMouseDown={() => { toDetail(item) }}>상세보기</button>
             <button className='px-5 py-2 bg-sky-500 rounded-xl' onMouseDown={() => { setCart(cart + 1) }}>장바구니</button>
           </div>
         </div>

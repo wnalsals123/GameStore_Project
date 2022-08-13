@@ -1,7 +1,10 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const ItemDetail = () => {
+  const location = useLocation();
   const navigate = useNavigate();
+
+  const item = location.state.item
 
   const toHome = () => {
     document.body.style.overflow = 'auto'
@@ -17,7 +20,7 @@ const ItemDetail = () => {
           <div className='relative w-full h-full sm:p-5 overflow-auto scrollbar-hide'>
 
             <div className='sticky top-0 mb-5 p-2 sm:p-5 bg-neutral-100 rounded-lg'>
-              <span className='block w-fit text-xl sm:text-3xl px-2'>Grand Theft Auto V</span>
+              <span className='block w-fit text-xl sm:text-3xl px-2'>{item.게임명}</span>
               <button className="absolute top-3 sm:top-6 right-3 sm:right-6 w-5 h-5 bg-close-btn bg-no-repeat bg-cover sm:w-7 sm:h-7" onClick={toHome}></button>
             </div>
 

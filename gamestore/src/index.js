@@ -12,8 +12,9 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />}></Route>
-        <Route path="/games/:gameid" element={<ItemDetail />}></Route>
+        <Route path="/" element={<App />}>
+          <Route path="/games/:gameid" element={<ItemDetail />}></Route>
+        </Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </BrowserRouter>
