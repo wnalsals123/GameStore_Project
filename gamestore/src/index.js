@@ -5,6 +5,7 @@ import './index.css';
 import App from './main/App';
 import ItemDetail from './modal/ItemDetail';
 import NotFound from './etc/NotFound'
+import NotFoundGame from './etc/NotFoundGame'
 import reportWebVitals from './test/reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -13,9 +14,10 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route path="/games/:gameid" element={<ItemDetail />}></Route>
+          <Route path="games/:gameid" element={<ItemDetail />}></Route>
         </Route>
         <Route path="*" element={<NotFound />}></Route>
+        <Route path="games/NotFound" element={<NotFoundGame />}></Route>
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

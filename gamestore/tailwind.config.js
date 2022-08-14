@@ -19,6 +19,12 @@ module.exports = {
 
       '2xl': '1536px',
       // => @media (min-width: 1536px) { ... }
+
+      '3xl': '1920px',
+      // => @media (min-width: 1920px) { ... }
+
+      '4xl': '2560px',
+      // => @media (min-width: 2560px) { ... }
     },
     extend: {
       backgroundImage: {
@@ -40,6 +46,8 @@ module.exports = {
         sideBarOut: "sideBarOut .4s ease",
       },
     },
+    
+    
   },
   plugins: [require("tailwind-scrollbar-hide")],
 }

@@ -1,86 +1,146 @@
 [
   {
     "게임명" : "GTA5",
+    "유통사" : "Rockstar Games",
+    "설명" : "어느 날 문득, 동네 건달과 은퇴한 은행 강도, 미치광이 사이코패스는 자신들이 어두운 범죄 세계와 미국 정부 기관, 엔터테인먼트 회사의 가장 끔찍하고 무시무시한 현실과 복잡하게 얽혀 있다는 걸 깨닫습니다. 아무도 믿을 수 없는, 서로조차 믿을 수 없는 이 무자비한 도시에서 살아남기 위해 그들은 여러 번의 위험한 습격에 몸을 던져야 합니다.",
     "이미지" : "https://post-phinf.pstatic.net/MjAxOTEyMDlfMTE2/MDAxNTc1ODU1MjI2MDk5.FRFPU4hRmTSm4dbU9P7AwyRkhBY0cu2ZHHDGzDOL9Y4g.A62Be94UyxxatbHgcllJkfbMofNCbqTZQED94tr_d4cg.JPEG/1.jpg?type=w1200",
+    "동영상" : "https://www.youtube-nocookie.com/embed/ISd3g9UZHtU",
     "가격" : 50000,
     "할인" : 0.5,
-    "신작" : false
+    "신작" : false,
+    "출시일" : "2015-04-14",
+    "태그" : {"오픈월드" : true, "멀티플레이" : false, "협동" : false, "액션" : true, "공포" : false, "좀비" : false, "어드벤처" : true, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : false}
   },
   {
     "게임명" : "메이플스토리",
+    "유통사" : "NEXON",
+    "설명" : "2002년 12월과 2003년 1월에 2차에 걸쳐 진행된 CBT를 거쳐, 2003년 4월 29일부터 상용 서비스를 시작했으며, 2022년 현재 19주년을 맞았다. 세계 최초의 횡스크롤 MMORPG를 표방하고 있으며, 다채로운 필드에서의 여행과 모험을 강조하고 있다. 캐치 프레이즈는 '끊임없는 즐거움, 스스로 만들어 나가는 이야기, 상상 속의 세계'다.",
     "이미지" : "https://nxcache.nexon.net/maplestory/assets-new/maplestoryfest/2021/src/images/global/share/facebook.jpg",
+    "동영상" : "https://www.youtube-nocookie.com/embed/F0FVvkVp1SE",
     "가격" : 0,
     "할인" : false,
-    "신작" : false
+    "신작" : false,
+    "출시일" : "2003-04-29",
+    "태그" : {"오픈월드" : false, "멀티플레이" : false, "협동" : false, "액션" : true, "공포" : false, "좀비" : false, "어드벤처" : true, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : false}
   },
   {
     "게임명" : "레프트4데드2",
+    "유통사" : "Valve",
+    "설명" : "밸브 코퍼레이션이 제작한 레프트 4 데드의 후속작으로, 4명의 플레이어가 좀비를 뚫고 생존해나가는 방식의 협동 FPS 게임이다.",
     "이미지" : "https://cdn.vox-cdn.com/thumbor/m-D5qAKVkTJ8Pr5mgQ44hq6uCwo=/1400x1400/filters:format(jpeg)/cdn.vox-cdn.com/uploads/chorus_asset/file/21907835/laststand_embed.jpg",
+    "동영상" : "https://www.youtube-nocookie.com/embed/9XIle_kLHKU",
     "가격" : 10000,
     "할인" : 0.5,
-    "신작" : false
+    "신작" : false,
+    "출시일" : "2009-11-17",
+    "태그" : {"오픈월드" : false, "멀티플레이" : true, "협동" : true, "액션" : false, "공포" : true, "좀비" : true, "어드벤처" : false, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : true}
   },
   {
     "게임명" : "로스트아크",
+    "유통사" : "Smilegate",
+    "설명" : "스마일게이트 RPG가 개발한 쿼터뷰 액션 MMORPG다. 2014년 11월 12일 최초 공개했으며 2018년 11월 7일부터 오픈 베타 테스트를 진행하였으며 2019년 12월 4일 정식 오픈했다. 이후 러시아, 일본, 글로벌 서버 순으로 런칭하였다.",
     "이미지" : "http://geimgaideu.com/wp-content/uploads/2021/06/Lost-Ark%EC%9D%98-%EC%B6%9C%EC%8B%9C%EC%9D%BC%EC%9D%80-%EC%96%B8%EC%A0%9C%EC%9D%B8%EA%B0%80%EC%9A%94.jpg",
+    "동영상" : "https://www.youtube-nocookie.com/embed/PmUNt90j42w",
     "가격" : 0,
     "할인" : false,
-    "신작" : false
+    "신작" : false,
+    "출시일" : "2019-12-04",
+    "태그" : {"오픈월드" : false, "멀티플레이" : false, "협동" : false, "액션" : true, "공포" : false, "좀비" : false, "어드벤처" : false, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : true, "FPS" : false}
   },
   {
     "게임명" : "배틀필드2042",
+    "유통사" : "Electronic Arts",
+    "설명" : "2021년 11월 19일에 출시된 EA Digital Illusions CE에서 개발하고 일렉트로닉 아츠에서 배급하는 배틀필드 시리즈 타이틀이다.",
     "이미지" : "https://cdn1.epicgames.com/offer/52f57f57120c440fad9bfa0e6c279317/EGS_Battlefield2042_DICE_S1_2560x1440-36f16374c9c29a18a46872795b483d72_2560x1440-36f16374c9c29a18a46872795b483d72",
+    "동영상" : "https://www.youtube-nocookie.com/embed/ASzOzrB-a9E",
     "가격" : 70000,
     "할인" : false,
-    "신작" : true
+    "신작" : true,
+    "출시일" : "2021-11-19",
+    "태그" : {"오픈월드" : false, "멀티플레이" : false, "협동" : false, "액션" : true, "공포" : false, "좀비" : false, "어드벤처" : false, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : true}
   },
   {
     "게임명" : "이블위딘",
+    "유통사" : "Bethesda",
+    "설명" : "탱고 게임웍스가 개발하고 베데스다 소프트웍스에서 유통한 2014년 10월 14일에 발매된 작품이자, 바이오하자드 시리즈의 프로듀서이자 아버지인 미카미 신지가 캡콤 퇴사 이후 첫 총괄 제작을 한 호러 게임!",
     "이미지" : "https://t1.daumcdn.net/cfile/tistory/24745B3956BF774002",
+    "동영상" : "https://www.youtube-nocookie.com/embed/PvR7-pZh_0M",
     "가격" : 45000,
     "할인" : 0.3,
-    "신작" : false
+    "신작" : false,
+    "출시일" : "2014-10-14",
+    "태그" : {"오픈월드" : false, "멀티플레이" : false, "협동" : false, "액션" : true, "공포" : true, "좀비" : true, "어드벤처" : false, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : false}
   },
   {
     "게임명" : "FIFA23",
+    "유통사" : "Electronic Arts",
+    "설명" : "FIFA 23은 2022년 9월 출시 예정인 EA 스포츠의 FIFA 시리즈 30번째 정규작이다. 전세계가 인정하는 최고의 축구 게임!",
     "이미지" : "https://www.fifaultimateteam.it/en/wp-content/uploads/2022/07/FIFA23-cover.jpg",
+    "동영상" : "https://www.youtube-nocookie.com/embed/o3V-GvvzjE4",
     "가격" : 70000,
     "할인" : false,
-    "신작" : true
+    "신작" : true,
+    "출시일" : "2022-09-30",
+    "태그" : {"오픈월드" : false, "멀티플레이" : true, "협동" : true, "액션" : false, "공포" : false, "좀비" : false, "어드벤처" : false, "스포츠" : true, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : false}
   },
   {
     "게임명" : "사이버펑크2077",
+    "유통사" : "CD PROJEKT",
+    "설명" : "초거대 기업들이 문명화된 삶의 모든 부분을 통제하고, 나머지는 갱단이 지배하는, 동서로 분열된 미국의 디스토피아를 배경으로, 플레이어는 미국에서 가장 살기 어려운 도시인 나이트 시티에서 큰 꿈을 꾸는 용병 V를 플레이하게 된다.",
     "이미지" : "https://cdn1.epicgames.com/offer/77f2b98e2cef40c8a7437518bf420e47/KR_CDProjektRED_Cyberpunk2077NG_S1_2560x1440_2560x1440-288702f4e6b60f12346e87559201a8ae",
+    "동영상" : "https://www.youtube-nocookie.com/embed/8X2kIfS6fb8",
     "가격" : 50000,
     "할인" : 0.7,
-    "신작" : false
+    "신작" : false,
+    "출시일" : "2020-12-10",
+    "태그" : {"오픈월드" : true, "멀티플레이" : false, "협동" : true, "액션" : true, "공포" : false, "좀비" : false, "어드벤처" : true, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : true}
   },
   {
     "게임명" : "DJMAX",
+    "유통사" : "NEOWIZ",
+    "설명" : "DJMAX RESPECT V는 로키 스튜디오에서 개발하고 네오위즈에서 퍼블리싱하는 DJMAX 시리즈의 PC 리듬게임으로, 2017년 PS4 플랫폼으로 출시된 DJMAX RESPECT에 추가 컨텐츠를 포함시킨 이식작이다.",
     "이미지" : "https://store-images.s-microsoft.com/image/apps.43739.14576235444726870.3e2b0155-ca8d-4075-bc12-04165b7144c1.0463db0d-2611-4b62-9622-423dfb90e56b",
+    "동영상" : "https://www.youtube-nocookie.com/embed/LvRIC9Vx7BY",
     "가격" : 40000,
     "할인" : 0.3,
-    "신작" : false
+    "신작" : false,
+    "출시일" : "2020-03-12",
+    "태그" : {"오픈월드" : false, "멀티플레이" : true, "협동" : false, "액션" : false, "공포" : false, "좀비" : false, "어드벤처" : false, "스포츠" : false, "리듬" : true, "인디" : false, "MMORPG" : false, "FPS" : false}
   },
   {
     "게임명" : "마인크래프트",
+    "유통사" : "Xbox Game Studios",
+    "설명" : "모든 것이 네모난 블록으로 이루어진 세계에서 혼자, 혹은 여럿이 생존하면서 건축, 사냥, 농사, 채집, PvP, 탐험, 회로 설계, 또는 직접 게임을 제작하는 등 정해진 목표 없이 자유롭게 즐길 수 있다.",
     "이미지" : "https://cdn.mos.cms.futurecdn.net/UP5XKspW58q2ksTCYbAuv.jpg",
+    "동영상" : "https://www.youtube-nocookie.com/embed/1JSjZqV-YK8",
     "가격" : 33000,
     "할인" : false,
-    "신작" : false
+    "신작" : false,
+    "출시일" : "2011-11-18",
+    "태그" : {"오픈월드" : true, "멀티플레이" : false, "협동" : true, "액션" : true, "공포" : false, "좀비" : true, "어드벤처" : true, "스포츠" : false, "리듬" : false, "인디" : true, "MMORPG" : false, "FPS" : false}
   },
   {
     "게임명" : "젤다의전설:야생의숨결",
+    "유통사" : "Nintendo",
+    "설명" : "100년 전, 재앙 가논이 부활하여 하이랄 성을 덮쳤다. 각 종족을 대표하는 영걸들과 공주인 젤다, 용사인 링크가 가논을 저지하려 했으나 강력한 가논의 힘 앞에 링크를 제외한 모든 영걸이 전사하고 링크마저 큰 부상을 입고만다. 그 후 100년이 지난 어느 날, 링크는 기억을 잃은 채로 의문의 장소에서 눈을 떴다.",
     "이미지" : "https://assets-prd.ignimgs.com/2022/06/14/zelda-breath-of-the-wild-1655249167687.jpg",
+    "동영상" : "https://www.youtube-nocookie.com/embed/zw47_q9wbBE",
     "가격" : 70000,
     "할인" : 0.2,
-    "신작" : false
+    "신작" : false,
+    "출시일" : "2018-02-01",
+    "태그" : {"오픈월드" : true, "멀티플레이" : false, "협동" : false, "액션" : true, "공포" : false, "좀비" : false, "어드벤처" : true, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : false}
   },
   {
     "게임명" : "포탈2",
+    "유통사" : "Valve",
+    "설명" : "애퍼처 사이언스에 돌아오게 된 첼은 또다시 GLaDOS의 실험에 반 강제로 참가하게 되고, 탈출 전에 사용했던[25] 포탈건을 사용하여 그녀가 새롭게 만들어낸 테스트실에서 치열한 두뇌 싸움을 벌이게 된다.",
     "이미지" : "https://archive.org/download/Portal2OST/Portal_AlbumCover.jpg",
+    "동영상" : "https://www.youtube-nocookie.com/embed/tax4e4hBBZc",
     "가격" : 30000,
     "할인" : 0.6,
-    "신작" : false
+    "신작" : false,
+    "출시일" : "2011-04-19",
+    "태그" : {"오픈월드" : false, "멀티플레이" : true, "협동" : true, "액션" : false, "공포" : false, "좀비" : false, "어드벤처" : false, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : true}
   }
 ]
