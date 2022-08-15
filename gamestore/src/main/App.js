@@ -16,7 +16,7 @@ function App() {
     <div className='relactive'>
       <Header cart={cart}></Header>
       <GameFlex cart={cart} setCart={setCart}></GameFlex>
-      <Outlet></Outlet>
+      <Outlet context={[cart, setCart]}></Outlet>
     </div>
   );
 }

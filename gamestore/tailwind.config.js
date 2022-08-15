@@ -46,8 +46,6 @@ module.exports = {
         sideBarOut: "sideBarOut .4s ease",
       },
     },
-    
-    
   },
   plugins: [require("tailwind-scrollbar-hide")],
 }
