@@ -9,15 +9,20 @@ const Login = () => {
   }, [])
 
 
-  const toHome = () => {
+  const toBack = () => {
     document.body.style.overflow = 'auto'
-    navigate("/");
+    navigate(-1);
+  }
+
+  const toSingUp = () => {
+    document.body.style.overflow = 'auto'
+    navigate("/singup");
   }
 
   return (
     <div className='fixed top-0 left-0 z-50 w-full h-full'>
       <div className='flex items-center justify-center w-full h-full bg-neutral-500 bg-opacity-70'>
-        <div className='relative w-screen border-2 sm:max-w-lg bg-neutral-900 rounded-xl border-neutral-100'>
+        <div className='relative w-screen border-2 sm:max-w-screen-sm bg-neutral-900 rounded-xl border-neutral-100'>
 
           <div className="flex flex-col text-xl text-white sm:text-3xl ">
 
@@ -26,12 +31,12 @@ const Login = () => {
                 <img className="w-10 md:w-12 filter-white" src="https://cdn-icons-png.flaticon.com/512/686/686589.png" alt="logo"></img>
                 <span className="pl-4 leading-none">Game Store</span>
               </div>
-              <button className="w-6 h-6 bg-no-repeat bg-cover sm:w-7 sm:h-7 bg-close-btn filter-white" onClick={toHome}></button>
+              <button className="w-6 h-6 bg-no-repeat bg-cover sm:w-7 sm:h-7 bg-close-btn filter-white" onClick={toBack}></button>
             </div>
             <input className="p-3 m-5 mb-0 text-black rounded-md" placeholder="아이디"></input>
             <input className="p-3 m-5 mb-0 text-black rounded-md" placeholder="비밀번호"></input>
             <button className="p-2 m-5 mb-0 rounded-md bg-sky-500">로그인</button>
-            <button className="p-2 m-5 bg-red-500 rounded-md">회원가입</button>
+            <button className="p-2 m-5 bg-red-500 rounded-md" onClick={toSingUp}>회원가입</button>
 
           </div>
 
