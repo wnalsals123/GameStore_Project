@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 
 const AutoCompleteEmail = (props) => {
-  const { textValue, setTextValue } = props
+  const { textValue } = props
 
   const [inputValue, setInputValue] = useState('')
   const [isHaveInputValue, setIsHaveInputValue] = useState(false)
