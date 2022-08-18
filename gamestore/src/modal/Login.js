@@ -22,9 +22,9 @@ const Login = () => {
   return (
     <div className='fixed top-0 left-0 z-50 w-full h-full'>
       <div className='flex items-center justify-center w-full h-full bg-neutral-500 bg-opacity-70'>
-        <div className='relative w-screen border-2 sm:max-w-screen-sm bg-neutral-900 rounded-xl border-neutral-100'>
+        <div className='relative w-[calc(100%-2rem)] max-w-screen-sm border-2 bg-neutral-900 rounded-xl border-neutral-100'>
 
-          <div className="flex flex-col text-xl text-white sm:text-3xl ">
+          <div className="flex flex-col text-base text-white sm:text-3xl ">
 
             <div className="relative flex items-center justify-between m-5 mb-0">
               <div className="flex items-center">
