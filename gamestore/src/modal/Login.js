@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate()
+  const userData = JSON.parse(localStorage.getItem('UserData'))
 
   useEffect(() => {
     document.body.style.overflow = 'hidden'
   }, [])
-
 
   const toBack = () => {
     document.body.style.overflow = 'auto'
@@ -17,6 +17,33 @@ const Login = () => {
   const toSingUp = () => {
     document.body.style.overflow = 'auto'
     navigate("/singup");
+  }
+
+  const toLogin = () => {
+    const id = document.getElementById('id').value
+    const password = document.getElementById('password').value
+    const idVaild = userData.filter((user)=>(user.username === id)).length === 1
+    const passwordVaild = userData.filter((user)=>(user.password === password)).length === 1
+
+    if(id === '' || password === ''){
+      alert("잘못된 입력입니다!")
+      return
+    }
+
+    if(userData === null) {
+      alert("오류가 발생했습니다!")
+      return
+    }
+
+    if(idVaild && passwordVaild) {
+      navigate(-1)
+    } else {
+      alert("존재하지 않는 회원 정보입니다!")
+    }
+  }
+
+  const enterLogin = (e) => {
+    if(e.key === 'Enter') toLogin()
   }
 
   return (
@@ -33,9 +60,10 @@ const Login = () => {
               </div>
               <button className="w-6 h-6 bg-no-repeat bg-cover sm:w-7 sm:h-7 bg-close-btn filter-white" onClick={toBack}></button>
             </div>
-            <input className="p-3 m-5 mb-0 text-black rounded-md" placeholder="아이디"></input>
-            <input className="p-3 m-5 mb-0 text-black rounded-md" placeholder="비밀번호"></input>
-            <button className="p-2 m-5 mb-0 rounded-md bg-sky-500">로그인</button>
+
+            <input className="p-3 m-5 mb-0 text-black rounded-md" onKeyUp={enterLogin} placeholder="아이디" id='id' autoComplete="off"></input>
+            <input className="p-3 m-5 mb-0 text-black rounded-md" onKeyUp={enterLogin} type="password" placeholder="비밀번호" id='password' autoComplete="off"></input>
+            <button className="p-2 m-5 mb-0 rounded-md bg-sky-500" onClick={toLogin}>로그인</button>
             <button className="p-2 m-5 bg-red-500 rounded-md" onClick={toSingUp}>회원가입</button>
 
           </div>

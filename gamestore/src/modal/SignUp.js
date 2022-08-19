@@ -4,9 +4,13 @@ import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const navigate = useNavigate()
+  const [userData, setUserData] = useState([])
 
   useEffect(() => {
     document.body.style.overflow = 'hidden'
+    // 유저 정보 가져오기
+    const serverUserDate = JSON.parse(localStorage.getItem('UserData'))
+    serverUserDate === null ? setUserData([]) : setUserData(serverUserDate)
   }, [])
 
   const toBack = () => {
@@ -23,14 +27,23 @@ const SignUp = () => {
     nickname: '',
   });
   const { username, password, passwordOk, email, nickname } = inputValue;
+  const [tempEmail, setTempEmail] = useState('') // autoEmail props 용도
+
+  // 회원정보 중복 확인
+  const [isDuplicate, setIsDuplicate] = useState({
+    D_usernmae: false,
+    D_email: false,
+    D_nickname: false,
+  })
+  const { D_usernmae, D_email, D_nickname } = isDuplicate
 
   // 회원가입 유효성 검사  
-  const isVaildUsername = username.length >= 4 && username.search(/[^a-z0-9]/g) === -1 // 아이디  전체 4자 이상일것. 소문자 또는 숫자
-  const specialLetter = password.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/g); // 비밀번호 특수문자 검사를 위한 정규식표현.
-  const isValidPassword = password.length >= 8 && password.search(/[^a-zA-Z0-9`~!@@#$%^&*|₩₩₩'₩";:₩/?]/g) === -1 && specialLetter > -1; // 비밀번호 특수문자 1자 이상, 전체 8자 이상일것. 영문자 또는 숫자
+  const isVaildUsername = username.length >= 4 && username.search(/[^a-z0-9]/g) === -1 && !D_usernmae // 아이디  전체 4자 이상일것. 소문자 또는 숫자
+  const specialLetter = password.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/g) // 비밀번호 특수문자 검사를 위한 정규식표현.
+  const isValidPassword = password.length >= 8 && password.search(/[^a-zA-Z0-9`~!@@#$%^&*|₩₩₩'₩";:₩/?]/g) === -1 && specialLetter > -1 // 비밀번호 특수문자 1자 이상, 전체 8자 이상일것. 영문자 또는 숫자
   const isSamePassword = passwordOk === password; // 비밀번호 동일여부
-  const isValidEmail = email.includes('@') && email.includes('.'); // 이메일 '@', '.' 이 둘다 포함될것.
-  const isValidNickname = nickname.length >= 2 && nickname.search(/[^a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣0-9]/g) === -1 // 닉네임 한글 영문 숫자
+  const isValidEmail = email.includes('@') && email.includes('.') && !D_email // 이메일 '@', '.' 이 둘다 포함될것.
+  const isValidNickname = nickname.length >= 2 && nickname.search(/[^a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣0-9]/g) === -1 && !D_nickname // 닉네임 한글 영문 숫자
 
   // 입력 값 길이 확인 state
   const [isShort, setIsShort] = useState({
@@ -56,7 +69,7 @@ const SignUp = () => {
     const { name, value } = e.target;
     const maxLength = name === 'email' ? 30 : 15
 
-    let noBlank = name === 'nickname' ? value.replace(/\s/gi, "") : value.replace(/[ㄱ-ㅎㅏ-ㅣ가-힣\s]/gi, "")
+    let noBlank = value.replace(/\s/gi, "")
     let result = "";
 
     for (let i = 0; i < noBlank.length && i < maxLength; i++) {
@@ -66,6 +79,7 @@ const SignUp = () => {
     if (name === 'username') {
       result.length < 4 ? setIsShort({ ...isShort, S_username: true }) : setIsShort({ ...isShort, S_username: false })
       value.search(/[^a-z0-9]/g) === -1 ? setIsVaild({ ...isVaild, V_username: true }) : setIsVaild({ ...isVaild, V_username: false })
+      userData.filter((index) => (index.username === result)).length === 0 ? setIsDuplicate({ ...isDuplicate, D_usernmae: false }) : setIsDuplicate({ ...isDuplicate, D_usernmae: true })
     } else if (name === 'password') {
       result.length < 8 ? setIsShort({ ...isShort, S_password: true }) : setIsShort({ ...isShort, S_password: false })
       value.search(/[^a-zA-Z0-9`~!@@#$%^&*|₩₩₩'₩";:₩/?]/g) === -1 && value.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/g) > -1 ? setIsVaild({ ...isVaild, V_password: true }) : setIsVaild({ ...isVaild, V_password: false })
@@ -76,8 +90,11 @@ const SignUp = () => {
     } else if (name === 'nickname') {
       result.length < 2 ? setIsShort({ ...isShort, S_nickname: true }) : setIsShort({ ...isShort, S_nickname: false })
       value.search(/[^a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣0-9]/g) === -1 ? setIsVaild({ ...isVaild, V_nickname: true }) : setIsVaild({ ...isVaild, V_nickname: false })
+      userData.filter((index) => (index.nickname === result)).length === 0 ? setIsDuplicate({ ...isDuplicate, D_nickname: false }) : setIsDuplicate({ ...isDuplicate, D_nickname: true })
     } else {
       value.includes('@') && value.includes('.') ? setIsVaild({ ...isVaild, V_email: true }) : setIsVaild({ ...isVaild, V_email: false })
+      userData.filter((index) => (index.email === result)).length === 0 ? setIsDuplicate({ ...isDuplicate, D_email: false }) : setIsDuplicate({ ...isDuplicate, D_email: true })
+      setTempEmail(result)
     }
 
     e.target.value = result
@@ -98,7 +115,7 @@ const SignUp = () => {
   const summitForm = () => {
     if (!onSummit) return
     else if (isVaildUsername && isValidPassword && isSamePassword && isValidEmail && isValidNickname) {
-      localStorage.setItem("UserData", JSON.stringify(inputValue))
+      localStorage.setItem("UserData", JSON.stringify(userData.concat(inputValue)))
       alert("회원가입이 완료되었습니다")
       navigate(-1)
     } else {
@@ -131,11 +148,12 @@ const SignUp = () => {
                   <span className='basis-1/4'>아이디</span>
                 </div>
                 <div className="relative basis-3/4">
-                  <input className="w-full h-full px-2 py-2 text-black rounded-md sm:px-5 placeholder:text-sm placeholder:sm:text-xl placeholder:md:text-2xl" placeholder="소문자 또는 숫자" name="username" onChange={handleInput}></input>
+                  <input className="w-full h-full px-2 py-2 text-black rounded-md sm:px-5 placeholder:text-sm placeholder:sm:text-xl placeholder:md:text-2xl" placeholder="소문자 또는 숫자" name="username" onChange={handleInput} autoComplete='off'></input>
                   <div className="absolute right-0 flex items-center h-full p-2 -top-8 sm:top-0">
-                    <div className="flex items-center"><span className={`${V_username ? 'hidden' : 'block'} p-2 text-sm sm:text-base leading-none text-red-500 rounded-lg`}>*사용 불가</span></div>
                     <span className={`${S_username ? 'block' : 'hidden'} p-2  text-sm sm:text-base leading-none text-red-500 rounded-lg`}>*4자리 이상</span>
-                    <span className={`${V_username && !S_username ? 'block' : 'hidden'} p-2  text-sm sm:text-base leading-none text-sky-500 rounded-lg`}>*사용 가능</span>
+                    {!S_username && <span className={`${V_username ? 'hidden' : 'block'} p-2 text-sm sm:text-base leading-none text-red-500 rounded-lg`}>*사용 불가</span>}
+                    <span className={`${V_username && !S_username && D_usernmae ? 'block' : 'hidden'} p-2  text-sm sm:text-base leading-none text-red-500 rounded-lg`}>*이미 사용중</span>
+                    <span className={`${V_username && !S_username && !D_usernmae ? 'block' : 'hidden'} p-2  text-sm sm:text-base leading-none text-sky-500 rounded-lg`}>*사용 가능</span>
                   </div>
                 </div>
               </div>
@@ -145,10 +163,10 @@ const SignUp = () => {
                   <span className='basis-1/4'>비밀번호</span>
                 </div>
                 <div className="relative flex basis-3/4">
-                  <input className="w-full h-full px-2 py-2 text-black rounded-md sm:px-5 placeholder:text-sm placeholder:sm:text-xl placeholder:md:text-2xl" type="password" placeholder="특수문자 포함, 영문자 또는 숫자" name="password" onChange={handleInput}></input>
+                  <input className="w-full h-full px-2 py-2 text-black rounded-md sm:px-5 placeholder:text-sm placeholder:sm:text-xl placeholder:md:text-2xl" type="password" placeholder="특수문자 포함, 영문자 또는 숫자" name="password" onChange={handleInput} autoComplete='off'></input>
                   <div className="absolute right-0 flex items-center h-full p-2 -top-8 sm:top-0">
-                    <div className="flex items-center"><span className={`${V_password ? 'hidden' : 'block'} p-2  text-sm sm:text-base leading-none text-red-500 rounded-lg`}>*사용 불가</span></div>
                     <span className={`${S_password ? 'block' : 'hidden'} p-2  text-sm sm:text-base leading-none text-red-500 rounded-lg`}>*8자리 이상</span>
+                    {!S_password && <span className={`${V_password ? 'hidden' : 'block'} p-2  text-sm sm:text-base leading-none text-red-500 rounded-lg`}>*사용 불가</span>}
                     <span className={`${V_password && !S_password ? 'block' : 'hidden'} p-2  text-sm sm:text-base leading-none text-sky-500 rounded-lg`}>*안전</span>
                   </div>
                 </div>
@@ -159,10 +177,10 @@ const SignUp = () => {
                   <span className='basis-1/4'>비밀번호 확인</span>
                 </div>
                 <div className="relative flex basis-3/4">
-                  <input className="w-full h-full px-2 py-2 text-black rounded-md sm:px-5 placeholder:text-sm placeholder:sm:text-xl placeholder:md:text-2xl" type="password" placeholder="비밀번호 재입력" name="passwordOk" onChange={handleInput}></input>
+                  <input className="w-full h-full px-2 py-2 text-black rounded-md sm:px-5 placeholder:text-sm placeholder:sm:text-xl placeholder:md:text-2xl" type="password" placeholder="비밀번호 재입력" name="passwordOk" onChange={handleInput} autoComplete='off'></input>
                   <div className="absolute right-0 flex items-center h-full p-2 -top-8 sm:top-0">
-                    <div className="flex items-center"><span className={`${V_passwordOk ? 'hidden' : 'block'} p-2  text-sm sm:text-base leading-none text-red-500 rounded-lg`}>*비밀번호 불일치</span></div>
                     <span className={`${S_passwordOk ? 'block' : 'hidden'} p-2  text-sm sm:text-base leading-none text-red-500 rounded-lg`}>*8자리 이상</span>
+                    {!S_passwordOk && <span className={`${V_passwordOk ? 'hidden' : 'block'} p-2  text-sm sm:text-base leading-none text-red-500 rounded-lg`}>*비밀번호 불일치</span>}
                     <span className={`${V_passwordOk && !S_passwordOk ? 'block' : 'hidden'} p-2  text-sm sm:text-base leading-none text-sky-500 rounded-lg`}>*일치</span>
                   </div>
                 </div>
@@ -174,12 +192,13 @@ const SignUp = () => {
                 </div>
                 <div className="relative flex basis-3/4">
                   <div className="w-full h-full">
-                    <input className="w-full h-full px-2 py-2 text-black rounded-md sm:px-5 placeholder:text-sm placeholder:sm:text-xl placeholder:md:text-2xl" placeholder="이메일 입력" name="email" onChange={handleInput}></input>
-                    <AutoCompleteEmail textValue={email} setTextValue={setInputValue}></AutoCompleteEmail>
+                    <input className="w-full h-full px-2 py-2 text-black rounded-md sm:px-5 placeholder:text-sm placeholder:sm:text-xl placeholder:md:text-2xl" placeholder="이메일 입력" name="email" onChange={handleInput} autoComplete='off' id="email"></input>
+                    <AutoCompleteEmail tempEmail={tempEmail} inputValue={inputValue} setInputValue={setInputValue} isVaild={isVaild} setIsVaild={setIsVaild} isDuplicate={isDuplicate} setIsDuplicate={setIsDuplicate} userData={userData}></AutoCompleteEmail>
                   </div>
                   <div className="absolute right-0 flex items-center h-full p-2 -top-8 sm:top-0">
-                    <div className="flex items-center"><span className={`${V_email ? 'hidden' : 'block'} p-2  text-sm sm:text-base leading-none text-red-500 rounded-lg`}>*잘못된 형식</span></div>
-                    <span className={`${isValidEmail ? 'block' : 'hidden'} p-2  text-sm sm:text-base leading-none text-sky-500 rounded-lg`}>*사용 가능</span>
+                    <span className={`${V_email ? 'hidden' : 'block'} p-2  text-sm sm:text-base leading-none text-red-500 rounded-lg`}>*잘못된 형식</span>
+                    <span className={`${V_email && D_email ? 'block' : 'hidden'} p-2  text-sm sm:text-base leading-none text-red-500 rounded-lg`}>*이미 사용중</span>
+                    <span className={`${isValidEmail && !D_email ? 'block' : 'hidden'} p-2  text-sm sm:text-base leading-none text-sky-500 rounded-lg`}>*사용 가능</span>
                   </div>
                 </div>
               </div>
@@ -189,18 +208,19 @@ const SignUp = () => {
                   <span className='basis-1/4'>별명</span>
                 </div>
                 <div className="relative flex basis-3/4">
-                  <input className="w-full h-full px-2 py-2 text-black rounded-md sm:px-5 placeholder:text-sm placeholder:sm:text-xl placeholder:md:text-2xl" placeholder="특수문자 제외" name="nickname" onChange={handleInput}></input>
+                  <input className="w-full h-full px-2 py-2 text-black rounded-md sm:px-5 placeholder:text-sm placeholder:sm:text-xl placeholder:md:text-2xl" placeholder="특수문자 제외" name="nickname" onChange={handleInput} autoComplete='off'></input>
                   <div className="absolute right-0 flex items-center h-full p-2 -top-8 sm:top-0">
-                    <div className="flex items-center"><span className={`${V_nickname ? 'hidden' : 'block'} p-2  text-sm sm:text-base leading-none text-red-500 rounded-lg`}>*사용 불가</span></div>
                     <span className={`${S_nickname ? 'block' : 'hidden'} p-2  text-sm sm:text-base leading-none text-red-500 rounded-lg`}>*2자리 이상</span>
-                    <span className={`${V_nickname && !S_nickname ? 'block' : 'hidden'} p-2  text-sm sm:text-base leading-none text-sky-500 rounded-lg`}>*사용 가능</span>
+                    {!S_nickname && <span className={`${V_nickname ? 'hidden' : 'block'} p-2  text-sm sm:text-base leading-none text-red-500 rounded-lg`}>*사용 불가</span>}
+                    <span className={`${V_nickname && !S_nickname && D_nickname ? 'block' : 'hidden'} p-2  text-sm sm:text-base leading-none text-red-500 rounded-lg`}>*이미 사용중</span>
+                    <span className={`${V_nickname && !S_nickname && !D_nickname ? 'block' : 'hidden'} p-2  text-sm sm:text-base leading-none text-sky-500 rounded-lg`}>*사용 가능</span>
                   </div>
                 </div>
               </div>
               {/* 회원가입 버튼 */}
               <div className="relative flex flex-col group">
                 <button className={`p-2 bg-red-500 rounded-lg ${onSummit ? 'opacity-100' : 'opacity-50'}`} onClick={summitForm}>회원가입</button>
-                <div><span className="absolute hidden px-2 text-sm rounded-md top-1/2 left-1/2 group-hover:block bg-sky-500">{!onSummit && "비어있는 값이 있습니다."}</span></div>
+                <div><span className="absolute hidden px-2 text-sm rounded-md top-1/2 left-1/2 group-hover:block bg-sky-500">{!onSummit && "불가능한 입력이 있습니다"}</span></div>
               </div>
               {/* 회원가입 하단 */}
               <div className="flex justify-between pt-5 text-white">

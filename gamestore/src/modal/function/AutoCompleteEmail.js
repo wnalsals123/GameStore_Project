@@ -1,39 +1,37 @@
 import { useEffect, useRef, useState } from "react"
 
 const AutoCompleteEmail = (props) => {
-  const { textValue } = props
+  const { tempEmail, inputValue, setInputValue, isVaild, setIsVaild, isDuplicate, setIsDuplicate, userData } = props
 
-  const [inputValue, setInputValue] = useState('')
   const [isHaveInputValue, setIsHaveInputValue] = useState(false)
   const [dropList, setDropList] = useState([])
   let resultTextArray = useRef([])
 
   useEffect(() => {
-    setInputValue(textValue)
-  }, [textValue])
-
-  useEffect(() => {
     const mailList = ['naver.com', 'gmail.com', 'daum.net', 'nate.com', 'hanmail.net']
 
-    if (inputValue.search(/@/g) === -1) {
+    if (tempEmail.search(/@/g) === -1) {
       resultTextArray.current = []
       setIsHaveInputValue(false)
       return
     }
 
-    if (inputValue.search(/@/g) > -1 && resultTextArray.current.length === 0) {
-      resultTextArray.current = mailList.map(textItem => inputValue + textItem)
+    if (tempEmail.search(/@/g) > -1 && resultTextArray.current.length === 0) {
+      resultTextArray.current = mailList.map(textItem => tempEmail + textItem)
       setDropList(resultTextArray.current)
       setIsHaveInputValue(true)
     } else {
-      const choosenTextList = resultTextArray.current.filter(textItem => textItem.includes(inputValue))
+      const choosenTextList = resultTextArray.current.filter(textItem => textItem.includes(tempEmail))
       setDropList(choosenTextList)
       setIsHaveInputValue(true)
     }
-  }, [inputValue])
+  }, [tempEmail])
 
   const clickDropDownItem = clickedItem => {
-    setInputValue(clickedItem)
+    document.getElementById('email').value = clickedItem
+    setInputValue({...inputValue, email: clickedItem})
+    setIsVaild({...isVaild, V_email: true})
+    userData.filter((index) => (index.email === clickedItem)).length === 0 ? setIsDuplicate({ ...isDuplicate, D_email: false }) : setIsDuplicate({ ...isDuplicate, D_email: true })
     setIsHaveInputValue(false)
   }
 
