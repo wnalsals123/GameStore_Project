@@ -1,9 +1,10 @@
 import AutoCompleteEmail from "./function/AutoCompleteEmail";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const navigate = useNavigate()
+  const emailRef = useRef()
   const [userData, setUserData] = useState([])
 
   useEffect(() => {
@@ -192,8 +193,8 @@ const SignUp = () => {
                 </div>
                 <div className="relative flex basis-3/4">
                   <div className="w-full h-full">
-                    <input className="w-full h-full px-2 py-2 text-black rounded-md sm:px-5 placeholder:text-sm placeholder:sm:text-xl placeholder:md:text-2xl" placeholder="이메일 입력" name="email" onChange={handleInput} autoComplete='off' id="email"></input>
-                    <AutoCompleteEmail tempEmail={tempEmail} inputValue={inputValue} setInputValue={setInputValue} isVaild={isVaild} setIsVaild={setIsVaild} isDuplicate={isDuplicate} setIsDuplicate={setIsDuplicate} userData={userData}></AutoCompleteEmail>
+                    <input className="w-full h-full px-2 py-2 text-black rounded-md sm:px-5 placeholder:text-sm placeholder:sm:text-xl placeholder:md:text-2xl" placeholder="이메일 입력" name="email" onChange={handleInput} autoComplete='off' ref={emailRef}></input>
+                    <AutoCompleteEmail tempEmail={tempEmail} inputValue={inputValue} setInputValue={setInputValue} isVaild={isVaild} setIsVaild={setIsVaild} isDuplicate={isDuplicate} setIsDuplicate={setIsDuplicate} userData={userData} emailRef={emailRef}></AutoCompleteEmail>
                   </div>
                   <div className="absolute right-0 flex items-center h-full p-2 -top-8 sm:top-0">
                     <span className={`${V_email ? 'hidden' : 'block'} p-2  text-sm sm:text-base leading-none text-red-500 rounded-lg`}>*잘못된 형식</span>

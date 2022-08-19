@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 
 const AutoCompleteEmail = (props) => {
-  const { tempEmail, inputValue, setInputValue, isVaild, setIsVaild, isDuplicate, setIsDuplicate, userData } = props
+  const { tempEmail, inputValue, setInputValue, isVaild, setIsVaild, isDuplicate, setIsDuplicate, userData, emailRef } = props
 
   const [isHaveInputValue, setIsHaveInputValue] = useState(false)
   const [dropList, setDropList] = useState([])
@@ -28,9 +28,9 @@ const AutoCompleteEmail = (props) => {
   }, [tempEmail])
 
   const clickDropDownItem = clickedItem => {
-    document.getElementById('email').value = clickedItem
-    setInputValue({...inputValue, email: clickedItem})
-    setIsVaild({...isVaild, V_email: true})
+    emailRef.current.value = clickedItem
+    setInputValue({ ...inputValue, email: clickedItem })
+    setIsVaild({ ...isVaild, V_email: true })
     userData.filter((index) => (index.email === clickedItem)).length === 0 ? setIsDuplicate({ ...isDuplicate, D_email: false }) : setIsDuplicate({ ...isDuplicate, D_email: true })
     setIsHaveInputValue(false)
   }
@@ -38,7 +38,7 @@ const AutoCompleteEmail = (props) => {
   const DropDown = () => {
     return (
       dropList.map((dropDownItem, dropDownIndex) => (
-        <li className="px-2 py-2 list-none cursor-pointer sm:px-5 hover:text-sky-500" key={dropDownIndex} onClick={() => clickDropDownItem(dropDownItem)}>{dropDownItem}</li>
+        <button className="px-2 py-2 list-none cursor-pointer sm:px-5 hover:text-sky-500" key={dropDownIndex} onClick={() => clickDropDownItem(dropDownItem)}>{dropDownItem}</button>
       ))
     )
   }
