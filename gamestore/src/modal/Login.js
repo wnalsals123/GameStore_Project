@@ -22,8 +22,8 @@ const Login = () => {
   const toLogin = () => {
     const id = document.getElementById('id').value
     const password = document.getElementById('password').value
-    const idVaild = userData.filter((user)=>(user.username === id)).length === 1
-    const passwordVaild = userData.filter((user)=>(user.password === password)).length === 1
+    const idVaild = userData === null ? false : userData.filter((user)=>(user.username === id)).length === 1
+    const passwordVaild = userData === null ? false : userData.filter((user)=>(user.password === password)).length === 1
 
     if(id === '' || password === ''){
       alert("잘못된 입력입니다!")
@@ -31,7 +31,7 @@ const Login = () => {
     }
 
     if(userData === null) {
-      alert("오류가 발생했습니다!")
+      alert("회원가입이 필요합니다!")
       return
     }
 
