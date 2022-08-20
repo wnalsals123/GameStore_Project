@@ -1,8 +1,9 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate()
+  const { setIsLogin } = useOutletContext()
   const userData = JSON.parse(localStorage.getItem('UserData'))
 
   useEffect(() => {
@@ -36,9 +37,10 @@ const Login = () => {
     }
 
     if(idVaild && passwordVaild) {
+      setIsLogin(true)
       navigate(-1)
     } else {
-      alert("존재하지 않는 회원 정보입니다!")
+      alert("존재하지 않는 회원입니다!")
     }
   }
 

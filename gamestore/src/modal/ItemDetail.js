@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 
 const ItemDetail = () => {
-  const [cart, setCart] = useOutletContext();
+  const { cart, setCart } = useOutletContext();
   const { gameid } = useParams();
   const navigate = useNavigate();
   const redirection = useRef(useNavigate())

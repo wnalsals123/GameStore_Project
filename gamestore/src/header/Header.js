@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 function Header(props) {
-  const { cart, sideIsOpen, setSideIsOpen } = props
+  const { cart, sideIsOpen, setSideIsOpen, isLogin } = props
   const navigate = useNavigate()
 
   const toCart = () => {
@@ -11,7 +11,7 @@ function Header(props) {
 
   const toMyPage = () => {
     document.body.style.overflow = 'hidden'
-    navigate("/mypage")
+    isLogin ? navigate("/mypage") : navigate("/login")
   }
 
   return (

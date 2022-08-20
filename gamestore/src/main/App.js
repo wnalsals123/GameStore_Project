@@ -7,9 +7,10 @@ import { useEffect, useState } from "react"
 import { Outlet, useLocation } from 'react-router-dom';
 
 function App() {
+  const location = useLocation()
   const [cart, setCart] = useState(0)
   const [sideIsOpen, setSideIsOpen] = useState(false)
-  const location = useLocation()
+  const [isLogin, setIsLogin] = useState(false)
 
   useEffect(()=>{
     localStorage.setItem("GameList", JSON.stringify(GameList))
@@ -22,11 +23,11 @@ function App() {
   return (
     <div className='relactive'>
       <div className='sticky top-0 z-40 w-full shadow-xl shadow-neutral-900'>
-        <Header cart={cart} sideIsOpen={sideIsOpen} setSideIsOpen={setSideIsOpen}></Header>
-        <SideBar sideIsOpen={sideIsOpen}></SideBar>
+        <Header cart={cart} sideIsOpen={sideIsOpen} setSideIsOpen={setSideIsOpen} isLogin={isLogin}></Header>
+        <SideBar sideIsOpen={sideIsOpen} isLogin={isLogin} setIsLogin={setIsLogin}></SideBar>
       </div>
       <GameFlex cart={cart} setCart={setCart}></GameFlex>
-      <Outlet context={[cart, setCart]}></Outlet>
+      <Outlet context={{cart, setCart, setIsLogin}}></Outlet>
     </div>
   );
 }
