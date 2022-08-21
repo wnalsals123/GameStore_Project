@@ -2,10 +2,25 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 
 const ItemDetail = () => {
-  const { cart, setCart } = useOutletContext();
+  const { setCart } = useOutletContext();
   const { gameid } = useParams();
   const navigate = useNavigate();
   const redirection = useRef(useNavigate())
+  const [userCart, setUserCart] = useState([])
+
+  useEffect(() => {
+    const isUserCart = JSON.parse(localStorage.getItem("UserCart")) !== null
+
+    if (isUserCart) setUserCart(JSON.parse(localStorage.getItem("UserCart")))
+  }, [])
+
+  const addCart = (item) => {
+    const temp = userCart.concat(item)
+
+    setCart(temp.length)
+    setUserCart(temp)
+    localStorage.setItem("UserCart", JSON.stringify(temp))
+  }
 
   let temp = {
     게임명: null,
@@ -202,7 +217,7 @@ const ItemDetail = () => {
             {item.할인 !== false && <span className="block line-through sm:inline-block">{(item.가격).toLocaleString() + "원"}</span>}
             <span>{gamePrice()}</span>
           </div>
-          <button className='w-3/12 py-1 sm:py-5 bg-sky-500 rounded-xl' onMouseDown={() => { setCart(cart + 1) }}>장바구니</button>
+          <button className='w-3/12 py-1 sm:py-5 bg-sky-500 rounded-xl' onClick={() => { addCart(item) }}>장바구니</button>
           <button className='w-3/12 py-1 sm:py-5 bg-sky-500 rounded-xl'>구매하기</button>
         </div>
       )

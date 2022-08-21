@@ -13,7 +13,10 @@ function App() {
   const [isLogin, setIsLogin] = useState(false)
 
   useEffect(()=>{
+    const isUserCart = JSON.parse(localStorage.getItem("UserCart")) !== null
+
     localStorage.setItem("GameList", JSON.stringify(GameList))
+    if(isUserCart) setCart(JSON.parse(localStorage.getItem("UserCart")).length)
   }, [])
 
   useEffect(()=>{
@@ -26,8 +29,8 @@ function App() {
         <Header cart={cart} sideIsOpen={sideIsOpen} setSideIsOpen={setSideIsOpen} isLogin={isLogin}></Header>
         <SideBar sideIsOpen={sideIsOpen} isLogin={isLogin} setIsLogin={setIsLogin}></SideBar>
       </div>
-      <GameFlex cart={cart} setCart={setCart}></GameFlex>
-      <Outlet context={{cart, setCart, setIsLogin}}></Outlet>
+      <GameFlex setCart={setCart}></GameFlex>
+      <Outlet context={{ setCart, setIsLogin }}></Outlet>
     </div>
   );
 }

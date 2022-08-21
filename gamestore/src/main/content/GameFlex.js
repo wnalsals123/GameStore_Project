@@ -2,23 +2,36 @@ import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const GameFlex = (props) => {
-  const { cart, setCart } = props
+  const { setCart } = props
   const [gameData, setGameData] = useState([])
+  const [userCart, setUserCart] = useState([])
   const navigate = useNavigate();
 
   useEffect(() => {
+    const isUserCart = JSON.parse(localStorage.getItem("UserCart")) !== null
+
     setGameData(JSON.parse(localStorage.getItem("GameList")))
+    if(isUserCart) setUserCart(JSON.parse(localStorage.getItem("UserCart")))
   }, [])
 
   const gameClickEvent = (name, mode) => {
     const id = 'gl-' + name
     const elemet = document.getElementById(id)
+    
     mode && elemet.style.display !== 'flex' ? elemet.style.display = 'flex' : elemet.style.display = 'none'
   }
 
   const toDetail = (item) => {
     document.body.style.overflow = 'hidden'
     navigate(`/games/${item.게임명}`);
+  }
+
+  const addCart = (item) => {
+    const temp = userCart.concat(item)
+
+    setCart(temp.length)
+    setUserCart(temp)
+    localStorage.setItem("UserCart", JSON.stringify(temp))
   }
 
   const GameFlexBox = () => {
@@ -42,7 +55,7 @@ const GameFlex = (props) => {
           </div>
           <div className='absolute top-0 left-0 flex-col items-center justify-center hidden w-full h-full rounded-xl bg-neutral-100 bg-opacity-70' id={'gl-' + item.게임명}>
             <button className='px-5 py-2 mb-10 bg-sky-500 rounded-xl' onMouseDown={() => { toDetail(item) }}>상세보기</button>
-            <button className='px-5 py-2 bg-sky-500 rounded-xl' onMouseDown={() => { setCart(cart + 1) }}>장바구니</button>
+            <button className='px-5 py-2 bg-sky-500 rounded-xl' onMouseDown={() => { addCart(item) }}>장바구니</button>
           </div>
         </div>
       ))
