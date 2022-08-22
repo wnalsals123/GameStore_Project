@@ -38,7 +38,7 @@ const AutoCompleteEmail = (props) => {
   const DropDown = () => {
     return (
       dropList.map((dropDownItem, dropDownIndex) => (
-        <button className="px-2 py-2 list-none cursor-pointer sm:px-5 hover:text-sky-500" key={dropDownIndex} onClick={() => clickDropDownItem(dropDownItem)}>{dropDownItem}</button>
+        <button className="w-full px-2 py-2 text-left list-none cursor-pointer sm:px-5 hover:text-sky-500" key={dropDownIndex} onClick={() => clickDropDownItem(dropDownItem)}>{dropDownItem}</button>
       ))
     )
   }
