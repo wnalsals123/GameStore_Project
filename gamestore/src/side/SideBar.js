@@ -45,8 +45,8 @@ const SideBar = (props) => {
 
   return (
     <div className="relative">
-      <div className={`absolute top-0 left-0 ${sideIsOpen ? 'animate-sideBarIn 4xl:animate-none' : 'animate-sideBarOut 4xl:animate-none'}`}>
-        <div className={`${sideBarAni ? 'block' : 'hidden 4xl:block'} w-screen sm:w-80 h-screen bg-neutral-900 text-white shadow-xl shadow-sky-500`}>
+      <div className={`absolute top-0 left-0 ${sideIsOpen ? 'animate-sideBarIn' : 'animate-sideBarOut'} ${!sideBarAni && '-translate-x-full opacity-0'}`}>
+        <div className={`w-screen sm:w-80 h-screen bg-neutral-900 text-white shadow-xl shadow-sky-500`}>
           <ul className="flex flex-col text-xl">
 
             <li className={`${isLogin ? 'hidden' : 'block'} m-5 mb-0 rounded-lg bg-neutral-500`}>

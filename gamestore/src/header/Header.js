@@ -18,7 +18,7 @@ function Header(props) {
     <div className="px-2 py-2 bg-neutral-100 md:px-5 md:py-4">
 
       <nav className="relative mx-auto max-w-screen-2xl">
-        <button className="absolute inline-block mr-5 align-middle bg-no-repeat bg-cover 4xl:hidden top-2 left-2 2xl:left-0 w-7 md:w-8 h-7 md:h-8 bg-menu-btn" onClick={() => { setSideIsOpen(!sideIsOpen) }}></button>
+        <button className="absolute inline-block mr-5 align-middle bg-no-repeat bg-cover 4xl:hidden top-2 left-2 2xl:left-0 w-7 md:w-8 h-7 md:h-8 bg-menu-btn" onClick={()=>{setSideIsOpen(!sideIsOpen)}}></button>
 
         <div className="inline-block w-full ml-0 text-center sm:w-fit sm:text-left sm:ml-16 4xl:ml-0">
           <a className='inline-flex items-center align-middle' href='/'>
