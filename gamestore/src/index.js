@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './index.css';
-import App from './main/App';
+import App from './App';
 import ItemDetail from './modal/ItemDetail';
 import Login from './modal/Login';
 import SignUp from './modal/SignUp';

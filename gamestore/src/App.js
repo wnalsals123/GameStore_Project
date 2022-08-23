@@ -1,8 +1,9 @@
 import './App.css';
-import Header from '../header/Header';
-import SideBar from '../side/SideBar';
-import GameFlex from './content/GameFlex';
-import GameList from '../json/GameList.json'
+import Header from './header/Header';
+import SideBar from './side/SideBar';
+import GameFlex from './main/GameFlex';
+import PopDown from './modal/PopDown';
+import GameList from './json/GameList.json'
 import { useEffect, useState } from "react"
 import { Outlet, useLocation } from 'react-router-dom';
 
@@ -10,10 +11,11 @@ function App() {
   const location = useLocation()
   const [cart, setCart] = useState(0)
   const [sideIsOpen, setSideIsOpen] = useState(false)
+  const [isAddCart, setIsAddCart] = useState(false)
   const [isLogin, setIsLogin] = useState(false)
 
   useEffect(()=>{
-    const isUserCart = JSON.parse(localStorage.getItem("UserCart")) !== null
+    const isUserCart = localStorage.getItem("UserCart") !== null
 
     localStorage.setItem("GameList", JSON.stringify(GameList))
     if(isUserCart) setCart(JSON.parse(localStorage.getItem("UserCart")).length)
@@ -29,8 +31,9 @@ function App() {
         <Header cart={cart} sideIsOpen={sideIsOpen} setSideIsOpen={setSideIsOpen} isLogin={isLogin}></Header>
         <SideBar sideIsOpen={sideIsOpen} isLogin={isLogin} setIsLogin={setIsLogin}></SideBar>
       </div>
-      <GameFlex setCart={setCart}></GameFlex>
-      <Outlet context={{ setCart, setIsLogin }}></Outlet>
+      <GameFlex setCart={setCart} setIsAddCart={setIsAddCart}></GameFlex>
+      <Outlet context={{ setCart, setIsLogin, setIsAddCart }}></Outlet>
+      <PopDown isAddCart={isAddCart} setIsAddCart={setIsAddCart}></PopDown>
     </div>
   );
 }

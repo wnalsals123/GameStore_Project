@@ -1,25 +1,36 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 
 const ItemDetail = () => {
-  const { setCart } = useOutletContext();
+  const { setCart, setIsAddCart } = useOutletContext();
   const { gameid } = useParams();
   const navigate = useNavigate();
   const redirection = useRef(useNavigate())
-  const [userCart, setUserCart] = useState([])
 
-  useEffect(() => {
-    const isUserCart = JSON.parse(localStorage.getItem("UserCart")) !== null
+  const addCart = (selectedItem) => {
+    const isUserCart = localStorage.getItem("UserCart") !== null
 
-    if (isUserCart) setUserCart(JSON.parse(localStorage.getItem("UserCart")))
-  }, [])
+    if (isUserCart) {
+      const userCart = JSON.parse(localStorage.getItem("UserCart")) 
+      const alreadyCart = userCart.filter((item)=>(item.게임명 === selectedItem.게임명)).length > 0
 
-  const addCart = (item) => {
-    const temp = userCart.concat(item)
+      if(alreadyCart) {
+        alert("이미 장바구니에 있습니다!")
+        return
+      }
 
-    setCart(temp.length)
-    setUserCart(temp)
-    localStorage.setItem("UserCart", JSON.stringify(temp))
+      const temp = userCart.concat(selectedItem)
+
+      localStorage.setItem("UserCart", JSON.stringify(temp))
+      setCart(temp.length)
+      setIsAddCart(true)
+    } else {
+      const temp = []
+      localStorage.setItem("UserCart", JSON.stringify(temp.concat(selectedItem)))
+
+      setCart(1)
+      setIsAddCart(true)
+    }
   }
 
   let temp = {
@@ -44,7 +55,7 @@ const ItemDetail = () => {
     const game = GameData.filter((item) => (item.게임명 === gameid))
 
     setTimeout(() => {
-      if(game.length !== 0) setItem(game[0])
+      if (game.length !== 0) setItem(game[0])
       else {
         setTimeout(() => {
           redirection.current('/games/NotFound')
@@ -221,11 +232,11 @@ const ItemDetail = () => {
           <button className='w-3/12 py-1 sm:py-5 bg-sky-500 rounded-xl'>구매하기</button>
         </div>
       )
-    }
+    } 
   }
 
   return (
-    <div className='fixed top-0 left-0 z-50 w-full h-full'>
+    <div className='fixed top-0 left-0 z-40 w-full h-full'>
       <div className='flex items-center justify-center w-full h-full bg-neutral-500 bg-opacity-70'>
         {/* 상세보기 시작 */}
         <div className='relative max-w-screen-lg max-h-[calc(100%-5rem)] w-[calc(100%-5rem)] h-fit bg-neutral-900 rounded-xl overflow-y-auto scrollbar-hide'>
@@ -256,4 +267,4 @@ const ItemDetail = () => {
   );
 }
 
-export default ItemDetail;
+export default React.memo(ItemDetail);

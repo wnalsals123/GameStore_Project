@@ -40,10 +40,16 @@ module.exports = {
           from: { transform: 'translateX(0)' },
           to: { transform: 'translateX(-100%)' },
         },
+        popDown: {
+          '0%': { transform: 'translateY(-100%)', opacity: 0  },
+          '40%': { transform: 'translateY(0%)', opacity: 1 },
+          '100%': { transform: 'translateY(0%)', opacity: 1 },
+        },
       },
       animation: {
         sideBarIn: "sideBarIn .4s ease",
         sideBarOut: "sideBarOut .4s ease",
+        popDown: "popDown 1.5s ease 2 alternate",
       },
     },
   },
