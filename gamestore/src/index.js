@@ -25,8 +25,10 @@ root.render(
           <Route path="cart" element={<Cart />}></Route>
           <Route path="mypage" element={<MyPage />}></Route>
         </Route>
+        <Route path="/:event" element={<App />}></Route>
         <Route path="community" element={<Community />}></Route>
         <Route path="*" element={<NotFound />}></Route>
+        <Route path="/NotFound" element={<NotFound />}></Route>
         <Route path="games/NotFound" element={<NotFoundGame />}></Route>
       </Routes>
     </BrowserRouter>

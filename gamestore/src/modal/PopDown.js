@@ -8,7 +8,7 @@ const PopDown = (props) => {
   useEffect(() => {
     let timer = null
 
-    timer = setTimeout(() => { setIsAddCart(false) }, 3000)
+    timer = setTimeout(() => { setIsAddCart(false) }, 2395)
 
     return () => { clearTimeout(timer) }
   }, [isAddCart, setIsAddCart])
@@ -20,12 +20,12 @@ const PopDown = (props) => {
 
   const CartView = () => {
     return (
-      <div className="flex items-center justify-center pt-20">
+      <div className="flex justify-center mt-16 sm:mt-32">
 
-        <div className="flex flex-wrap items-center justify-center p-2 text-xl border-2 rounded-md sm:text-2xl border-neutral-500 bg-neutral-100">
-          <span className="rounded-lg bg-neutral-100">장바구니에 담았습니다</span>
+        <div className="flex flex-wrap items-center justify-center p-2 text-xl border-2 rounded-xl sm:p-5 sm:text-2xl border-neutral-100 bg-neutral-900">
+          <span className="text-white">장바구니에 담았습니다</span>
           <div className="flex text-white bg-opacity-70">
-            <button className="px-2 ml-2 rounded-md bg-sky-500" onClick={toCart}>보기</button>
+            <button className="px-2 ml-2 rounded-md sm:ml-5 bg-sky-500" onClick={toCart}>보기</button>
           </div>
         </div>
 

@@ -49,7 +49,7 @@ module.exports = {
       animation: {
         sideBarIn: "sideBarIn .4s ease",
         sideBarOut: "sideBarOut .4s ease",
-        popDown: "popDown 1.5s ease 2 alternate",
+        popDown: "popDown 1.2s ease 2 alternate",
       },
     },
   },

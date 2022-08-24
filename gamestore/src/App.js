@@ -14,17 +14,17 @@ function App() {
   const [isAddCart, setIsAddCart] = useState(false)
   const [isLogin, setIsLogin] = useState(false)
 
-  useEffect(()=>{
+  useEffect(() => {
     const isUserCart = localStorage.getItem("UserCart") !== null
 
     localStorage.setItem("GameList", JSON.stringify(GameList))
-    if(isUserCart) setCart(JSON.parse(localStorage.getItem("UserCart")).length)
+    if (isUserCart) setCart(JSON.parse(localStorage.getItem("UserCart")).length)
   }, [])
 
-  useEffect(()=>{
+  useEffect(() => {
     location.pathname === '/' && (document.body.style.overflow = 'auto')
   }, [location])
-  
+
   return (
     <div className='relactive'>
       <div className='sticky top-0 z-40 w-full shadow-xl shadow-neutral-900'>
