@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 function Header(props) {
-  const { cart, sideIsOpen, setSideIsOpen, isLogin } = props
+  const { cart, sideIsOpen, setSideIsOpen, isLogin, setCategory } = props
   const navigate = useNavigate()
 
   const toCart = () => {
@@ -12,6 +12,10 @@ function Header(props) {
   const toMyPage = () => {
     document.body.style.overflow = 'hidden'
     isLogin ? navigate("/mypage") : navigate("/login")
+  }
+
+  const toCategory = (category) => {
+    setCategory(category)
   }
 
   return (
@@ -29,8 +33,9 @@ function Header(props) {
         </div>
 
         <nav className="hidden ml-10 text-xl align-middle md:inline-block">
-          <a className="ml-5" href="/sales">특별 할인</a>
-          <a className="ml-5" href="/new">신작</a>
+          <button className="ml-0" onClick={() => {toCategory('home')}}>홈</button>
+          <button className="ml-5" onClick={() => {toCategory('sales')}}>특별 할인</button>
+          <button className="ml-5" onClick={() => {toCategory('new')}}>신작</button>
           <a className="ml-5" href="/community">커뮤니티</a>
         </nav>
 

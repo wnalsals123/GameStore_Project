@@ -13,6 +13,7 @@ function App() {
   const [sideIsOpen, setSideIsOpen] = useState(false)
   const [isAddCart, setIsAddCart] = useState(false)
   const [isLogin, setIsLogin] = useState(false)
+  const [category, setCategory] = useState('home')
 
   useEffect(() => {
     const isUserCart = localStorage.getItem("UserCart") !== null
@@ -28,10 +29,10 @@ function App() {
   return (
     <div className='relactive'>
       <div className='sticky top-0 z-40 w-full shadow-xl shadow-neutral-900'>
-        <Header cart={cart} sideIsOpen={sideIsOpen} setSideIsOpen={setSideIsOpen} isLogin={isLogin}></Header>
-        <SideBar sideIsOpen={sideIsOpen} isLogin={isLogin} setIsLogin={setIsLogin}></SideBar>
+        <Header cart={cart} sideIsOpen={sideIsOpen} setSideIsOpen={setSideIsOpen} isLogin={isLogin} setCategory={setCategory}></Header>
+        <SideBar sideIsOpen={sideIsOpen} isLogin={isLogin} setIsLogin={setIsLogin} setCategory={setCategory}></SideBar>
       </div>
-      <GameFlex setCart={setCart} setIsAddCart={setIsAddCart}></GameFlex>
+      <GameFlex setCart={setCart} setIsAddCart={setIsAddCart} category={category}></GameFlex>
       <Outlet context={{ setCart, setIsLogin, setIsAddCart }}></Outlet>
       <PopDown isAddCart={isAddCart} setIsAddCart={setIsAddCart}></PopDown>
     </div>

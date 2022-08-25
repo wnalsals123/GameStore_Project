@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 
 const SideBarContent = (props) => {
-  const { isLogin, setIsLogin } = props
+  const { isLogin, setIsLogin, setCategory } = props
 
   const navigate = useNavigate()
 
@@ -30,9 +30,13 @@ const SideBarContent = (props) => {
     navigate("/mypage")
   }
 
+  const toCategory = (category) => {
+    setCategory(category)
+  }
+
   return (
     <div className={`w-screen sm:w-80 h-screen bg-neutral-900 text-white`}>
-      <ul className="flex flex-col p-5 text-xl 3xl:pl-0 3xl:pt-8">
+      <ul className="flex flex-col p-5 text-xl 3xl:pl-0 3xl:pt-6">
 
         <li className={`${isLogin ? 'hidden' : 'block'} mb-5 rounded-lg bg-neutral-500`}>
           <button className="w-full" onClick={() => { toLogin() }}>
@@ -64,10 +68,10 @@ const SideBarContent = (props) => {
         </li>
 
         <div className="mb-5 md:hidden">
-          <li className="mb-2">특별 할인</li>
-          <li className="mb-2">신작</li>
-          <li className="mb-2">커뮤니티</li>
-          <button className={`${isLogin ? 'block' : 'hidden'}`} onClick={toLogout}><li className="mb-2">로그아웃</li></button>
+          <button className="block mb-2" onClick={() => { toCategory('home') }}>홈</button>
+          <button className="block mb-2" onClick={() => { toCategory('sales') }}>특별 할인</button>
+          <button className="block mb-2" onClick={() => { toCategory('new') }}>신작</button>
+          <a className="block" href="/community">커뮤니티</a>
         </div>
 
         <div className='p-2 rounded-lg bg-neutral-500'>
@@ -85,6 +89,8 @@ const SideBarContent = (props) => {
             <li>항목명</li>
           </ul>
         </div>
+
+        <button className={`${isLogin ? 'block' : 'hidden'}`} onClick={toLogout}><li className="mb-2">로그아웃</li></button>
       </ul>
     </div>
   )

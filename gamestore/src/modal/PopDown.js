@@ -8,7 +8,7 @@ const PopDown = (props) => {
   useEffect(() => {
     let timer = null
 
-    timer = setTimeout(() => { setIsAddCart(false) }, 2395)
+    timer = setTimeout(() => { setIsAddCart(false) }, 2390)
 
     return () => { clearTimeout(timer) }
   }, [isAddCart, setIsAddCart])
