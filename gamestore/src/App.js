@@ -14,12 +14,13 @@ function App() {
   const [isAddCart, setIsAddCart] = useState(false)
   const [isLogin, setIsLogin] = useState(false)
   const [category, setCategory] = useState('home')
+  const [loading, setLoading] = useState('block')
 
   useEffect(() => {
     const isUserCart = localStorage.getItem("UserCart") !== null
 
-    localStorage.setItem("GameList", JSON.stringify(GameList))
     if (isUserCart) setCart(JSON.parse(localStorage.getItem("UserCart")).length)
+    localStorage.setItem("GameList", JSON.stringify(GameList))
   }, [])
 
   useEffect(() => {
@@ -29,10 +30,10 @@ function App() {
   return (
     <div className='relactive'>
       <div className='sticky top-0 z-40 w-full shadow-xl shadow-neutral-900'>
-        <Header cart={cart} sideIsOpen={sideIsOpen} setSideIsOpen={setSideIsOpen} isLogin={isLogin} setCategory={setCategory}></Header>
-        <SideBar sideIsOpen={sideIsOpen} isLogin={isLogin} setIsLogin={setIsLogin} setCategory={setCategory}></SideBar>
+        <Header cart={cart} sideIsOpen={sideIsOpen} setSideIsOpen={setSideIsOpen} isLogin={isLogin} category={category} setCategory={setCategory} setLoading={setLoading}></Header>
+        <SideBar sideIsOpen={sideIsOpen} isLogin={isLogin} setIsLogin={setIsLogin} category={category} setCategory={setCategory} setLoading={setLoading}></SideBar>
       </div>
-      <GameFlex setCart={setCart} setIsAddCart={setIsAddCart} category={category}></GameFlex>
+      <GameFlex setCart={setCart} setIsAddCart={setIsAddCart} category={category} loading={loading} setLoading={setLoading}></GameFlex>
       <Outlet context={{ setCart, setIsLogin, setIsAddCart }}></Outlet>
       <PopDown isAddCart={isAddCart} setIsAddCart={setIsAddCart}></PopDown>
     </div>

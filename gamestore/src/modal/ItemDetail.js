@@ -72,7 +72,7 @@ const ItemDetail = () => {
   const gamePrice = () => {
     if (item.가격 === 0) {
       return "무료 플레이"
-    } else if (item.할인 !== false) {
+    } else if (item.할인 !== 0) {
       return (item.가격 * (1 - item.할인)).toLocaleString() + "원"
     } else {
       return (item.가격).toLocaleString() + "원"
@@ -118,7 +118,7 @@ const ItemDetail = () => {
           <img className='object-cover w-full rounded-lg' src={item.이미지} alt='game-logo'></img>
           <div className="absolute text-white top-2 right-2">
             {item.신작 && <span className="hidden px-2 rounded-lg sm:inline-block bg-violet-500">NEW</span>}
-            {item.할인 !== false && <span className="hidden px-2 ml-2 rounded-lg sm:inline-block bg-sky-500">{((item.할인) * 100).toFixed() + "%OFF"}</span>}
+            {item.할인 !== 0 && <span className="hidden px-2 ml-2 rounded-lg sm:inline-block bg-sky-500">{((item.할인) * 100).toFixed() + "%OFF"}</span>}
           </div>
         </div>
       )
@@ -151,7 +151,7 @@ const ItemDetail = () => {
       return (
         <div className="flex flex-wrap">
           {item.신작 && <span className={`!bg-violet-500 ${tagStyle}`}>NEW</span>}
-          {item.할인 !== false && <span className={`!bg-sky-500 ${tagStyle}`}>{((item.할인) * 100).toFixed() + "%OFF"}</span>}
+          {item.할인 !== 0 && <span className={`!bg-sky-500 ${tagStyle}`}>{((item.할인) * 100).toFixed() + "%OFF"}</span>}
           {item.가격 === 0 && <span className={`!bg-red-500 ${tagStyle}`}>무료 플레이</span>}
 
           {item.태그.오픈월드 && <span className={`${tagStyle}`}>오픈월드</span>}
@@ -189,7 +189,7 @@ const ItemDetail = () => {
           <div className="flex flex-col p-2 rounded-lg bg-neutral-500">
             <span className={`${infoStyle}`}>게임명 : {item.게임명}</span>
             <span className={`${infoStyle}`}>유통사 : {item.유통사}</span>
-            <span className={`${infoStyle}`}>출시일 : {item.출시일}</span>
+            <span className={`${infoStyle}`}>출시일 : {String(item.출시일).replace(/(\d{4})(\d{2})(\d{2})/g, '$1년 $2월 $3일')}</span>
           </div>
         </div>
       )
@@ -225,7 +225,7 @@ const ItemDetail = () => {
       return (
         <div className='sticky bottom-0 left-0 flex justify-between w-full p-2 text-sm text-center text-white bg-opacity-50 rounded-lg bg-neutral-100 sm:p-5 sm:text-2xl'>
           <div className="w-5/12 py-1 bg-red-500 sm:py-5 rounded-xl">
-            {item.할인 !== false && <span className="block line-through sm:inline-block">{(item.가격).toLocaleString() + "원"}</span>}
+            {item.할인 !== 0 && <span className="block line-through sm:inline-block">{(item.가격).toLocaleString() + "원"}</span>}
             <span>{gamePrice()}</span>
           </div>
           <button className='w-3/12 py-1 sm:py-5 bg-sky-500 rounded-xl' onClick={() => { addCart(item) }}>장바구니</button>

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 
 const SideBarContent = (props) => {
-  const { isLogin, setIsLogin, setCategory } = props
+  const { isLogin, setIsLogin, category, setCategory, setLoading } = props
 
   const navigate = useNavigate()
 
@@ -30,9 +30,15 @@ const SideBarContent = (props) => {
     navigate("/mypage")
   }
 
-  const toCategory = (category) => {
-    setCategory(category)
+  const toCategory = (currentCategory) => {
+    if(category === currentCategory) return
+
+    setCategory(currentCategory)
+    setLoading('block')
   }
+
+  const buttonFilter = 'flex items-center border-2 rounded-md mb-1 bg-neutral-500 px-2'
+  const checkboxFilter = 'mr-2 rounded-sm'
 
   return (
     <div className={`w-screen sm:w-80 h-screen bg-neutral-900 text-white`}>
@@ -74,20 +80,20 @@ const SideBarContent = (props) => {
           <a className="block" href="/community">커뮤니티</a>
         </div>
 
-        <div className='p-2 rounded-lg bg-neutral-500'>
-          <span>필터</span>
-          <ul>
-            <li>항목명</li>
-            <li>항목명</li>
-            <li>항목명</li>
-            <li>항목명</li>
-            <li>항목명</li>
-            <li>항목명</li>
-            <li>항목명</li>
-            <li>항목명</li>
-            <li>항목명</li>
-            <li>항목명</li>
-          </ul>
+        <div className='p-2 rounded-lg bg-neutral-100'>
+          <span className="block px-2 mb-2 rounded-md bg-sky-500">장르</span>
+          <div className="flex flex-col flex-wrap">
+            <button className={buttonFilter}><input className={checkboxFilter} type='checkbox' id="오픈월드"></input><span>오픈월드</span></button>
+            <button className={buttonFilter}><input className={checkboxFilter} type='checkbox' id="멀티플레이"></input><span>멀티플레이</span></button>
+            <button className={buttonFilter}><input className={checkboxFilter} type='checkbox' id="협동"></input><span>협동</span></button>
+            <button className={buttonFilter}><input className={checkboxFilter} type='checkbox' id="액션"></input><span>액션</span></button>
+            <button className={buttonFilter}><input className={checkboxFilter} type='checkbox' id="공포"></input><span>공포</span></button>
+            <button className={buttonFilter}><input className={checkboxFilter} type='checkbox' id="좀비"></input><span>좀비</span></button>
+            <button className={buttonFilter}><input className={checkboxFilter} type='checkbox' id="어드벤처"></input><span>어드벤처</span></button>
+            <button className={buttonFilter}><input className={checkboxFilter} type='checkbox' id="스포츠"></input><span>스포츠</span></button>
+            <button className={buttonFilter}><input className={checkboxFilter} type='checkbox' id="MMORPG"></input><span>MMORPG</span></button>
+            <button className={buttonFilter}><input className={checkboxFilter} type='checkbox' id="FPS"></input><span>FPS</span></button>
+          </div>
         </div>
 
         <button className={`${isLogin ? 'block' : 'hidden'}`} onClick={toLogout}><li className="mb-2">로그아웃</li></button>

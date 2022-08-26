@@ -34,8 +34,8 @@ module.exports = {
       },
       keyframes: {
         sideBarIn: {
-          from: { transform: 'translateX(-100%)' },
-          to: { transform: 'translateX(0)' },
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(100%)' },
         },
         sideBarOut: {
           from: { transform: 'translateX(0)' },
@@ -46,11 +46,16 @@ module.exports = {
           '40%': { transform: 'translateY(0%)', opacity: 1 },
           '100%': { transform: 'translateY(0%)', opacity: 1 },
         },
+        loadingGame: {
+          '0%': {  opacity: 1  },
+          '100%': { opacity: 0 },
+        },
       },
       animation: {
-        sideBarIn: "sideBarIn .4s ease",
-        sideBarOut: "sideBarOut .4s ease",
+        sideBarIn: "sideBarIn .4s ease forwards",
+        sideBarOut: "sideBarOut .4s ease forwards",
         popDown: "popDown 1.2s ease 2 alternate",
+        loadingGame: "loadingGame .3s .3s ease",
       },
     },
   },

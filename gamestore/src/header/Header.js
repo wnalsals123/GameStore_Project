@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 function Header(props) {
-  const { cart, sideIsOpen, setSideIsOpen, isLogin, setCategory } = props
+  const { cart, sideIsOpen, setSideIsOpen, isLogin, category, setCategory, setLoading } = props
   const navigate = useNavigate()
 
   const toCart = () => {
@@ -14,8 +14,11 @@ function Header(props) {
     isLogin ? navigate("/mypage") : navigate("/login")
   }
 
-  const toCategory = (category) => {
-    setCategory(category)
+  const toCategory = (currentCategory) => {
+    if(category === currentCategory) return
+
+    setCategory(currentCategory)
+    setLoading('block')
   }
 
   return (

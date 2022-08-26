@@ -9,7 +9,7 @@
     "가격" : 50000,
     "할인" : 0.5,
     "신작" : false,
-    "출시일" : "2015-04-14",
+    "출시일" : 20150414,
     "태그" : {"오픈월드" : true, "멀티플레이" : false, "협동" : false, "액션" : true, "공포" : false, "좀비" : false, "어드벤처" : true, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : false}
   },
   {
@@ -20,9 +20,9 @@
     "이미지" : "https://nxcache.nexon.net/maplestory/assets-new/maplestoryfest/2021/src/images/global/share/facebook.jpg",
     "동영상" : "https://www.youtube-nocookie.com/embed/F0FVvkVp1SE",
     "가격" : 0,
-    "할인" : false,
+    "할인" : 0,
     "신작" : false,
-    "출시일" : "2003-04-29",
+    "출시일" : 20030429,
     "태그" : {"오픈월드" : false, "멀티플레이" : false, "협동" : false, "액션" : true, "공포" : false, "좀비" : false, "어드벤처" : true, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : false}
   },
   {
@@ -35,7 +35,7 @@
     "가격" : 10000,
     "할인" : 0.5,
     "신작" : false,
-    "출시일" : "2009-11-17",
+    "출시일" : 20091117,
     "태그" : {"오픈월드" : false, "멀티플레이" : true, "협동" : true, "액션" : false, "공포" : true, "좀비" : true, "어드벤처" : false, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : true}
   },
   {
@@ -46,9 +46,9 @@
     "이미지" : "http://geimgaideu.com/wp-content/uploads/2021/06/Lost-Ark%EC%9D%98-%EC%B6%9C%EC%8B%9C%EC%9D%BC%EC%9D%80-%EC%96%B8%EC%A0%9C%EC%9D%B8%EA%B0%80%EC%9A%94.jpg",
     "동영상" : "https://www.youtube-nocookie.com/embed/PmUNt90j42w",
     "가격" : 0,
-    "할인" : false,
+    "할인" : 0,
     "신작" : false,
-    "출시일" : "2019-12-04",
+    "출시일" : 20191204,
     "태그" : {"오픈월드" : false, "멀티플레이" : false, "협동" : false, "액션" : true, "공포" : false, "좀비" : false, "어드벤처" : false, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : true, "FPS" : false}
   },
   {
@@ -59,9 +59,9 @@
     "이미지" : "https://cdn1.epicgames.com/offer/52f57f57120c440fad9bfa0e6c279317/EGS_Battlefield2042_DICE_S1_2560x1440-36f16374c9c29a18a46872795b483d72_2560x1440-36f16374c9c29a18a46872795b483d72",
     "동영상" : "https://www.youtube-nocookie.com/embed/ASzOzrB-a9E",
     "가격" : 70000,
-    "할인" : false,
+    "할인" : 0,
     "신작" : true,
-    "출시일" : "2021-11-19",
+    "출시일" : 20211119,
     "태그" : {"오픈월드" : false, "멀티플레이" : false, "협동" : false, "액션" : true, "공포" : false, "좀비" : false, "어드벤처" : false, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : true}
   },
   {
@@ -74,7 +74,7 @@
     "가격" : 45000,
     "할인" : 0.3,
     "신작" : false,
-    "출시일" : "2014-10-14",
+    "출시일" : 20141014,
     "태그" : {"오픈월드" : false, "멀티플레이" : false, "협동" : false, "액션" : true, "공포" : true, "좀비" : true, "어드벤처" : false, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : false}
   },
   {
@@ -85,9 +85,9 @@
     "이미지" : "https://www.fifaultimateteam.it/en/wp-content/uploads/2022/07/FIFA23-cover.jpg",
     "동영상" : "https://www.youtube-nocookie.com/embed/o3V-GvvzjE4",
     "가격" : 70000,
-    "할인" : false,
+    "할인" : 0,
     "신작" : true,
-    "출시일" : "2022-09-30",
+    "출시일" : 20220930,
     "태그" : {"오픈월드" : false, "멀티플레이" : true, "협동" : true, "액션" : false, "공포" : false, "좀비" : false, "어드벤처" : false, "스포츠" : true, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : false}
   },
   {
@@ -100,7 +100,7 @@
     "가격" : 50000,
     "할인" : 0.7,
     "신작" : false,
-    "출시일" : "2020-12-10",
+    "출시일" : 20201210,
     "태그" : {"오픈월드" : true, "멀티플레이" : false, "협동" : true, "액션" : true, "공포" : false, "좀비" : false, "어드벤처" : true, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : true}
   },
   {
@@ -113,7 +113,7 @@
     "가격" : 40000,
     "할인" : 0.3,
     "신작" : false,
-    "출시일" : "2020-03-12",
+    "출시일" : 20200312,
     "태그" : {"오픈월드" : false, "멀티플레이" : true, "협동" : false, "액션" : false, "공포" : false, "좀비" : false, "어드벤처" : false, "스포츠" : false, "리듬" : true, "인디" : false, "MMORPG" : false, "FPS" : false}
   },
   {
@@ -124,9 +124,9 @@
     "이미지" : "https://cdn.mos.cms.futurecdn.net/UP5XKspW58q2ksTCYbAuv.jpg",
     "동영상" : "https://www.youtube-nocookie.com/embed/1JSjZqV-YK8",
     "가격" : 33000,
-    "할인" : false,
+    "할인" : 0,
     "신작" : false,
-    "출시일" : "2011-11-18",
+    "출시일" : 20111118,
     "태그" : {"오픈월드" : true, "멀티플레이" : false, "협동" : true, "액션" : true, "공포" : false, "좀비" : true, "어드벤처" : true, "스포츠" : false, "리듬" : false, "인디" : true, "MMORPG" : false, "FPS" : false}
   },
   {
@@ -139,7 +139,7 @@
     "가격" : 70000,
     "할인" : 0.2,
     "신작" : false,
-    "출시일" : "2018-02-01",
+    "출시일" : 20180201,
     "태그" : {"오픈월드" : true, "멀티플레이" : false, "협동" : false, "액션" : true, "공포" : false, "좀비" : false, "어드벤처" : true, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : false}
   },
   {
@@ -152,7 +152,7 @@
     "가격" : 30000,
     "할인" : 0.6,
     "신작" : false,
-    "출시일" : "2011-04-19",
+    "출시일" : 20110419,
     "태그" : {"오픈월드" : false, "멀티플레이" : true, "협동" : true, "액션" : false, "공포" : false, "좀비" : false, "어드벤처" : false, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : true}
   }
 ]
