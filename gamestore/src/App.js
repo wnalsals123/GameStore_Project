@@ -9,7 +9,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 
 function App() {
   const location = useLocation()
-  const version = '1.2'
+  const version = '1.3'
   const [cart, setCart] = useState(0)
   const [sideIsOpen, setSideIsOpen] = useState(false)
   const [isAddCart, setIsAddCart] = useState(false)
@@ -19,16 +19,8 @@ function App() {
 
   useEffect(() => {
     const getVersion = localStorage.getItem('version')
-    const getGameList = localStorage.getItem('GameList')
-    const getUserCart = localStorage.getItem('UserCart')
 
-    if(getVersion === null && getGameList === null && getUserCart === null) {
-      localStorage.setItem('version', version)
-      localStorage.setItem("GameList", JSON.stringify(GameList))
-      return
-    }
-
-    if(getVersion !== version) {
+    if(getVersion === null || getVersion !== version) {
       alert('데이터 오류로 페이지를 초기화 합니다.')
       localStorage.removeItem('version')
       localStorage.removeItem('GameList')
@@ -37,7 +29,10 @@ function App() {
 
     localStorage.setItem('version', version)
     localStorage.setItem("GameList", JSON.stringify(GameList))
-    if(getUserCart !== null) setCart(JSON.parse(localStorage.getItem("UserCart")).length)
+    
+    const isUserCart = localStorage.getItem("UserCart") !== null
+
+    if(isUserCart) setCart(JSON.parse(localStorage.getItem("UserCart")).length)
   }, [])
 
   useEffect(() => {
