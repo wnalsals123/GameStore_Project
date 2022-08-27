@@ -9,7 +9,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 
 function App() {
   const location = useLocation()
-  const version = '1.0'
+  const version = '1.1'
   const [cart, setCart] = useState(0)
   const [sideIsOpen, setSideIsOpen] = useState(false)
   const [isAddCart, setIsAddCart] = useState(false)
@@ -20,7 +20,7 @@ function App() {
   useEffect(() => {
     const getVersion = localStorage.getItem('version')
 
-    if(getVersion !== null && getVersion !== version) {
+    if(getVersion !== version) {
       alert('게임 목록 수정으로 페이지를 초기화 합니다.')
       localStorage.removeItem('version')
       localStorage.removeItem('GameList')
