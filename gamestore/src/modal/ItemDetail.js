@@ -236,7 +236,7 @@ const ItemDetail = () => {
   }
 
   return (
-    <div className='fixed top-0 left-0 z-40 w-full h-full'>
+    <div className='fixed top-0 left-0 z-50 w-full h-full'>
       <div className='flex items-center justify-center w-full h-full bg-neutral-500 bg-opacity-70'>
         {/* 상세보기 시작 */}
         <div className='relative max-w-screen-lg max-h-[calc(100%-5rem)] w-[calc(100%-5rem)] h-fit bg-neutral-900 rounded-xl overflow-y-auto scrollbar-hide'>

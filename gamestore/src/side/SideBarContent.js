@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom"
 
 const SideBarContent = (props) => {
-  const { isLogin, setIsLogin, category, setCategory, setLoading } = props
+  const { isLogin, setIsLogin } = props
 
   const navigate = useNavigate()
 
@@ -30,30 +30,23 @@ const SideBarContent = (props) => {
     navigate("/mypage")
   }
 
-  const toCategory = (currentCategory) => {
-    if(category === currentCategory) return
-
-    setCategory(currentCategory)
-    setLoading('block')
-  }
-
   const buttonFilter = 'flex items-center border-2 rounded-md mb-1 bg-neutral-500 px-2'
   const checkboxFilter = 'mr-2 rounded-sm'
 
   return (
     <div className={`w-screen sm:w-80 h-screen bg-neutral-900 text-white`}>
-      <ul className="flex flex-col p-5 text-xl 3xl:pl-0 3xl:pt-6">
+      <div className="flex flex-col p-5 text-xl 3xl:pl-0 3xl:pt-6">
 
-        <li className={`${isLogin ? 'hidden' : 'block'} mb-5 rounded-lg bg-neutral-500`}>
+        <div className={`${isLogin ? 'hidden' : 'block'} mb-5 rounded-lg bg-neutral-500`}>
           <button className="w-full" onClick={() => { toLogin() }}>
-            <div className="relative flex items-center justify-center p-2 sm:justify-start">
+            <div className="relative flex items-center p-2">
               <div className="p-2 rounded-full sm:relative bg-neutral-100"><img className="w-7" src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png" alt="user"></img></div>
               <span className="flex-1 block pl-2">로그인이 필요합니다</span>
             </div>
           </button>
-        </li>
+        </div>
 
-        <li className={`${isLogin ? 'block' : 'hidden'} mb-5 rounded-lg bg-neutral-500`}>
+        <div className={`${isLogin ? 'block' : 'hidden'} mb-5 rounded-lg bg-neutral-500`}>
           <button className="w-full" onClick={() => { toMyPage() }}>
             <div className="flex items-center justify-center p-2">
               <div className="p-2 rounded-full bg-neutral-100"><img className="w-7" src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png" alt="user"></img></div>
@@ -62,22 +55,24 @@ const SideBarContent = (props) => {
             <span className="block">회원등급</span>
             <span className="block">레벨</span>
           </button>
-        </li>
+        </div>
 
-        <li className="mb-5 rounded-lg bg-sky-500">
+        <div className="mb-5 rounded-lg bg-sky-500">
           <button className="w-full" onClick={() => { toCart() }}>
-            <div className="flex items-center justify-center p-2 sm:justify-start">
+            <div className="flex items-center p-2">
               <div className="p-2 rounded-full bg-neutral-100"><img className="w-7" src="https://cdn-icons-png.flaticon.com/512/833/833314.png" alt="cart"></img></div>
               <span className="flex-1 block pl-2">장바구니</span>
             </div>
           </button>
-        </li>
+        </div>
 
-        <div className="mb-5 md:hidden">
-          <button className="block mb-2" onClick={() => { toCategory('home') }}>홈</button>
-          <button className="block mb-2" onClick={() => { toCategory('sales') }}>특별 할인</button>
-          <button className="block mb-2" onClick={() => { toCategory('new') }}>신작</button>
-          <a className="block" href="/community">커뮤니티</a>
+        <div className="mb-5 bg-orange-500 rounded-lg">
+          <a className="w-full" href="/community">
+            <div className="flex items-center p-2 text-center">
+              <div className="p-2 rounded-full bg-neutral-100"><img className="w-7" src="https://cdn-icons-png.flaticon.com/512/2907/2907904.png" alt="cart"></img></div>
+              <span className="flex-1 block pl-2">커뮤니티</span>
+            </div>
+          </a>
         </div>
 
         <div className='p-2 rounded-lg bg-neutral-100'>
@@ -97,7 +92,7 @@ const SideBarContent = (props) => {
         </div>
 
         <button className={`${isLogin ? 'block' : 'hidden'}`} onClick={toLogout}><li className="mb-2">로그아웃</li></button>
-      </ul>
+      </div>
     </div>
   )
 }

@@ -39,11 +39,11 @@ const Cart = () => {
 
               <div className="flex flex-col flex-wrap justify-between sm:flex-row">
                 <div className="flex flex-col sm:flex-row">
-                  <span className={`${item.가격 === 0 && "hidden"} ${item.할인 !== false && 'line-through'}`}>{(item.가격).toLocaleString() + "원"}</span>
-                  {item.할인 !== false && <span>{(item.가격 * (1 - item.할인)).toLocaleString() + "원"}</span>}
+                  <span className={`${item.가격 === 0 && "hidden"} ${item.할인 !== 0 && 'line-through'}`}>{(item.가격).toLocaleString() + "원"}</span>
+                  {item.할인 !== 0 && <span>{(item.가격 * (1 - item.할인)).toLocaleString() + "원"}</span>}
                   {item.가격 === 0 && <span>무료 플레이</span>}
                 </div>
-                {item.할인 !== false && <span>{((item.할인) * 100).toFixed() + "%↓"}</span>}
+                {item.할인 !== 0 && <span>{((item.할인) * 100).toFixed() + "%↓"}</span>}
               </div>
 
             </div>
