@@ -9,7 +9,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 
 function App() {
   const location = useLocation()
-  const version = '1.3'
+  const version = '1.4'
   const [cart, setCart] = useState(0)
   const [sideIsOpen, setSideIsOpen] = useState(false)
   const [isAddCart, setIsAddCart] = useState(false)
@@ -19,13 +19,13 @@ function App() {
 
   useEffect(() => {
     const getVersion = localStorage.getItem('version')
-    let isError = false
+    // let isError = false
 
     if(getVersion === null || getVersion !== version) {
       localStorage.removeItem('version')
       localStorage.removeItem('GameList')
       localStorage.removeItem('UserCart')
-      isError = true
+      // isError = true
     }
 
     localStorage.setItem('version', version)
@@ -34,7 +34,7 @@ function App() {
     const isUserCart = localStorage.getItem("UserCart") !== null
 
     if(isUserCart) setCart(JSON.parse(localStorage.getItem("UserCart")).length)
-    if(isError) alert('데이터 오류로 페이지를 초기화했습니다.')
+    // if(isError) alert('데이터 오류로 페이지를 초기화했습니다.')
   }, [])
 
   useEffect(() => {
