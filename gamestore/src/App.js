@@ -19,12 +19,13 @@ function App() {
 
   useEffect(() => {
     const getVersion = localStorage.getItem('version')
+    let isError = false
 
     if(getVersion === null || getVersion !== version) {
-      alert('데이터 오류로 페이지를 초기화 합니다.')
       localStorage.removeItem('version')
       localStorage.removeItem('GameList')
       localStorage.removeItem('UserCart')
+      isError = true
     }
 
     localStorage.setItem('version', version)
@@ -33,6 +34,7 @@ function App() {
     const isUserCart = localStorage.getItem("UserCart") !== null
 
     if(isUserCart) setCart(JSON.parse(localStorage.getItem("UserCart")).length)
+    if(isError) alert('데이터 오류로 페이지를 초기화했습니다.')
   }, [])
 
   useEffect(() => {
