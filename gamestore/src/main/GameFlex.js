@@ -66,7 +66,7 @@ const GameFlex = (props) => {
     } else if (sortState === 'sortSale') {
       filterGameData = filterGameData.sort((a, b) => a.할인 > b.할인 ? -1 : 1);
     } else if (sortState === 'sortChip') {
-      console.log('sortChip!')
+      filterGameData = filterGameData.sort((a, b) => (a.할인 === 0 ? a.가격 : (a.가격 * (1 - a.할인))) < (b.할인 === 0 ? b.가격 : (b.가격 * (1 - b.할인))) ? -1 : 1);
     } else {
       console.log('sorterror!')
     }
