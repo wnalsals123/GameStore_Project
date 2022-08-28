@@ -26,20 +26,21 @@ function Header(props) {
 
       <div className="relative mx-auto max-w-screen-2xl 3xl:max-w-[116rem]">
 
-        <button className="absolute inline-block mr-5 align-middle bg-no-repeat bg-cover 3xl:hidden top-2 left-2 2xl:left-0 w-7 md:w-8 h-7 md:h-8 bg-menu-btn" onClick={() => { setSideIsOpen(!sideIsOpen) }}></button>
+        <button className="absolute inline-block mr-5 align-middle bg-no-repeat bg-cover md:hidden top-2 left-2 2xl:left-0 w-7 md:w-8 h-7 md:h-8 bg-menu-btn" onClick={() => { setSideIsOpen(!sideIsOpen) }}></button>
 
-        <div className="inline-block w-full ml-0 text-center sm:w-fit sm:text-left sm:ml-16 3xl:ml-0">
+        <div className="inline-block w-full ml-0 text-center md:w-fit md:text-left">
           <a className='inline-flex items-center align-middle' href='/'>
             <img className="block w-11 md:w-12" src="https://cdn-icons-png.flaticon.com/512/686/686589.png" alt="logo"></img>
             <span className="block pl-4 !leading-none text-2xl md:text-3xl">Game Store</span>
           </a>
         </div>
 
-        <nav className="hidden ml-10 text-xl align-middle md:inline-block">
+        <div className="hidden ml-10 text-xl align-middle md:inline-block">
           <button className="ml-0" onClick={() => { toCategory('home') }}>홈</button>
           <button className="ml-5" onClick={() => { toCategory('sales') }}>특별 할인</button>
           <button className="ml-5" onClick={() => { toCategory('new') }}>신작</button>
-        </nav>
+          <a className="ml-5" href="community">커뮤니티</a>
+        </div>
 
         <div className="absolute top-0 right-0 h-full">
           <div className="flex items-center h-full">

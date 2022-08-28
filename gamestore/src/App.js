@@ -9,7 +9,7 @@ import { Outlet, useLocation } from 'react-router-dom';
 
 function App() {
   const location = useLocation()
-  const version = '1.5'
+  const version = '1.6'
   const [cart, setCart] = useState(0)
   const [sideIsOpen, setSideIsOpen] = useState(false)
   const [isAddCart, setIsAddCart] = useState(false)
@@ -19,12 +19,14 @@ function App() {
 
   useEffect(() => {
     const getVersion = localStorage.getItem('version')
+    const getGameList = localStorage.getItem('GameList')
+    const getUserCart = localStorage.getItem('UserCart')
     let isError = false
 
     if(getVersion === null || getVersion !== version) {
-      localStorage.removeItem('version')
-      localStorage.removeItem('GameList')
-      localStorage.removeItem('UserCart')
+      if(getVersion !== null) localStorage.removeItem('version')
+      if(getGameList !== null) localStorage.removeItem('GameList')
+      if(getUserCart !== null) localStorage.removeItem('UserCart')
       isError = true
     }
 

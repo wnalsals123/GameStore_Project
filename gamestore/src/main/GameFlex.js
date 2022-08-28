@@ -18,8 +18,7 @@ const GameFlex = (props) => {
 
   useEffect(() => {
     let timer = null
-
-    console.log('로딩히든!')
+    
     timer = setTimeout(() => { setLoading('hidden') }, 590);
 
     return () => { clearTimeout(timer) }
@@ -105,8 +104,8 @@ const GameFlex = (props) => {
   }
 
   const buttonFilter = 'flex items-center p-2 !leading-none w-full'
-  const [sortDropVis, setSortDropVis] = useState(false);
   const [categoryDropVis, setCategoryDropVis] = useState(false);
+  const [sortDropVis, setSortDropVis] = useState(false);
 
   const filterSort = (sortName, sortState) => {
     setSortName(sortName)
@@ -114,50 +113,56 @@ const GameFlex = (props) => {
   }
 
   const toCategory = (currentCategory) => {
-    if(category === currentCategory) return
+    if (category === currentCategory) return
 
     setCategory(currentCategory)
     setLoading('block')
   }
 
-  return (
-    <div className='flex justify-center'>
-      <div className='hidden fixed z-20 left-[calc(50%-58rem)] border-r-[1px] border-neutral-500 3xl:block'>
-        <SideBarContent></SideBarContent>
-      </div>
-      <div className='w-full text-white max-w-screen-2xl 3xl:ml-80'>
-        <Banner></Banner>
-        <div className='flex justify-between mx-3 mt-5 text-2xl sm:text-3xl lg:mx-6'>
-          <div className='relative flex items-center justify-between cursor-pointer' onClick={() => { setCategoryDropVis(!categoryDropVis) }} onBlur={() => { setCategoryDropVis(false) }} tabIndex={0}>
-            {category === 'home' && <span>상점 홈</span>}
-            {category === 'sales' && <span>#특별 할인</span>}
-            {category === 'new' && <span>#신작</span>}
-            <svg className='flex items-center ml-2 md:hidden' width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.363 6.363a1.239 1.239 0 000 1.752l8.76 8.761a1.239 1.239 0 001.753 0l8.761-8.76a1.239 1.239 0 10-1.752-1.753L12 14.248 4.115 6.363a1.239 1.239 0 00-1.752 0z" fill="currentColor"></path></svg>
-            <div className="absolute left-0 z-30 flex flex-col flex-wrap w-full rounded-md text-xl top-full bg-neutral-900 min-w-[7rem]">
-              <Dropdown visibility={categoryDropVis}>
-                <button className={buttonFilter} onMouseDown={() => { toCategory('home') }}><span>상점 홈</span></button>
-                <button className={buttonFilter} onMouseDown={() => { toCategory('sales') }}><span>#특별 할인</span></button>
-                <button className={buttonFilter} onMouseDown={() => { toCategory('new') }}><span>#신작</span></button>
+  const FlexHeader = () => { 
+    return (
+      <div className='relative z-10 flex justify-between mx-3 mt-5 text-2xl sm:text-3xl lg:mx-6'>
+        <div className='relative flex items-center justify-between cursor-pointer' tabIndex={0} onClick={() => { setCategoryDropVis(!categoryDropVis) }} onBlur={() => { setCategoryDropVis(false) }}>
+          {category === 'home' && <span>상점 홈</span>}
+          {category === 'sales' && <span>#특별 할인</span>}
+          {category === 'new' && <span>#신작</span>}
+          <svg className='flex items-center ml-2 md:hidden' width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.363 6.363a1.239 1.239 0 000 1.752l8.76 8.761a1.239 1.239 0 001.753 0l8.761-8.76a1.239 1.239 0 10-1.752-1.753L12 14.248 4.115 6.363a1.239 1.239 0 00-1.752 0z" fill="currentColor"></path></svg>
+          <div className="absolute left-0 flex flex-col flex-wrap w-full rounded-md text-xl top-full bg-neutral-900 min-w-[7rem]">
+            <Dropdown visibility={categoryDropVis}>
+              <button className={buttonFilter} onMouseDown={() => { toCategory('home') }}><span>상점 홈</span></button>
+              <button className={buttonFilter} onMouseDown={() => { toCategory('sales') }}><span>#특별 할인</span></button>
+              <button className={buttonFilter} onMouseDown={() => { toCategory('new') }}><span>#신작</span></button>
+            </Dropdown>
+          </div>
+        </div>
+
+        <div className='w-[6.8rem] text-sm text-black border-2 rounded-md sm:w-[7.5rem] md:w-[8rem] sm:text-base md:text-lg bg-neutral-100 h-fit border-neutral-500'>
+          <div className='relative flex items-center justify-between px-2 py-1 !leading-none w-full cursor-pointer' tabIndex={0} onClick={() => { setSortDropVis(!sortDropVis) }} onBlur={() => { setSortDropVis(false) }}>
+            <span>{sortName}</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.363 6.363a1.239 1.239 0 000 1.752l8.76 8.761a1.239 1.239 0 001.753 0l8.761-8.76a1.239 1.239 0 10-1.752-1.753L12 14.248 4.115 6.363a1.239 1.239 0 00-1.752 0z" fill="currentColor"></path></svg>
+            <div className="absolute left-0 flex flex-col flex-wrap w-full border-2 rounded-md top-full bg-neutral-100 border-neutral-500">
+              <Dropdown visibility={sortDropVis}>
+                <button className={buttonFilter} onMouseDown={() => { filterSort('이름 순', 'sortAbc') }}><span>이름 순</span></button>
+                <button className={buttonFilter} onMouseDown={() => { filterSort('최신 순', 'sortNew') }}><span>최신 순</span></button>
+                <button className={buttonFilter} onMouseDown={() => { filterSort('할인 높은 순', 'sortSale') }}><span>할인 높은 순</span></button>
+                <button className={buttonFilter} onMouseDown={() => { filterSort('가격 낮은 순', 'sortChip') }}><span>가격 낮은 순</span></button>
               </Dropdown>
             </div>
           </div>
-
-          <div className='w-[6.8rem] text-sm text-black border-2 rounded-md sm:w-[7.5rem] md:w-[8rem] sm:text-base md:text-lg bg-neutral-100 h-fit border-neutral-500'>
-            <div className='relative flex items-center justify-between px-2 py-1 !leading-none w-full cursor-pointer' onClick={() => { setSortDropVis(!sortDropVis) }} onBlur={() => { setSortDropVis(false) }} tabIndex={0}>
-              <span>{sortName}</span>
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.363 6.363a1.239 1.239 0 000 1.752l8.76 8.761a1.239 1.239 0 001.753 0l8.761-8.76a1.239 1.239 0 10-1.752-1.753L12 14.248 4.115 6.363a1.239 1.239 0 00-1.752 0z" fill="currentColor"></path></svg>
-              <div className="absolute left-0 z-30 flex flex-col flex-wrap w-full border-2 rounded-md top-full bg-neutral-100 border-neutral-500">
-                <Dropdown visibility={sortDropVis}>
-                  <button className={buttonFilter} onMouseDown={() => { filterSort('이름 순', 'sortAbc') }}><span>이름 순</span></button>
-                  <button className={buttonFilter} onMouseDown={() => { filterSort('최신 순', 'sortNew') }}><span>최신 순</span></button>
-                  <button className={buttonFilter} onMouseDown={() => { filterSort('할인 높은 순', 'sortSale') }}><span>할인 높은 순</span></button>
-                  <button className={buttonFilter} onMouseDown={() => { filterSort('가격 낮은 순', 'sortChip') }}><span>가격 낮은 순</span></button>
-                </Dropdown>
-              </div>
-            </div>
-          </div>
         </div>
-        <div className='relative z-10 flex flex-wrap text-sm text-center sm:text-base lg:text-lg'>
+      </div>
+    )
+  }
+
+  return (
+    <div className='relative flex justify-center'>
+      <div className='hidden fixed left-[calc(50%-58rem)] border-r-[1px] border-neutral-500 3xl:block'>
+        <SideBarContent></SideBarContent>
+      </div>
+      <div className='relative w-full text-white max-w-screen-2xl 3xl:ml-80'>
+        <Banner></Banner>
+        {FlexHeader()}
+        <div className='relative flex flex-wrap text-sm text-center sm:text-base lg:text-lg'>
           <GameFlexBox></GameFlexBox>
           <Filtering></Filtering>
         </div>

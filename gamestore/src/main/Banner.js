@@ -1,6 +1,7 @@
 import { Carousel } from "flowbite-react";
 import summerDeal from "./bannerImg/summer-deal.png"
 import newOrder from "./bannerImg/new-order.png"
+import React from "react";
 
 const Banner = () => {
   return (
@@ -13,4 +14,4 @@ const Banner = () => {
   )
 }
 
-export default Banner;
+export default React.memo(Banner);

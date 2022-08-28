@@ -18,7 +18,7 @@ const SideBar = (props) => {
   }, [sideIsOpen])
 
   return (
-    <div className="relative 3xl:hidden">
+    <div className="relative md:hidden">
       <div className={`absolute top-0 shadow-xl shadow-sky-500 ${sideIsOpen && sideBarAni && 'animate-sideBarIn -left-[100vw] sm:-left-80'} ${!sideIsOpen && 'animate-sideBarOut left-0'}`}>
         {sideBarAni && <SideBarContent isLogin={isLogin} setIsLogin={setIsLogin}></SideBarContent>}
       </div>
