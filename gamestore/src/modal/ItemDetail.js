@@ -2,8 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 
 const ItemDetail = () => {
-  console.log('itemdetail re')
-
   const { setCart, setIsAddCart } = useOutletContext();
   const { gameid } = useParams();
   const navigate = useNavigate();
@@ -249,7 +247,7 @@ const ItemDetail = () => {
             <div className="flex mb-2 sm:mb-5">
               <div className="block w-full">
                 <GameImg></GameImg>
-                <GameYoutube></GameYoutube>
+                {GameYoutube()}
               </div>
             </div>
 

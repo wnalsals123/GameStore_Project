@@ -1,11 +1,11 @@
 import React from "react";
 
 const Dropdown = (props) => {
-  const { children, visibility } = props
+  const { children } = props
 
   return (
     <article>
-      {visibility && children}
+      {children}
     </article>
   )
 };
