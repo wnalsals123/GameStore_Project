@@ -2,15 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './index.css';
-import App from './App';
-import ItemDetail from './modal/ItemDetail';
-import Login from './modal/Login';
-import SignUp from './modal/SignUp';
-import Cart from './modal/Cart';
-import MyPage from './modal/MyPage';
-import Community from './community/Community';
-import NotFound from './etc/NotFound'
-import NotFoundGame from './etc/NotFoundGame'
+import App from './home/App';
+import ItemDetail from './page/ItemDetail';
+import Login from './page/Login';
+import SignUp from './page/SignUp';
+import Cart from './page/Cart';
+import MyPage from './page/MyPage';
+import Community from './page/Community';
+import NotFound from './page/404/NotFound'
+import NotFoundGame from './page/404/NotFoundGame'
 import reportWebVitals from './test/reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

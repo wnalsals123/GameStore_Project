@@ -1,6 +1,6 @@
 import { Carousel } from "flowbite-react";
-import summerDeal from "./bannerImg/summer-deal.png"
-import newOrder from "./bannerImg/new-order.png"
+import summerDeal from '../../img/summer-deal.png'
+import newOrder from "../../img/new-order.png"
 import React from "react";
 
 const Banner = () => {

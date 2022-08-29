@@ -1,9 +1,8 @@
-import './App.css';
 import Header from './header/Header';
 import SideBar from './side/SideBar';
 import GameFlex from './main/GameFlex';
-import PopDown from './modal/PopDown';
-import GameList from './json/GameList.json'
+import PopDown from '../function/PopDown'
+import GameList from '../json/GameList.json'
 import { useEffect, useState } from "react"
 import { Outlet, useLocation } from 'react-router-dom';
 

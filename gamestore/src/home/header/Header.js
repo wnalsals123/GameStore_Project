@@ -1,3 +1,4 @@
+import AutoCompleteSearch from "../../function/AutoCompleteSearch";
 import { useNavigate } from "react-router-dom";
 
 function Header(props) {
@@ -40,6 +41,10 @@ function Header(props) {
           <button className="ml-5" onClick={() => { toCategory('sales') }}>특별 할인</button>
           <button className="ml-5" onClick={() => { toCategory('new') }}>신작</button>
           <a className="ml-5" href="community">커뮤니티</a>
+        </div>
+        
+        <div className="w-[16rem] h-10 ml-5 align-middle hidden lg:inline-block">
+          <AutoCompleteSearch></AutoCompleteSearch>
         </div>
 
         <div className="absolute top-0 right-0 h-full">

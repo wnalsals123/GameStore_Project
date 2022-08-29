@@ -1,4 +1,4 @@
-import AutoCompleteEmail from "./function/AutoCompleteEmail";
+import AutoCompleteEmail from "../function/AutoCompleteEmail";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -134,7 +134,7 @@ const SignUp = () => {
 
           <div className="w-full p-2 sm:p-5">
 
-            <div className="relative flex flex-col w-full text-base text-white sm:text-xl md:text-2xl lg:text-3xl">
+            <div className="relative flex flex-col w-full text-base text-white sm:text-xl md:text-2xl">
               {/* 회원가입 상단 */}
               <div className="relative flex items-center justify-center mb-2 sm:mb-5">
                 <div className="flex items-center">
@@ -164,7 +164,7 @@ const SignUp = () => {
                   <span className='basis-1/4'>비밀번호</span>
                 </div>
                 <div className="relative flex basis-3/4">
-                  <input className="w-full h-full px-2 py-2 text-black rounded-md sm:px-5 placeholder:text-sm placeholder:sm:text-xl placeholder:md:text-2xl" type="password" placeholder="특수문자 포함, 영문자 또는 숫자" name="password" onChange={handleInput} autoComplete='off'></input>
+                  <input className="w-full h-full px-2 py-2 text-base text-black rounded-md sm:px-5 placeholder:text-sm placeholder:sm:text-xl placeholder:md:text-2xl sm:text-xl md:text-2xl" type="password" placeholder="특수문자 포함, 영문자 또는 숫자" name="password" onChange={handleInput} autoComplete='off'></input>
                   <div className="absolute right-0 flex items-center h-full p-2 -top-8 sm:top-0">
                     <span className={`${S_password ? 'block' : 'hidden'} p-2  text-sm sm:text-base leading-none text-red-500 rounded-lg`}>*8자리 이상</span>
                     {!S_password && <span className={`${V_password ? 'hidden' : 'block'} p-2  text-sm sm:text-base leading-none text-red-500 rounded-lg`}>*사용 불가</span>}
@@ -178,7 +178,7 @@ const SignUp = () => {
                   <span className='basis-1/4'>비밀번호 확인</span>
                 </div>
                 <div className="relative flex basis-3/4">
-                  <input className="w-full h-full px-2 py-2 text-black rounded-md sm:px-5 placeholder:text-sm placeholder:sm:text-xl placeholder:md:text-2xl" type="password" placeholder="비밀번호 재입력" name="passwordOk" onChange={handleInput} autoComplete='off'></input>
+                  <input className="w-full h-full px-2 py-2 text-base text-black rounded-md sm:px-5 placeholder:text-sm placeholder:sm:text-xl placeholder:md:text-2xl sm:text-xl md:text-2xl" type="password" placeholder="비밀번호 재입력" name="passwordOk" onChange={handleInput} autoComplete='off'></input>
                   <div className="absolute right-0 flex items-center h-full p-2 -top-8 sm:top-0">
                     <span className={`${S_passwordOk ? 'block' : 'hidden'} p-2  text-sm sm:text-base leading-none text-red-500 rounded-lg`}>*8자리 이상</span>
                     {!S_passwordOk && <span className={`${V_passwordOk ? 'hidden' : 'block'} p-2  text-sm sm:text-base leading-none text-red-500 rounded-lg`}>*비밀번호 불일치</span>}
@@ -230,7 +230,7 @@ const SignUp = () => {
                   <span className="pl-2 !leading-none sm:pl-4 text-base sm:text-xl md:text-2xl">Game Store</span>
                 </div>
                 <div>
-                  <span className="text-sm sm:text-base">JU MINJONG</span>
+                  <div className="flex items-end h-full"><span className="text-sm sm:text-base">Made by JMJ</span></div>
                 </div>
               </div>
             </div>

@@ -5,7 +5,6 @@ const ItemDetail = () => {
   const { setCart, setIsAddCart } = useOutletContext();
   const { gameid } = useParams();
   const navigate = useNavigate();
-  const redirection = useRef(useNavigate())
 
   const addCart = (selectedItem) => {
     const isUserCart = localStorage.getItem("UserCart") !== null
@@ -47,6 +46,7 @@ const ItemDetail = () => {
   }
 
   const [item, setItem] = useState(temp)
+  const redirection = useRef(useNavigate())
 
   useEffect(() => {
     document.body.style.overflow = 'hidden'

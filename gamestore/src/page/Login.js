@@ -53,7 +53,7 @@ const Login = () => {
       <div className='flex items-center justify-center w-full h-full bg-neutral-500 bg-opacity-70'>
         <div className='relative w-[calc(100%-2rem)] max-w-screen-sm border-2 bg-neutral-900 rounded-xl border-neutral-100'>
 
-          <div className="flex flex-col text-base text-white sm:text-3xl ">
+          <div className="flex flex-col text-base text-white sm:text-2xl">
 
             <div className="relative flex items-center justify-between m-5 mb-0">
               <div className="flex items-center">
@@ -64,7 +64,7 @@ const Login = () => {
             </div>
 
             <input className="p-3 m-5 mb-0 text-black rounded-md" onKeyUp={enterLogin} placeholder="아이디" id='id' autoComplete="off"></input>
-            <input className="p-3 m-5 mb-0 text-black rounded-md" onKeyUp={enterLogin} type="password" placeholder="비밀번호" id='password' autoComplete="off"></input>
+            <input className="p-3 m-5 mb-0 text-base text-black rounded-md sm:text-2xl" onKeyUp={enterLogin} type="password" placeholder="비밀번호" id='password' autoComplete="off"></input>
             <button className="p-2 m-5 mb-0 rounded-md bg-sky-500" onClick={toLogin}>로그인</button>
             <button className="p-2 m-5 bg-red-500 rounded-md" onClick={toSingUp}>회원가입</button>
 
