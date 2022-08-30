@@ -1,21 +1,23 @@
 import AutoCompleteSearch from "../../function/AutoCompleteSearch";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Header(props) {
   const { cart, sideIsOpen, setSideIsOpen, isLogin, category, setCategory, setLoading } = props
   const navigate = useNavigate()
+  const location = useLocation()
 
   const toCart = () => {
     document.body.style.overflow = 'hidden'
-    navigate("/cart")
+    navigate(`/cart${location.search}`)
   }
 
   const toMyPage = () => {
     document.body.style.overflow = 'hidden'
-    isLogin ? navigate("/mypage") : navigate("/login")
+    isLogin ? navigate(`/mypage${location.search}`) : navigate(`/login${location.search}`)
   }
 
   const toCategory = (currentCategory) => {
+    navigate('/')
     if (category === currentCategory) return
 
     setCategory(currentCategory)

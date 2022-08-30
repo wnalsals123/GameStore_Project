@@ -2,15 +2,19 @@ import SideBarContent from '../side/SideBarContent'
 import Banner from './Banner'
 import Filtering from './Filtering'
 import Dropdown from '../../function/DropDown'
+import SearchResult from '../../function/SearchResult'
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 const GameFlex = (props) => {
   const navigate = useNavigate();
+  const location = useLocation()
   const { setCart, setIsAddCart, category, loading, setLoading, setCategory } = props
   const [gameData, setGameData] = useState([])
   const [sortName, setSortName] = useState('이름 순')
   const [sortState, setsortState] = useState('sortAbc')
+  const searchParams = new URLSearchParams(location.search);
+  const keyword = searchParams.get('keyword')
 
   useEffect(() => {
     setGameData(JSON.parse(localStorage.getItem("GameList")))
@@ -18,7 +22,7 @@ const GameFlex = (props) => {
 
   useEffect(() => {
     let timer = null
-    
+
     timer = setTimeout(() => { setLoading('hidden') }, 590);
 
     return () => { clearTimeout(timer) }
@@ -117,7 +121,7 @@ const GameFlex = (props) => {
     setLoading('block')
   }
 
-  const FlexHeader = () => { 
+  const FlexHeader = () => {
     return (
       <div className='relative z-10 flex justify-between mx-3 mt-5 text-2xl sm:text-3xl lg:mx-6'>
         <div className='relative flex items-center justify-between cursor-pointer group' tabIndex={0}>
@@ -127,7 +131,7 @@ const GameFlex = (props) => {
           <svg className='flex items-center ml-2 md:hidden' width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.363 6.363a1.239 1.239 0 000 1.752l8.76 8.761a1.239 1.239 0 001.753 0l8.761-8.76a1.239 1.239 0 10-1.752-1.753L12 14.248 4.115 6.363a1.239 1.239 0 00-1.752 0z" fill="currentColor"></path></svg>
           <div className="absolute left-0 hidden flex-col flex-wrap w-full rounded-md text-xl top-full bg-neutral-900 min-w-[7rem] group-focus:flex">
             <Dropdown>
-              <button className={buttonFilter} onMouseDown={() => { toCategory('home')  }}><span>상점 홈</span></button>
+              <button className={buttonFilter} onMouseDown={() => { toCategory('home') }}><span>상점 홈</span></button>
               <button className={buttonFilter} onMouseDown={() => { toCategory('sales') }}><span>#특별 할인</span></button>
               <button className={buttonFilter} onMouseDown={() => { toCategory('new') }}><span>#신작</span></button>
             </Dropdown>
@@ -157,14 +161,20 @@ const GameFlex = (props) => {
       <div className='hidden fixed left-[calc(50%-58rem)] border-r-[1px] border-neutral-500 3xl:block'>
         <SideBarContent></SideBarContent>
       </div>
-      <div className='relative w-full text-white max-w-screen-2xl 3xl:ml-80'>
-        <Banner></Banner>
-        <FlexHeader></FlexHeader>
-        <div className='relative flex flex-wrap text-sm text-center sm:text-base lg:text-lg'>
-          <GameFlexBox></GameFlexBox>
-          <Filtering></Filtering>
+
+      { keyword === null &&
+        <div className='relative w-full text-white max-w-screen-2xl 3xl:ml-80'>
+          <Banner></Banner>
+          <FlexHeader></FlexHeader>
+          <div className='relative flex flex-wrap text-sm text-center sm:text-base lg:text-lg'>
+            <GameFlexBox></GameFlexBox>
+            <Filtering></Filtering>
+          </div>
         </div>
-      </div>
+      }
+
+      { keyword !== null && <SearchResult gameData={gameData} keyword={keyword} addCart={addCart}></SearchResult> }
+
     </div>
   )
 }
