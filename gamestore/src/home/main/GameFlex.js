@@ -79,11 +79,11 @@ const GameFlex = (props) => {
     // 태그 검색 시 활성화
     const Tag = () => {
       let filterTag = gameTag.filter(item => document.getElementById(item).checked)
-      const tagStyle = 'bg-neutral-500 rounded-lg px-3 mr-2 sm:mr-5 mb-2 sm:mb-5'
+      const tagStyle = 'bg-neutral-500 rounded-lg px-3 ml-3'
 
       return (
-        <div>
-          <span>적용된 필터 : </span>
+        <div className='flex flex-wrap mt-2 text-base sm:text-lg md:text-xl lg:text-2xl'>
+          <span>적용된 필터 :</span>
           {filterTag.map((item, index) => (<span key={index} className={`${tagStyle}`}>{item}</span>))}
         </div>
       )
@@ -121,9 +121,7 @@ const GameFlex = (props) => {
             </div>
           </div>
         </div>
-        <div className='flex flex-wrap mt-2 text-base sm:text-lg md:text-xl lg:text-2xl'>
-          {isFilter && <Tag></Tag>}
-        </div>
+        {isFilter && <Tag></Tag>}
       </div>
     )
   }
@@ -160,35 +158,39 @@ const GameFlex = (props) => {
     }
 
     return (
-      filterGameData.map((item) => (
-        <div key={item.게임명} className='group relative inline-block leading-snug w-[calc(50%-1.5rem)] h-60 mx-3 my-5 p-0 sm:h-80 lg:mx-6 lg:my-8 lg:w-[calc(33.3%-3rem)] xl:w-[calc(25%-3rem)] cursor-pointer 2xl:h-96' tabIndex={0}>
-          <div className='relative w-full h-full'>
-            <img className='object-cover w-full h-full border-2 shadow-md border-neutral-100 rounded-xl shadow-neutral-100' src={item.이미지} alt='game-logo'></img>
-            <span className='absolute px-2 rounded-md bottom-2 left-2 bg-neutral-500 bg-opacity-70'>{item.게임명}</span>
-            <div className='absolute top-2 left-2'>
-              {item.가격 === 0 && <span className='block px-2 bg-red-500 rounded-md bg-opacity-70'>무료 플레이</span>}
-              {item.할인 !== 0 && <span className='block px-2 rounded-md bg-sky-500 bg-opacity-70 sm:hidden'>{((item.할인) * 100).toFixed() + "%↓"}</span>}
-              {item.신작 && <span className='block px-2 rounded-md bg-violet-500 bg-opacity-70 sm:hidden'>NEW</span>}
-              <span className='block px-2 bg-red-500 rounded-md bg-opacity-70' style={{ textDecoration: item.할인 !== 0 && "line-through", display: item.가격 === 0 && "none" }}>{(item.가격).toLocaleString() + "원"}</span>
-              {item.할인 !== 0 && <span className='block px-2 bg-red-500 rounded-md bg-opacity-70'>{(item.가격 * (1 - item.할인)).toLocaleString() + "원"}</span>}
+      <div className='relative flex flex-wrap text-sm text-center sm:text-base lg:text-lg'>
+        {filterGameData.length === 0 && <div className='mx-3 mt-5 text-2xl lg:mx-6 sm:text-3xl'><span>적용된 필터에 해당하는 게임이 없습니다.</span></div>}
+        {filterGameData.map((item) => (
+          <div key={item.게임명} className='group relative inline-block leading-snug w-[calc(50%-1.5rem)] h-60 mx-3 my-5 p-0 sm:h-80 lg:mx-6 lg:my-8 lg:w-[calc(33.3%-3rem)] xl:w-[calc(25%-3rem)] cursor-pointer 2xl:h-96' tabIndex={0}>
+            <div className='relative w-full h-full'>
+              <img className='object-cover w-full h-full border-2 shadow-md border-neutral-100 rounded-xl shadow-neutral-100' src={item.이미지} alt='game-logo'></img>
+              <span className='absolute px-2 rounded-md bottom-2 left-2 bg-neutral-500 bg-opacity-70'>{item.게임명}</span>
+              <div className='absolute top-2 left-2'>
+                {item.가격 === 0 && <span className='block px-2 bg-red-500 rounded-md bg-opacity-70'>무료 플레이</span>}
+                {item.할인 !== 0 && <span className='block px-2 rounded-md bg-sky-500 bg-opacity-70 sm:hidden'>{((item.할인) * 100).toFixed() + "%↓"}</span>}
+                {item.신작 && <span className='block px-2 rounded-md bg-violet-500 bg-opacity-70 sm:hidden'>NEW</span>}
+                <span className='block px-2 bg-red-500 rounded-md bg-opacity-70' style={{ textDecoration: item.할인 !== 0 && "line-through", display: item.가격 === 0 && "none" }}>{(item.가격).toLocaleString() + "원"}</span>
+                {item.할인 !== 0 && <span className='block px-2 bg-red-500 rounded-md bg-opacity-70'>{(item.가격 * (1 - item.할인)).toLocaleString() + "원"}</span>}
+              </div>
+              <div className='absolute hidden sm:block top-2 right-2'>
+                {item.할인 !== 0 && <span className='block px-2 rounded-md bg-sky-500 bg-opacity-70'>{((item.할인) * 100).toFixed() + "%↓"}</span>}
+                {item.신작 && <span className='block px-2 rounded-md bg-violet-500 bg-opacity-70'>NEW</span>}
+              </div>
             </div>
-            <div className='absolute hidden sm:block top-2 right-2'>
-              {item.할인 !== 0 && <span className='block px-2 rounded-md bg-sky-500 bg-opacity-70'>{((item.할인) * 100).toFixed() + "%↓"}</span>}
-              {item.신작 && <span className='block px-2 rounded-md bg-violet-500 bg-opacity-70'>NEW</span>}
+            <div className='absolute top-0 left-0 flex-col items-center justify-center hidden w-full h-full group-focus:flex rounded-xl bg-neutral-100 bg-opacity-70'>
+              <button className='px-5 py-2 mb-10 bg-sky-500 rounded-xl' onMouseDown={() => { toDetail(item) }}>상세보기</button>
+              <button className='px-5 py-2 bg-sky-500 rounded-xl' onMouseDown={() => { addCart(item) }}>장바구니</button>
+            </div>
+            <div className={`${loading} absolute top-0 left-0 flex items-center justify-center w-full h-full rounded-lg bg-neutral-900 animate-loadingGame`}>
+              <svg className="w-1/2 text-white h-1/2 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
             </div>
           </div>
-          <div className='absolute top-0 left-0 flex-col items-center justify-center hidden w-full h-full group-focus:flex rounded-xl bg-neutral-100 bg-opacity-70'>
-            <button className='px-5 py-2 mb-10 bg-sky-500 rounded-xl' onMouseDown={() => { toDetail(item) }}>상세보기</button>
-            <button className='px-5 py-2 bg-sky-500 rounded-xl' onMouseDown={() => { addCart(item) }}>장바구니</button>
-          </div>
-          <div className={`${loading} absolute top-0 left-0 flex items-center justify-center w-full h-full rounded-lg bg-neutral-900 animate-loadingGame`}>
-            <svg className="w-1/2 text-white h-1/2 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-            </svg>
-          </div>
-        </div>
-      ))
+        ))}
+        <Filtering></Filtering>
+      </div>
     )
   }
 
@@ -196,17 +198,14 @@ const GameFlex = (props) => {
   return (
     <div className='relative flex justify-center'>
       <div className='hidden fixed left-[calc(50%-58rem)] border-r-[1px] border-neutral-500 3xl:block'>
-        <SideBarContent setIsFilter={setIsFilter}></SideBarContent>
+        <SideBarContent isFilter={isFilter} setIsFilter={setIsFilter}></SideBarContent>
       </div>
 
       {keyword === null &&
         <div className='relative w-full text-white max-w-screen-2xl 3xl:ml-80'>
           <Banner></Banner>
           <FlexHeader></FlexHeader>
-          <div className='relative flex flex-wrap text-sm text-center sm:text-base lg:text-lg'>
-            <GameFlexBox></GameFlexBox>
-            <Filtering></Filtering>
-          </div>
+          <GameFlexBox></GameFlexBox>
         </div>
       }
 

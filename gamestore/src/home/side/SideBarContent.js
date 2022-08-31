@@ -64,15 +64,6 @@ const SideBarContent = (props) => {
           </button>
         </div>
 
-        <div className="mb-5 bg-orange-500 rounded-lg">
-          <a className="w-full" href="/community">
-            <div className="flex items-center p-2 text-center">
-              <div className="p-2 rounded-full bg-neutral-100"><img className="w-7" src="https://cdn-icons-png.flaticon.com/512/2907/2907904.png" alt="cart"></img></div>
-              <span className="flex-1 block pl-2">커뮤니티</span>
-            </div>
-          </a>
-        </div>
-
         <div className='hidden p-2 rounded-lg 3xl:block bg-neutral-100'>
           <GameFilter setIsFilter={setIsFilter}></GameFilter>
         </div>

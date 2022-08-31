@@ -8,7 +8,6 @@ import Login from './page/Login';
 import SignUp from './page/SignUp';
 import Cart from './page/Cart';
 import MyPage from './page/MyPage';
-import Community from './page/Community';
 import NotFound from './page/404/NotFound'
 import NotFoundGame from './page/404/NotFoundGame'
 import reportWebVitals from './test/reportWebVitals';
@@ -25,7 +24,6 @@ root.render(
           <Route path="cart" element={<Cart />}></Route>
           <Route path="mypage" element={<MyPage />}></Route>
         </Route>
-        <Route path="/community" element={<Community />}></Route>
         <Route path="/*" element={<NotFound />}></Route>
         <Route path="/NotFound" element={<NotFound />}></Route>
         <Route path="/games/NotFound" element={<NotFoundGame />}></Route>
