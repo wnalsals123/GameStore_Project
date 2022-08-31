@@ -1,9 +1,10 @@
 import { useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 const PopDown = (props) => {
   const { isAddCart, setIsAddCart } = props
   const navigate = useNavigate()
+  const location = useLocation()
 
   useEffect(() => {
     let timer = null
@@ -15,7 +16,7 @@ const PopDown = (props) => {
 
   const toCart = () => {
     document.body.style.overflow = 'hidden'
-    navigate("/cart")
+    navigate(`/cart${location.search}`)
   }
 
   const CartView = () => {

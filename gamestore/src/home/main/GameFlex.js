@@ -9,17 +9,20 @@ import { useLocation, useNavigate } from 'react-router-dom'
 const GameFlex = (props) => {
   const navigate = useNavigate();
   const location = useLocation()
-  const { setCart, setIsAddCart, category, loading, setLoading, setCategory } = props
+  const { setCart, setIsAddCart, category, loading, setLoading, setCategory, isFilter, setIsFilter } = props
   const [gameData, setGameData] = useState([])
+  const gameTag = ['오픈월드', '멀티플레이', '협동', '액션', '공포', '좀비', '어드벤처', '스포츠', 'MMORPG', 'FPS']
   const [sortName, setSortName] = useState('이름 순')
   const [sortState, setsortState] = useState('sortAbc')
   const searchParams = new URLSearchParams(location.search);
   const keyword = searchParams.get('keyword')
 
+  /* 게임 데이터 불러오기 */
   useEffect(() => {
     setGameData(JSON.parse(localStorage.getItem("GameList")))
   }, [])
 
+  /* 게임 데이터 로딩 애니메이션 */
   useEffect(() => {
     let timer = null
 
@@ -28,6 +31,7 @@ const GameFlex = (props) => {
     return () => { clearTimeout(timer) }
   }, [category, setLoading])
 
+  /* 장바구니에 추가 함수 */
   const addCart = (selectedItem) => {
     const isUserCart = localStorage.getItem("UserCart") !== null
 
@@ -54,11 +58,77 @@ const GameFlex = (props) => {
     }
   }
 
-  const toDetail = (item) => {
-    document.body.style.overflow = 'hidden'
-    navigate(`/games/${item.게임명}`);
+  /* 카테고리, 정렬 컴포넌트 */
+  const FlexHeader = () => {
+    const buttonFilter = 'flex items-center p-2 !leading-none w-full'
+
+    // 해당 게임 카테고리 설정
+    const toCategory = (currentCategory) => {
+      if (category === currentCategory) return
+
+      setCategory(currentCategory)
+      setLoading('block')
+    }
+
+    // 게임 정렬 설정
+    const filterSort = (sortName, sortState) => {
+      setSortName(sortName)
+      setsortState(sortState)
+    }
+
+    // 태그 검색 시 활성화
+    const Tag = () => {
+      let filterTag = gameTag.filter(item => document.getElementById(item).checked)
+      const tagStyle = 'bg-neutral-500 rounded-lg px-3 mr-2 sm:mr-5 mb-2 sm:mb-5'
+
+      return (
+        <div>
+          <span>적용된 필터 : </span>
+          {filterTag.map((item, index) => (<span key={index} className={`${tagStyle}`}>{item}</span>))}
+        </div>
+      )
+    }
+
+    return (
+      <div className='flex flex-col mx-3 mt-5 lg:mx-6'>
+        <div className='relative z-10 flex justify-between text-2xl sm:text-3xl'>
+          <div className='relative flex items-center justify-between cursor-pointer group' tabIndex={0}>
+            {category === 'home' && <span>상점 홈</span>}
+            {category === 'sales' && <span>#특별 할인</span>}
+            {category === 'new' && <span>#신작</span>}
+            <svg className='flex items-center ml-2 md:hidden' width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.363 6.363a1.239 1.239 0 000 1.752l8.76 8.761a1.239 1.239 0 001.753 0l8.761-8.76a1.239 1.239 0 10-1.752-1.753L12 14.248 4.115 6.363a1.239 1.239 0 00-1.752 0z" fill="currentColor"></path></svg>
+            <div className="absolute left-0 hidden flex-col flex-wrap w-full rounded-md text-xl top-full bg-neutral-900 min-w-[7rem] group-focus:flex">
+              <Dropdown>
+                <button className={buttonFilter} onMouseDown={() => { toCategory('home') }}><span>상점 홈</span></button>
+                <button className={buttonFilter} onMouseDown={() => { toCategory('sales') }}><span>#특별 할인</span></button>
+                <button className={buttonFilter} onMouseDown={() => { toCategory('new') }}><span>#신작</span></button>
+              </Dropdown>
+            </div>
+          </div>
+
+          <div className='w-[6.8rem] text-sm text-black border-2 rounded-md sm:w-[7.5rem] md:w-[8rem] sm:text-base md:text-lg bg-neutral-100 h-fit border-neutral-500'>
+            <div className='relative flex items-center justify-between px-2 py-1 !leading-none w-full cursor-pointer group' tabIndex={0}>
+              <span>{sortName}</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.363 6.363a1.239 1.239 0 000 1.752l8.76 8.761a1.239 1.239 0 001.753 0l8.761-8.76a1.239 1.239 0 10-1.752-1.753L12 14.248 4.115 6.363a1.239 1.239 0 00-1.752 0z" fill="currentColor"></path></svg>
+              <div className="absolute left-0 flex-col flex-wrap hidden w-full border-2 rounded-md top-full bg-neutral-100 border-neutral-500 group-focus:flex">
+                <Dropdown>
+                  <button className={buttonFilter} onMouseDown={() => { filterSort('이름 순', 'sortAbc') }}><span>이름 순</span></button>
+                  <button className={buttonFilter} onMouseDown={() => { filterSort('최신 순', 'sortNew') }}><span>최신 순</span></button>
+                  <button className={buttonFilter} onMouseDown={() => { filterSort('할인 높은 순', 'sortSale') }}><span>할인 높은 순</span></button>
+                  <button className={buttonFilter} onMouseDown={() => { filterSort('가격 낮은 순', 'sortChip') }}><span>가격 낮은 순</span></button>
+                </Dropdown>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className='flex flex-wrap mt-2 text-base sm:text-lg md:text-xl lg:text-2xl'>
+          {isFilter && <Tag></Tag>}
+        </div>
+      </div>
+    )
   }
 
+  /* 게임 데이터에 카테고리, 정렬, 필터 적용 컴포넌트 */
   const GameFlexBox = () => {
     let filterGameData = category === 'home' ? gameData : category === 'sales' ? gameData.filter((item) => (item.할인 !== 0)) : category === 'new' ? gameData.filter((item) => (item.신작 === true)) : gameData
 
@@ -72,6 +142,21 @@ const GameFlex = (props) => {
       filterGameData = filterGameData.sort((a, b) => (a.할인 === 0 ? a.가격 : (a.가격 * (1 - a.할인))) < (b.할인 === 0 ? b.가격 : (b.가격 * (1 - b.할인))) ? -1 : 1);
     } else {
       console.log('sorterror!')
+    }
+
+    let filterTag = []
+
+    if (isFilter) {
+      filterTag = gameTag.filter(item => document.getElementById(item).checked)
+      for (let i = 0; i < filterTag.length; i++) {
+        filterGameData = filterGameData.filter(item => item.태그[filterTag[i]])
+      }
+    }
+
+    // 상세보기 이동 함수
+    const toDetail = (item) => {
+      document.body.style.overflow = 'hidden'
+      navigate(`/games/${item.게임명}`);
     }
 
     return (
@@ -107,62 +192,14 @@ const GameFlex = (props) => {
     )
   }
 
-  const buttonFilter = 'flex items-center p-2 !leading-none w-full'
-
-  const filterSort = (sortName, sortState) => {
-    setSortName(sortName)
-    setsortState(sortState)
-  }
-
-  const toCategory = (currentCategory) => {
-    if (category === currentCategory) return
-
-    setCategory(currentCategory)
-    setLoading('block')
-  }
-
-  const FlexHeader = () => {
-    return (
-      <div className='relative z-10 flex justify-between mx-3 mt-5 text-2xl sm:text-3xl lg:mx-6'>
-        <div className='relative flex items-center justify-between cursor-pointer group' tabIndex={0}>
-          {category === 'home' && <span>상점 홈</span>}
-          {category === 'sales' && <span>#특별 할인</span>}
-          {category === 'new' && <span>#신작</span>}
-          <svg className='flex items-center ml-2 md:hidden' width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.363 6.363a1.239 1.239 0 000 1.752l8.76 8.761a1.239 1.239 0 001.753 0l8.761-8.76a1.239 1.239 0 10-1.752-1.753L12 14.248 4.115 6.363a1.239 1.239 0 00-1.752 0z" fill="currentColor"></path></svg>
-          <div className="absolute left-0 hidden flex-col flex-wrap w-full rounded-md text-xl top-full bg-neutral-900 min-w-[7rem] group-focus:flex">
-            <Dropdown>
-              <button className={buttonFilter} onMouseDown={() => { toCategory('home') }}><span>상점 홈</span></button>
-              <button className={buttonFilter} onMouseDown={() => { toCategory('sales') }}><span>#특별 할인</span></button>
-              <button className={buttonFilter} onMouseDown={() => { toCategory('new') }}><span>#신작</span></button>
-            </Dropdown>
-          </div>
-        </div>
-
-        <div className='w-[6.8rem] text-sm text-black border-2 rounded-md sm:w-[7.5rem] md:w-[8rem] sm:text-base md:text-lg bg-neutral-100 h-fit border-neutral-500'>
-          <div className='relative flex items-center justify-between px-2 py-1 !leading-none w-full cursor-pointer group' tabIndex={0}>
-            <span>{sortName}</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.363 6.363a1.239 1.239 0 000 1.752l8.76 8.761a1.239 1.239 0 001.753 0l8.761-8.76a1.239 1.239 0 10-1.752-1.753L12 14.248 4.115 6.363a1.239 1.239 0 00-1.752 0z" fill="currentColor"></path></svg>
-            <div className="absolute left-0 flex-col flex-wrap hidden w-full border-2 rounded-md top-full bg-neutral-100 border-neutral-500 group-focus:flex">
-              <Dropdown>
-                <button className={buttonFilter} onMouseDown={() => { filterSort('이름 순', 'sortAbc') }}><span>이름 순</span></button>
-                <button className={buttonFilter} onMouseDown={() => { filterSort('최신 순', 'sortNew') }}><span>최신 순</span></button>
-                <button className={buttonFilter} onMouseDown={() => { filterSort('할인 높은 순', 'sortSale') }}><span>할인 높은 순</span></button>
-                <button className={buttonFilter} onMouseDown={() => { filterSort('가격 낮은 순', 'sortChip') }}><span>가격 낮은 순</span></button>
-              </Dropdown>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
+  /* 메인 렌더링 */
   return (
     <div className='relative flex justify-center'>
       <div className='hidden fixed left-[calc(50%-58rem)] border-r-[1px] border-neutral-500 3xl:block'>
-        <SideBarContent></SideBarContent>
+        <SideBarContent setIsFilter={setIsFilter}></SideBarContent>
       </div>
 
-      { keyword === null &&
+      {keyword === null &&
         <div className='relative w-full text-white max-w-screen-2xl 3xl:ml-80'>
           <Banner></Banner>
           <FlexHeader></FlexHeader>
@@ -173,7 +210,7 @@ const GameFlex = (props) => {
         </div>
       }
 
-      { keyword !== null && <SearchResult gameData={gameData} keyword={keyword} addCart={addCart}></SearchResult> }
+      {keyword !== null && <SearchResult gameData={gameData} keyword={keyword} addCart={addCart}></SearchResult>}
 
     </div>
   )
