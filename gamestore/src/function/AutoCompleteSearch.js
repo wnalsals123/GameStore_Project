@@ -2,7 +2,8 @@ import { createFuzzyMatcher } from "./StringMatcher";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const AutoCompleteSearch = () => {
+const AutoCompleteSearch = (props) => {
+  const { setSearchVis } = props
   const navigate = useNavigate()
   const [inputValue, setInputValue] = useState('')
   const [isHaveInputValue, setIsHaveInputValue] = useState(false)
@@ -36,6 +37,7 @@ const AutoCompleteSearch = () => {
   const clickDropDownItem = clickedItem => {
     setInputValue(clickedItem)
     setIsHaveInputValue(false)
+    setSearchVis(false)
     navigate(`/?keyword=${clickedItem}`)
   }
 
@@ -49,6 +51,7 @@ const AutoCompleteSearch = () => {
           clickDropDownItem(dropDownList[dropDownItemIndex])
           setDropDownItemIndex(-1)
         } else {
+          setSearchVis(false)
           navigate(`/?keyword=${event.target.value}`)
         }
       }
@@ -63,7 +66,7 @@ const AutoCompleteSearch = () => {
 
   const Result = () => {
     return (
-      <ul className="absolute top-[85%] -left-[2px] w-[16rem] bg-white border-2 border-neutral-900 rounded-b-lg border-t-0 py-2">
+      <ul className="absolute top-[85%] -left-[2px] w-[16rem] bg-white border-2 border-neutral-900 rounded-b-lg border-t-0 py-2 text-left">
         {dropDownList.length === 0 && <li className={`!leading-none pl-[2.575rem] py-2`}>해당하는 결과가 없습니다.</li>}
         {dropDownList.map((dropDownItem, dropDownIndex) => (
           <li key={dropDownIndex} onMouseDown={() => clickDropDownItem(dropDownItem)} className={`!leading-none pl-[2.575rem] py-2 cursor-pointer hover:bg-neutral-200 ${dropDownItemIndex === dropDownIndex && 'bg-neutral-200'}`}>
@@ -76,7 +79,7 @@ const AutoCompleteSearch = () => {
   return (
     <div className="relative flex items-center w-full h-full bg-white border-2 rounded-lg border-neutral-900">
       <div className="w-[10%] mx-2 z-10"><img className="object-cover w-full h-full" src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="search-img"></img></div>
-      <input className="h-[90%] w-[80%] focus:outline-none z-10" placeholder="게임 검색" value={inputValue} onChange={changeInputValue} onKeyDown={handleDropDownKey} onFocus={changeInputValue} onBlur={blurAuto}></input>
+      <input className="h-[90%] w-[80%] !border-0 !outline-0 !ring-0 z-10" type="search" placeholder="게임 검색" value={inputValue} onChange={changeInputValue} onKeyDown={handleDropDownKey} onFocus={changeInputValue} onBlur={blurAuto}></input>
       {isHaveInputValue && <Result></Result>}
     </div>
   )

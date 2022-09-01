@@ -1,5 +1,7 @@
 import AutoCompleteSearch from "../../function/AutoCompleteSearch";
+import Dropdown from "../../function/DropDown";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 function Header(props) {
   const { cart, sideIsOpen, setSideIsOpen, isLogin, category, setCategory, setLoading } = props
@@ -24,6 +26,8 @@ function Header(props) {
     setLoading('block')
   }
 
+  const [searchVis, setSearchVis] = useState(false)
+
   return (
     <div className="px-2 py-2 bg-neutral-100 md:px-5 md:py-4">
 
@@ -43,22 +47,37 @@ function Header(props) {
           <button className="ml-5" onClick={() => { toCategory('sales') }}>특별 할인</button>
           <button className="ml-5" onClick={() => { toCategory('new') }}>신작</button>
         </div>
-        
+
+        <div className="hidden ml-5 align-middle md:inline-block lg:hidden">
+          <button className="w-6 h-6 align-middle bg-no-repeat bg-cover bg-search-btn" onClick={() => { setSearchVis(!searchVis) }}></button>
+        </div>
+
         <div className="w-[16rem] h-10 ml-5 align-middle hidden lg:inline-block">
-          <AutoCompleteSearch></AutoCompleteSearch>
+          <AutoCompleteSearch setSearchVis={setSearchVis}></AutoCompleteSearch>
         </div>
 
         <div className="absolute top-0 right-0 h-full">
           <div className="flex items-center h-full">
-            <button className="relative ml-6" onClick={() => { toCart() }}>
-              <img className="inline-block w-8 sm:w-9 md:w-10" src="https://cdn-icons-png.flaticon.com/512/833/833314.png" alt="cart"></img>
+            <button className="inline-block align-middle bg-no-repeat bg-cover md:hidden w-7 h-7 bg-search-btn" onClick={() => { setSearchVis(!searchVis) }}></button>
+            <button className="relative hidden ml-6 md:inline-block" onClick={() => { toCart() }}>
+              <img className="w-8 sm:w-9 md:w-10" src="https://cdn-icons-png.flaticon.com/512/833/833314.png" alt="cart"></img>
               {cart !== 0 && <span className='absolute h-4 px-1 text-sm leading-none text-white rounded-full -top-2 -right-1 bg-sky-500'>{cart}</span>}
             </button>
-            <button className="hidden ml-6 sm:inline-block" onClick={() => { toMyPage() }}>
-              <img className="inline-block w-9 md:w-10" src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png" alt="user"></img>
+            <button className="hidden ml-6 md:inline-block" onClick={() => { toMyPage() }}>
+              <img className="w-9 md:w-10" src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png" alt="user"></img>
             </button>
           </div>
         </div>
+
+        <Dropdown visble={searchVis}>
+          <div className="fixed top-[3.75rem] md:top-[5rem] left-0 w-screen lg:hidden">
+            <div className="flex items-center justify-center bg-opacity-70 bg-neutral-500">
+              <div className="w-[16rem] h-10">
+                <AutoCompleteSearch setSearchVis={setSearchVis}></AutoCompleteSearch>
+              </div>
+            </div>
+          </div>
+        </Dropdown>
 
       </div>
 

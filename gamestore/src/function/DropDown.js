@@ -1,12 +1,10 @@
-import React from "react";
-
 const Dropdown = (props) => {
-  const { children } = props
+  const { visble, children } = props
 
   return (
-    <article>
-      {children}
-    </article>
+    <div>
+      {visble && children}
+    </div>
   )
 };
 

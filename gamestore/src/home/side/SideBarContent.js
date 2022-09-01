@@ -1,8 +1,7 @@
-import GameFilter from "../../function/GameFilter"
 import { useNavigate } from "react-router-dom"
 
 const SideBarContent = (props) => {
-  const { isLogin, setIsLogin, setIsFilter } = props
+  const { isLogin, setIsLogin } = props
 
   const navigate = useNavigate()
 
@@ -62,10 +61,6 @@ const SideBarContent = (props) => {
               <span className="flex-1 block pl-2">장바구니</span>
             </div>
           </button>
-        </div>
-
-        <div className='hidden p-2 rounded-lg 3xl:block bg-neutral-100'>
-          <GameFilter setIsFilter={setIsFilter}></GameFilter>
         </div>
 
         <button className={`${isLogin ? 'block' : 'hidden'}`} onClick={toLogout}><li className="mb-2">로그아웃</li></button>

@@ -31,6 +31,7 @@ module.exports = {
       backgroundImage: {
         'close-btn': "url('https://cdn-icons-png.flaticon.com/512/1828/1828778.png')",
         'menu-btn': "url('https://cdn-icons-png.flaticon.com/512/1828/1828859.png')",
+        'search-btn': "url('https://cdn-icons-png.flaticon.com/512/622/622669.png')",
       },
       keyframes: {
         sideBarIn: {

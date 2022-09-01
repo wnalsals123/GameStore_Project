@@ -42,7 +42,7 @@ const SearchResult = (props) => {
 
   return (
     <div className='relative w-full text-white max-w-screen-2xl 3xl:ml-80'>
-      <div className="mx-3 mt-5 text-2xl sm:text-3xl lg:mx-6">
+      <div className="mx-3 mt-5 text-xl md:text-2xl lg:text-3xl lg:mx-6">
         {filterGameData.length === 0 && <span>{`"${keyword}"에 대한 검색 결과가 없습니다.`}</span>}
         {filterGameData.length !== 0 && <span>{`"${keyword}"에 대한 검색 결과입니다.`}</span>}
       </div>

@@ -15,7 +15,6 @@ function App() {
   const [isLogin, setIsLogin] = useState(false)
   const [category, setCategory] = useState('home')
   const [loading, setLoading] = useState('block')
-  const [isFilter, setIsFilter] = useState(false)
 
   useEffect(() => {
     const getVersion = localStorage.getItem('version')
@@ -49,7 +48,7 @@ function App() {
         <Header cart={cart} sideIsOpen={sideIsOpen} setSideIsOpen={setSideIsOpen} isLogin={isLogin} category={category} setCategory={setCategory} setLoading={setLoading}></Header>
         <SideBar sideIsOpen={sideIsOpen} isLogin={isLogin} setIsLogin={setIsLogin}></SideBar>
       </div>
-      <GameFlex setCart={setCart} setIsAddCart={setIsAddCart} category={category} setCategory={setCategory} loading={loading} setLoading={setLoading} isFilter={isFilter} setIsFilter={setIsFilter}></GameFlex>
+      <GameFlex setCart={setCart} setIsAddCart={setIsAddCart} isLogin={isLogin} setIsLogin={setIsLogin} category={category} setCategory={setCategory} loading={loading} setLoading={setLoading}></GameFlex>
       <Outlet context={{ setCart, setIsLogin, setIsAddCart }}></Outlet>
       <PopDown isAddCart={isAddCart} setIsAddCart={setIsAddCart}></PopDown>
     </div>
