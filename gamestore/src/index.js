@@ -20,7 +20,7 @@ root.render(
         <Route path="/" element={<App />}>
           <Route path="games/:gameid" element={<ItemDetail />}></Route>
           <Route path="login" element={<Login />}></Route>
-          <Route path="singup" element={<SignUp />}></Route>
+          <Route path="signup" element={<SignUp />}></Route>
           <Route path="cart" element={<Cart />}></Route>
           <Route path="mypage" element={<MyPage />}></Route>
         </Route>

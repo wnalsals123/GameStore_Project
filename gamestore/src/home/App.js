@@ -12,7 +12,7 @@ function App() {
   const [cart, setCart] = useState(0)
   const [sideIsOpen, setSideIsOpen] = useState(false)
   const [isAddCart, setIsAddCart] = useState(false)
-  const [isLogin, setIsLogin] = useState(false)
+  const [isLogin, setIsLogin] = useState(true)
   const [category, setCategory] = useState('home')
   const [loading, setLoading] = useState('block')
 

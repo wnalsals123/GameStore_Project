@@ -57,8 +57,8 @@ const GameFilter = (props) => {
       <div className="flex flex-col m-2">
         {gameTag.map((item, index) =>
           <button key={index} className={`flex items-center mb-1 bg-transparent px-2 py-1 !leading-none`} onClick={() => { checkboxClick(item) }}>
-            {!checkedTag[item] && <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2" color="#FFFFFF"><path fill-rule="evenodd" clip-rule="evenodd" d="M19 5H5v14h14V5zM5 3a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2H5z" fill="currentColor"></path></svg>}
-            {checkedTag[item] && <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" class="mr-2" color="#FFFFFF"><path fill-rule="evenodd" clip-rule="evenodd" d="M19 5H5v14h14V5zM5 3a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2H5z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M17.625 7.95c.431.356.5 1.004.156 1.449l-6 7.725a.991.991 0 01-.726.385.984.984 0 01-.762-.3l-3.5-3.605a1.052 1.052 0 010-1.457.98.98 0 011.414 0l2.71 2.791 5.302-6.826a.98.98 0 011.406-.161z" fill="currentColor"></path></svg>}
+            {!checkedTag[item] && <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-2" color="#FFFFFF"><path fillRule="evenodd" clipRule="evenodd" d="M19 5H5v14h14V5zM5 3a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2H5z" fill="currentColor"></path></svg>}
+            {checkedTag[item] && <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-2" color="#FFFFFF"><path fillRule="evenodd" clipRule="evenodd" d="M19 5H5v14h14V5zM5 3a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2H5z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M17.625 7.95c.431.356.5 1.004.156 1.449l-6 7.725a.991.991 0 01-.726.385.984.984 0 01-.762-.3l-3.5-3.605a1.052 1.052 0 010-1.457.98.98 0 011.414 0l2.71 2.791 5.302-6.826a.98.98 0 011.406-.161z" fill="currentColor"></path></svg>}
             <span>{item}</span>
           </button>
         )}

@@ -15,9 +15,9 @@ const Login = () => {
     navigate(-1);
   }
 
-  const toSingUp = () => {
+  const toSignUp = () => {
     document.body.style.overflow = 'auto'
-    navigate("/singup");
+    navigate("/signup");
   }
 
   const toLogin = () => {
@@ -66,7 +66,7 @@ const Login = () => {
             <input className="p-3 m-5 mb-0 text-black rounded-md" onKeyUp={enterLogin} placeholder="아이디" id='id' autoComplete="off"></input>
             <input className="p-3 m-5 mb-0 text-base text-black rounded-md sm:text-2xl" onKeyUp={enterLogin} type="password" placeholder="비밀번호" id='password' autoComplete="off"></input>
             <button className="p-2 m-5 mb-0 rounded-md bg-sky-500" onClick={toLogin}>로그인</button>
-            <button className="p-2 m-5 bg-red-500 rounded-md" onClick={toSingUp}>회원가입</button>
+            <button className="p-2 m-5 bg-red-500 rounded-md" onClick={toSignUp}>회원가입</button>
 
           </div>
 

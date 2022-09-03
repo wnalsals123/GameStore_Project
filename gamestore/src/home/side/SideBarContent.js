@@ -10,6 +10,12 @@ const SideBarContent = (props) => {
     navigate("/login")
   }
 
+  const toSignUp = () => {
+    document.body.style.overflow = 'hidden'
+    navigate("/signup")
+  }
+
+
   const toLogout = () => {
     const message = "정말로 로그아웃하시겠습니까?"
 
@@ -38,7 +44,7 @@ const SideBarContent = (props) => {
           <button className="w-full" onClick={() => { toLogin() }}>
             <div className="relative flex items-center p-2">
               <div className="p-2 rounded-full sm:relative bg-neutral-100"><img className="w-7" src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png" alt="user"></img></div>
-              <span className="flex-1 block pl-2">로그인이 필요합니다</span>
+              <span className="flex-1 block pl-2">로그인</span>
             </div>
           </button>
         </div>
@@ -51,6 +57,15 @@ const SideBarContent = (props) => {
             </div>
             <span className="block">회원등급</span>
             <span className="block">레벨</span>
+          </button>
+        </div>
+
+        <div className={`${isLogin ? 'hidden' : 'block'} mb-5 rounded-lg bg-orange-500`}>
+          <button className="w-full" onClick={() => { toSignUp() }}>
+            <div className="relative flex items-center p-2">
+              <div className="p-2 rounded-full sm:relative bg-neutral-100"><img className="w-7" src="https://cdn-icons-png.flaticon.com/512/684/684831.png" alt="user"></img></div>
+              <span className="flex-1 block pl-2">회원가입</span>
+            </div>
           </button>
         </div>
 
