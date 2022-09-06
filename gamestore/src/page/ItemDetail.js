@@ -66,7 +66,7 @@ const ItemDetail = () => {
 
   const toHome = () => {
     document.body.style.overflow = 'auto'
-    navigate(-1);
+    navigate('/');
   }
 
   const gamePrice = () => {

@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom"
+import { removeCookie } from "../../function/Cookie"
 
 const SideBarContent = (props) => {
   const { isLogin, setIsLogin } = props
@@ -20,6 +21,7 @@ const SideBarContent = (props) => {
     const message = "정말로 로그아웃하시겠습니까?"
 
     if (window.confirm(message)) {
+      removeCookie("LoginSession")
       setIsLogin(false)
     } else {
       console.log("취소")

@@ -3,39 +3,41 @@ import SideBar from './side/SideBar';
 import GameFlex from './main/GameFlex';
 import PopDown from '../function/PopDown'
 import GameList from '../json/GameList.json'
+import UserData from '../json/UserData.json'
 import { useEffect, useState } from "react"
 import { Outlet, useLocation } from 'react-router-dom';
+import { getCookie } from '../function/Cookie';
 
 function App() {
   const location = useLocation()
-  const version = '1.6'
+  const version = '1.8'
   const [cart, setCart] = useState(0)
   const [sideIsOpen, setSideIsOpen] = useState(false)
   const [isAddCart, setIsAddCart] = useState(false)
-  const [isLogin, setIsLogin] = useState(true)
+  const [isLogin, setIsLogin] = useState(false)
   const [category, setCategory] = useState('home')
   const [loading, setLoading] = useState('block')
 
   useEffect(() => {
+    // 데이터 유효성 검사 false 로컬스토리지 클리어
     const getVersion = localStorage.getItem('version')
-    const getGameList = localStorage.getItem('GameList')
-    const getUserCart = localStorage.getItem('UserCart')
-    let isError = false
-
     if(getVersion === null || getVersion !== version) {
-      if(getVersion !== null) localStorage.removeItem('version')
-      if(getGameList !== null) localStorage.removeItem('GameList')
-      if(getUserCart !== null) localStorage.removeItem('UserCart')
-      isError = true
+      localStorage.clear()
+      alert('데이터 오류로 새로고침이 필요합니다')
     }
 
+    // 데이터 불러오기
     localStorage.setItem('version', version)
     localStorage.setItem("GameList", JSON.stringify(GameList))
-    
-    const isUserCart = localStorage.getItem("UserCart") !== null
+    localStorage.setItem("UserData", JSON.stringify(UserData))
 
+    // 로그인 세션 확인
+    const loginSession = !!getCookie("LoginSession")
+    if(loginSession) setIsLogin(true)
+    
+    // 장바구니 확인
+    const isUserCart = localStorage.getItem("UserCart") !== null
     if(isUserCart) setCart(JSON.parse(localStorage.getItem("UserCart")).length)
-    if(isError) alert('데이터 오류로 새로고침이 필요합니다')
   }, [])
 
   useEffect(() => {
@@ -49,7 +51,7 @@ function App() {
         <SideBar sideIsOpen={sideIsOpen} isLogin={isLogin} setIsLogin={setIsLogin}></SideBar>
       </div>
       <GameFlex setCart={setCart} setIsAddCart={setIsAddCart} isLogin={isLogin} setIsLogin={setIsLogin} category={category} setCategory={setCategory} loading={loading} setLoading={setLoading}></GameFlex>
-      <Outlet context={{ setCart, setIsLogin, setIsAddCart }}></Outlet>
+      <Outlet context={{ setCart, setIsAddCart, isLogin, setIsLogin,  }}></Outlet>
       <PopDown isAddCart={isAddCart} setIsAddCart={setIsAddCart}></PopDown>
     </div>
   );

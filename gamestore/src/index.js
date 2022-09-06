@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { CookiesProvider } from 'react-cookie'
 import './index.css';
 import App from './home/App';
 import ItemDetail from './page/ItemDetail';
@@ -15,20 +16,22 @@ import reportWebVitals from './test/reportWebVitals';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route path="games/:gameid" element={<ItemDetail />}></Route>
-          <Route path="login" element={<Login />}></Route>
-          <Route path="signup" element={<SignUp />}></Route>
-          <Route path="cart" element={<Cart />}></Route>
-          <Route path="mypage" element={<MyPage />}></Route>
-        </Route>
-        <Route path="/*" element={<NotFound />}></Route>
-        <Route path="/NotFound" element={<NotFound />}></Route>
-        <Route path="/games/NotFound" element={<NotFoundGame />}></Route>
-      </Routes>
-    </BrowserRouter>
+    <CookiesProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route path="games/:gameid" element={<ItemDetail />}></Route>
+            <Route path="login" element={<Login />}></Route>
+            <Route path="signup" element={<SignUp />}></Route>
+            <Route path="cart" element={<Cart />}></Route>
+            <Route path="mypage" element={<MyPage />}></Route>
+          </Route>
+          <Route path="/*" element={<NotFound />}></Route>
+          <Route path="/NotFound" element={<NotFound />}></Route>
+          <Route path="/games/NotFound" element={<NotFoundGame />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </CookiesProvider>
   </React.StrictMode>
 );
 

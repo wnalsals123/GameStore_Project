@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
+import { setCookie } from "../function/Cookie";
 
 const Login = () => {
   const navigate = useNavigate()
@@ -12,7 +13,7 @@ const Login = () => {
 
   const toBack = () => {
     document.body.style.overflow = 'auto'
-    navigate(-1);
+    navigate('/');
   }
 
   const toSignUp = () => {
@@ -23,8 +24,9 @@ const Login = () => {
   const toLogin = () => {
     const id = document.getElementById('id').value
     const password = document.getElementById('password').value
-    const idVaild = userData === null ? false : userData.filter((user)=>(user.username === id)).length === 1
-    const passwordVaild = userData === null ? false : userData.filter((user)=>(user.password === password)).length === 1
+    const userInfo = userData.filter((user)=>(user.username === id))
+    const idVaild = userInfo[0].username === id
+    const passwordVaild = userInfo[0].password === password
 
     if(id === '' || password === ''){
       alert("잘못된 입력입니다!")
@@ -37,10 +39,13 @@ const Login = () => {
     }
 
     if(idVaild && passwordVaild) {
+      localStorage.setItem("LoginInfo", id)
+      setCookie('LoginSession', true, 0)
       setIsLogin(true)
       navigate(-1)
     } else {
-      alert("존재하지 않는 회원입니다!")
+      console.log(userInfo)
+      alert("가입된 회원이 아니거나 비밀번호 오류입니다!")
     }
   }
 

@@ -10,7 +10,8 @@
     "할인" : 0.5,
     "신작" : false,
     "출시일" : 20150414,
-    "태그" : {"오픈월드" : true, "멀티플레이" : false, "협동" : false, "액션" : true, "공포" : false, "좀비" : false, "어드벤처" : true, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : false}
+    "태그" : {"오픈월드" : true, "멀티플레이" : false, "협동" : false, "액션" : true, "공포" : false, "좀비" : false, "어드벤처" : true, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : false},
+    "리뷰" : [ {"username" : "관리자", "좋아요": 0, "리뷰내용" : "재밌어요!", "작성일" : "2022-12-12"} ]
   },
   {
     "gameID" : 2,
