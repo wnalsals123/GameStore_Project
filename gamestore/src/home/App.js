@@ -10,7 +10,7 @@ import { getCookie } from '../function/Cookie';
 
 function App() {
   const location = useLocation()
-  const version = '1.8'
+  const version = '2.0'
   const [cart, setCart] = useState(0)
   const [sideIsOpen, setSideIsOpen] = useState(false)
   const [isAddCart, setIsAddCart] = useState(false)
@@ -19,17 +19,17 @@ function App() {
   const [loading, setLoading] = useState('block')
 
   useEffect(() => {
-    // 데이터 유효성 검사 false 로컬스토리지 클리어
+    // 데이터 유효성 검사
     const getVersion = localStorage.getItem('version')
-    if(getVersion === null || getVersion !== version) {
+    if(getVersion !== null && getVersion !== version) {
       localStorage.clear()
-      alert('데이터 오류로 새로고침이 필요합니다')
+      alert('데이터 오류로 초기화합니다!')
     }
-
-    // 데이터 불러오기
-    localStorage.setItem('version', version)
-    localStorage.setItem("GameList", JSON.stringify(GameList))
-    localStorage.setItem("UserData", JSON.stringify(UserData))
+    if(getVersion === null) {
+      localStorage.setItem('version', version)
+      localStorage.setItem("GameList", JSON.stringify(GameList))
+      localStorage.setItem("UserData", JSON.stringify(UserData))
+    }
 
     // 로그인 쿠키 확인
     const loginSession = !!getCookie("LoginSession")

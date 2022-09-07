@@ -120,7 +120,6 @@ const SignUp = () => {
     }
   }
 
-
   // 회원가입 양식 제출
   const summitForm = () => {
     if (isVaildUsername && isValidPassword && isSamePassword && isValidEmail && isValidNickname) {
