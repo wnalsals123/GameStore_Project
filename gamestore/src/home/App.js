@@ -31,7 +31,7 @@ function App() {
     localStorage.setItem("GameList", JSON.stringify(GameList))
     localStorage.setItem("UserData", JSON.stringify(UserData))
 
-    // 로그인 세션 확인
+    // 로그인 쿠키 확인
     const loginSession = !!getCookie("LoginSession")
     if(loginSession) setIsLogin(true)
     
