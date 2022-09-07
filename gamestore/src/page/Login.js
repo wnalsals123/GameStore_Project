@@ -25,8 +25,6 @@ const Login = () => {
     const id = document.getElementById('id').value
     const password = document.getElementById('password').value
     const userInfo = userData.filter((user)=>(user.username === id))
-    const idVaild = userInfo[0].username === id
-    const passwordVaild = userInfo[0].password === password
 
     if(id === '' || password === ''){
       alert("잘못된 입력입니다!")
@@ -38,7 +36,7 @@ const Login = () => {
       return
     }
 
-    if(idVaild && passwordVaild) {
+    if(userInfo.length !== 0) {
       localStorage.setItem("LoginInfo", id)
       setCookie('LoginSession', true, 0)
       setIsLogin(true)
