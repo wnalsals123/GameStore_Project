@@ -17,7 +17,7 @@ const SignUp = () => {
 
   const toBack = () => {
     document.body.style.overflow = 'auto'
-    navigate('/');
+    navigate(-1);
   }
 
   // 입력 값 확인 state
@@ -28,7 +28,10 @@ const SignUp = () => {
     email: '',
     nickname: '',
     exp: 0,
-    point: 0
+    point: 0,
+    구매: [],
+    리뷰: [],
+    쿠폰: [],
   });
   const { username, password, passwordOk, email, nickname } = inputValue;
   const [tempEmail, setTempEmail] = useState('') // autoEmail props 용도

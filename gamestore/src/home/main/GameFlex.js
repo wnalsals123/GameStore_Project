@@ -7,15 +7,15 @@ import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 const GameFlex = (props) => {
+  const { setCart, setIsAddCart, isLogin, setIsLogin, category, loading, setLoading, setCategory } = props
   const navigate = useNavigate();
   const location = useLocation()
-  const { setCart, setIsAddCart, isLogin, setIsLogin, category, loading, setLoading, setCategory } = props
+  const searchParams = new URLSearchParams(location.search);
+  const keyword = searchParams.get('keyword')
   const [gameData, setGameData] = useState([])
   const gameTag = ['오픈월드', '멀티플레이', '협동', '액션', '공포', '좀비', '어드벤처', '스포츠', 'MMORPG', 'FPS']
   const [sortName, setSortName] = useState('이름 순')
   const [sortState, setsortState] = useState('sortAbc')
-  const searchParams = new URLSearchParams(location.search);
-  const keyword = searchParams.get('keyword')
   const [isTagListOn, setIsTagListOn] = useState(false)
   const [isFilter, setIsFilter] = useState(false)
 

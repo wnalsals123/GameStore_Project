@@ -51,7 +51,7 @@ function App() {
         <SideBar sideIsOpen={sideIsOpen} isLogin={isLogin} setIsLogin={setIsLogin}></SideBar>
       </div>
       <GameFlex setCart={setCart} setIsAddCart={setIsAddCart} isLogin={isLogin} setIsLogin={setIsLogin} category={category} setCategory={setCategory} loading={loading} setLoading={setLoading}></GameFlex>
-      <Outlet context={{ setCart, setIsAddCart, isLogin, setIsLogin,  }}></Outlet>
+      <Outlet context={{ setCart, setIsAddCart, isLogin, setIsLogin }}></Outlet>
       <PopDown isAddCart={isAddCart} setIsAddCart={setIsAddCart}></PopDown>
     </div>
   );

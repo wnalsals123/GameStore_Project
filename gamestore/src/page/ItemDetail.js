@@ -64,9 +64,9 @@ const ItemDetail = () => {
     }, 500);
   }, [gameid])
 
-  const toHome = () => {
+  const toBack = () => {
     document.body.style.overflow = 'auto'
-    navigate('/');
+    navigate(-1);
   }
 
   const gamePrice = () => {
@@ -85,7 +85,7 @@ const ItemDetail = () => {
         <div className='sticky top-0 z-50 p-2 mb-2 text-center rounded-lg sm:mb-5 sm:p-5 bg-neutral-100 animate-pulse'>
           <span className='block text-xl sm:text-3xl animate-spin'>↻</span>
           <div className="absolute top-0 right-0 flex items-center h-full p-2 sm:p-5">
-            <button className="w-5 h-5 bg-no-repeat bg-cover bg-close-btn sm:w-7 sm:h-7" onClick={toHome}></button>
+            <button className="w-5 h-5 bg-no-repeat bg-cover bg-close-btn sm:w-7 sm:h-7" onClick={toBack}></button>
           </div>
         </div>
       )
@@ -94,7 +94,7 @@ const ItemDetail = () => {
         <div className='sticky top-0 z-50 p-2 mb-2 rounded-lg sm:mb-5 sm:p-5 bg-neutral-100'>
           <span className='block text-xl sm:text-3xl'>{item.게임명}</span>
           <div className="absolute top-0 right-0 flex items-center h-full p-2 sm:p-5">
-            <button className="w-5 h-5 bg-no-repeat bg-cover bg-close-btn sm:w-7 sm:h-7" onClick={toHome}></button>
+            <button className="w-5 h-5 bg-no-repeat bg-cover bg-close-btn sm:w-7 sm:h-7" onClick={toBack}></button>
           </div>
         </div>
       )
