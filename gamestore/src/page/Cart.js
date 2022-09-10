@@ -69,7 +69,7 @@ const Cart = () => {
       }
     }
 
-    return total.toLocaleString() + "원"
+    return total
   }
 
   const toPayment = () => {
@@ -81,7 +81,7 @@ const Cart = () => {
 
     navigate('/payment', {
       state: {
-        user: localStorage.getItem("LoginInfo"),
+        loginInfo: localStorage.getItem("LoginInfo"),
         paymentItem: userCart,
         totalAmount: getTotal(),
       }
@@ -109,7 +109,7 @@ const Cart = () => {
 
             <div className="sticky bottom-0 p-2 bg-opacity-50 rounded-lg sm:p-5 bg-neutral-100">
               <div className="flex flex-wrap items-center justify-between">
-                <span className="p-2 rounded-lg bg-neutral-100">{`장바구니 합계: ${getTotal()}`}</span>
+                <span className="p-2 rounded-lg bg-neutral-100">{`장바구니 합계: ${getTotal().toLocaleString() + "원"}`}</span>
                 {userCart.length === 0 ? <button className="p-2 text-white rounded-lg opacity-50 bg-sky-500" disabled>구매하기</button> : <button className="p-2 text-white rounded-lg bg-sky-500" onClick={toPayment}>구매하기</button>}
               </div>
             </div>

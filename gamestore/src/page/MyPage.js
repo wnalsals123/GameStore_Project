@@ -323,13 +323,11 @@ const MyPage = () => {
   }
 
   const Coupon = () => {
-    const couponList = CouponList
-
     /* 유저 쿠폰 불러오기 */
-    const userCoupon = () => {
+    const userCoupon = (userCouponHistory) => {
       let result = []
-      for (let i = 0; i < (user.쿠폰).length; i++) {
-        let temp = couponList.filter(item => item.쿠폰명 === (user.쿠폰[i]).쿠폰명 && (user.쿠폰[i]).사용 === false)
+      for (let i = 0; i < userCouponHistory.length; i++) {
+        let temp = CouponList.filter(item => item.쿠폰명 === (userCouponHistory[i]).쿠폰명 && (userCouponHistory[i]).사용 === false)
         result = result.concat(temp)
       }
       return result
@@ -339,7 +337,7 @@ const MyPage = () => {
     const couponConfirmation = () => {
       // 쿠폰 유효성 검사
       const couponValue = document.getElementById("coupon").value
-      const invalidCoupon = couponList.filter(item => item.쿠폰명 === couponValue).length === 0
+      const invalidCoupon = CouponList.filter(item => item.쿠폰명 === couponValue).length === 0
       if (invalidCoupon) {
         alert("유효하지 않은 쿠폰입니다!")
         return
@@ -412,13 +410,13 @@ const MyPage = () => {
           <span className="pb-2 text-base sm:text-xl">나의 쿠폰</span>
 
 
-          {(user.쿠폰).length === 0 ?
+          {userCoupon(user.쿠폰).length === 0 ?
             <div className="flex flex-col">
               <span className="py-2">등록된 쿠폰이 없습니다.</span>
               <hr className="border-t-2"></hr>
             </div>
             :
-            userCoupon().map((item, index) => (
+            userCoupon(user.쿠폰).map((item, index) => (
               <div className="flex flex-col" key={index}>
                 <div className="flex flex-col p-2 mb-2 border-2 rounded-lg border-neutral-100">
                   <div className="flex my-2 border-b-[1px] pb-2 flex-wrap flex-col xsm:flex-row">
