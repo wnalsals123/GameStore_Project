@@ -60,5 +60,17 @@
         "사용": false
       }
     ]
+  },
+  {
+    "username": "test",
+    "password": "test",
+    "passwordOk": "test",
+    "email": "test@gamestore.com",
+    "nickname": "test",
+    "exp": 99999,
+    "point": 99999,
+    "구매": [],
+    "리뷰": [],
+    "쿠폰": []
   }
 ]

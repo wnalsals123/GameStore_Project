@@ -66,7 +66,7 @@ const ItemDetail = () => {
 
   const toBack = () => {
     document.body.style.overflow = 'auto'
-    navigate(-1);
+    navigate('/');
   }
 
   const gamePrice = () => {
@@ -216,20 +216,18 @@ const ItemDetail = () => {
     if (item.게임명 === null) {
       return (
         <div className='sticky bottom-0 left-0 flex justify-between w-full p-2 text-sm text-center text-white bg-opacity-50 rounded-lg bg-neutral-100 sm:p-5 sm:text-2xl animate-pulse'>
-          <div className="w-5/12 py-1 bg-red-500 sm:py-5 rounded-xl"><span className="block animate-spin">↻</span></div>
-          <button className='w-3/12 py-1 sm:py-5 bg-sky-500 rounded-xl'><span className="block animate-spin">↻</span></button>
-          <button className='w-3/12 py-1 sm:py-5 bg-sky-500 rounded-xl'><span className="block animate-spin">↻</span></button>
+          <div className="w-[50%] py-1 bg-red-500 sm:py-5 rounded-xl"><span className="block animate-spin">↻</span></div>
+          <button className='w-[40%] py-1 sm:py-5 bg-sky-500 rounded-xl'><span className="block animate-spin">↻</span></button>
         </div>
       )
     } else {
       return (
         <div className='sticky bottom-0 left-0 flex justify-between w-full p-2 text-sm text-center text-white bg-opacity-50 rounded-lg bg-neutral-100 sm:p-5 sm:text-2xl'>
-          <div className="w-5/12 py-1 bg-red-500 sm:py-5 rounded-xl">
+          <div className="w-[50%] py-1 bg-red-500 sm:py-5 rounded-xl">
             {item.할인 !== 0 && <span className="block line-through sm:inline-block">{(item.가격).toLocaleString() + "원"}</span>}
             <span>{gamePrice()}</span>
           </div>
-          <button className='w-3/12 py-1 sm:py-5 bg-sky-500 rounded-xl' onClick={() => { addCart(item) }}>장바구니</button>
-          <button className='w-3/12 py-1 sm:py-5 bg-sky-500 rounded-xl'>구매하기</button>
+          <button className='w-[40%] py-1 sm:py-5 bg-sky-500 rounded-xl' onClick={() => { addCart(item) }}>장바구니</button>
         </div>
       )
     } 

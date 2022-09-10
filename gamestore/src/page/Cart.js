@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 
 const Cart = () => {
-  const { setCart } = useOutletContext()
+  const { isLogin, setCart } = useOutletContext()
   const navigate = useNavigate()
   const [userCart, setUserCart] = useState([])
 
@@ -14,7 +14,7 @@ const Cart = () => {
 
   const toBack = () => {
     document.body.style.overflow = 'auto'
-    navigate(-1);
+    navigate('/');
   }
 
   const deleteCart = (gameID) => {
@@ -24,11 +24,16 @@ const Cart = () => {
     localStorage.setItem("UserCart", JSON.stringify(temp))
   }
 
+  /* 게임 상세 페이지로 이동 */
+  const toDetail = (page) => {
+    navigate(`/games/${page}`);
+  }
+
   const CartList = () => {
     return (
       userCart.map((item, index) => (
         <div key={index} className="flex justify-center p-2 mb-2 text-white border-2 rounded-lg sm:mb-5 bg-neutral-900 border-neutral-100">
-          <div className="flex-grow basis-1/2 sm:basis-2/5 h-[10rem]"><img className="object-cover w-full h-full rounded-lg" src={item.이미지} alt="game-logo"></img></div>
+          <button className="flex-grow basis-1/2 sm:basis-2/5 h-[10rem]" onClick={()=>{toDetail(item.게임명)}}><img className="object-cover w-full h-full rounded-lg" src={item.이미지} alt="game-logo"></img></button>
           <div className="flex-grow ml-2 basis-1/2 sm:basis-3/5 sm:ml-5">
             <div className="flex flex-col justify-between h-full">
 
@@ -56,8 +61,8 @@ const Cart = () => {
   const getTotal = () => {
     let total = 0
 
-    for(let i = 0; i < userCart.length; i++) {
-      if(!userCart[i].할인) {
+    for (let i = 0; i < userCart.length; i++) {
+      if (!userCart[i].할인) {
         total += userCart[i].가격
       } else {
         total += userCart[i].가격 * (1 - userCart[i].할인)
@@ -65,6 +70,22 @@ const Cart = () => {
     }
 
     return total.toLocaleString() + "원"
+  }
+
+  const toPayment = () => {
+    if (!isLogin) {
+      alert("로그인이 필요합니다!")
+      navigate('/login')
+      return
+    }
+
+    navigate('/payment', {
+      state: {
+        user: localStorage.getItem("LoginInfo"),
+        paymentItem: userCart,
+        totalAmount: getTotal(),
+      }
+    })
   }
 
   return (
@@ -88,8 +109,8 @@ const Cart = () => {
 
             <div className="sticky bottom-0 p-2 bg-opacity-50 rounded-lg sm:p-5 bg-neutral-100">
               <div className="flex flex-wrap items-center justify-between">
-                <span className="p-2 rounded-lg bg-neutral-100">{`총 결제금액: ${getTotal()}`}</span>
-                <button className="p-2 text-white rounded-lg bg-sky-500">구매하기</button>
+                <span className="p-2 rounded-lg bg-neutral-100">{`장바구니 합계: ${getTotal()}`}</span>
+                {userCart.length === 0 ? <button className="p-2 text-white rounded-lg opacity-50 bg-sky-500" disabled>구매하기</button> : <button className="p-2 text-white rounded-lg bg-sky-500" onClick={toPayment}>구매하기</button>}
               </div>
             </div>
 

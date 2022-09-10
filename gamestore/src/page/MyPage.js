@@ -82,8 +82,8 @@ const MyPage = () => {
     }
 
     return (
-      <div className="overflow-y-auto scrollbar-hide w-[calc(100%-12rem)] p-2 sm:p-5 !ml-0 rounded-lg bg-neutral-900 flex-grow">
-        <div className="flex justify-center mb-2">
+      <div className="overflow-y-auto scrollbar-hide xsm:w-[calc(100%-12rem)] p-2 sm:p-5 !ml-0 rounded-lg bg-neutral-900 flex-grow">
+        <div className="flex justify-center py-1 mb-5 rounded-md bg-sky-500">
           <span>내 정보</span>
         </div>
         <div className="flex flex-col">
@@ -142,15 +142,15 @@ const MyPage = () => {
 
   const Purchase = () => {
     return (
-      <div className="overflow-y-auto scrollbar-hide w-[calc(100%-12rem)] p-2 sm:p-5 !ml-0 rounded-lg bg-neutral-900 flex-grow">
+      <div className="overflow-y-auto scrollbar-hide xsm:w-[calc(100%-12rem)] p-2 sm:p-5 !ml-0 rounded-lg bg-neutral-900 flex-grow">
 
-        <div className="flex justify-center mb-2">
+        <div className="flex justify-center py-1 mb-5 rounded-md bg-sky-500">
           <span>구매 내역</span>
         </div>
 
-        {user.구매 === undefined || user.구매 === null ?
+        {(user.구매).length === 0 ?
           <div className="flex flex-col">
-            <span className="py-2">구매내역이 없습니다</span>
+            <span className="py-2">구매내역이 없습니다.</span>
             <hr className="border-t-2"></hr>
           </div>
           :
@@ -204,6 +204,11 @@ const MyPage = () => {
       else return "고인물"
     }
 
+    /* 총 리뷰 수 */
+    const totalReview = (reviews) => {
+      return reviews.length
+    }
+
     /* 총 좋아요 수 */
     const totalLike = (reviews) => {
       let total = 0
@@ -226,9 +231,9 @@ const MyPage = () => {
     }
 
     return (
-      <div className="overflow-y-auto scrollbar-hide w-[calc(100%-12rem)] p-2 sm:p-5 !ml-0 rounded-lg bg-neutral-900 flex-grow">
+      <div className="overflow-y-auto scrollbar-hide xsm:w-[calc(100%-12rem)] p-2 sm:p-5 !ml-0 rounded-lg bg-neutral-900 flex-grow">
 
-        <div className="flex justify-center mb-2">
+        <div className="flex justify-center py-1 mb-5 rounded-md bg-sky-500">
           <span>리뷰 관리</span>
         </div>
 
@@ -241,7 +246,7 @@ const MyPage = () => {
             </div>
             <div className="flex my-2 border-b-[1px] pb-2 flex-wrap">
               <span className="w-[7rem] sm:w-[10rem] bg-neutral-500 rounded-md px-2 mr-2">총 리뷰 수</span>
-              <span>{`${((user.리뷰).length).toLocaleString()}개`}</span>
+              <span>{`${totalReview(user.리뷰).toLocaleString()}개`}</span>
             </div>
             <div className="flex my-2 border-b-[1px] pb-2 flex-wrap">
               <span className="w-[7rem] sm:w-[10rem] bg-neutral-500 rounded-md px-2 mr-2">받은 좋아요 수</span>
@@ -250,7 +255,7 @@ const MyPage = () => {
           </div>
         </div>
 
-        {(user.리뷰 !== undefined || user.리뷰 !== null) &&
+        {(user.리뷰).length !== 0 &&
           <div className="flex flex-col">
             <span className="pb-2 text-base sm:text-xl">가장 인기있는 리뷰</span>
             <div className="flex flex-col p-2 mb-20 border-2 rounded-lg border-neutral-100">
@@ -279,7 +284,7 @@ const MyPage = () => {
         <div className="flex flex-col">
           <span className="pb-2 text-base sm:text-xl">리뷰 목록</span>
 
-          {user.리뷰 === undefined || user.리뷰 === null ?
+          {(user.리뷰).length === 0 ?
             <div className="flex flex-col">
               <span className="py-2">작성하신 리뷰가 없습니다</span>
               <hr className="border-t-2"></hr>
@@ -323,7 +328,7 @@ const MyPage = () => {
     /* 유저 쿠폰 불러오기 */
     const userCoupon = () => {
       let result = []
-      for(let i = 0; i < (user.쿠폰).length; i++){
+      for (let i = 0; i < (user.쿠폰).length; i++) {
         let temp = couponList.filter(item => item.쿠폰명 === (user.쿠폰[i]).쿠폰명 && (user.쿠폰[i]).사용 === false)
         result = result.concat(temp)
       }
@@ -359,15 +364,15 @@ const MyPage = () => {
         point: user.point,
         구매: user.구매,
         리뷰: user.리뷰,
-        쿠폰: [ ...user.쿠폰, addCoupon ],
+        쿠폰: [...user.쿠폰, addCoupon],
       }
       setUser(updateUser)
 
       // 유저 데이터 업데이트
       const userData = JSON.parse(localStorage.getItem("UserData"))
       const loginInfo = localStorage.getItem("LoginInfo")
-      for(let i = 0; i < userData.length; i++) {
-        if(userData[i].username === loginInfo) {
+      for (let i = 0; i < userData.length; i++) {
+        if (userData[i].username === loginInfo) {
           let temp = userData
           temp[i] = updateUser
           console.log(temp)
@@ -378,10 +383,15 @@ const MyPage = () => {
       alert("쿠폰을 등록했습니다!")
     }
 
-    return (
-      <div className="overflow-y-auto scrollbar-hide w-[calc(100%-12rem)] p-2 sm:p-5 !ml-0 rounded-lg bg-neutral-900 flex-grow">
+    // 엔터로 제출
+    const enterListen = (e) => {
+      if(e.key === 'Enter') couponConfirmation()
+    }
 
-        <div className="flex justify-center mb-2">
+    return (
+      <div className="overflow-y-auto scrollbar-hide xsm:w-[calc(100%-12rem)] p-2 sm:p-5 !ml-0 rounded-lg bg-neutral-900 flex-grow">
+
+        <div className="flex justify-center py-1 mb-5 rounded-md bg-sky-500">
           <span>쿠폰함</span>
         </div>
 
@@ -391,7 +401,7 @@ const MyPage = () => {
             <div className="flex my-2 border-b-[1px] pb-2 flex-wrap xsm:flex-row">
               <span className="w-[7rem] sm:w-[10rem] bg-neutral-500 rounded-md px-2 mr-2">쿠폰 번호</span>
               <div className="flex flex-wrap flex-grow">
-                <input className="flex-grow w-[7rem] px-2 mr-2 text-black rounded-md" id="coupon"></input>
+                <input className="flex-grow w-[7rem] px-2 mr-2 text-black rounded-md" id="coupon" onKeyUp={enterListen}></input>
                 <button className="px-2 py-1 text-sm rounded-lg sm:text-base bg-sky-500 !leading-none" onClick={couponConfirmation}>등록</button>
               </div>
             </div>
@@ -402,9 +412,9 @@ const MyPage = () => {
           <span className="pb-2 text-base sm:text-xl">나의 쿠폰</span>
 
 
-          {user.쿠폰 === undefined || user.쿠폰 === null ?
+          {(user.쿠폰).length === 0 ?
             <div className="flex flex-col">
-              <span className="py-2">작성하신 리뷰가 없습니다</span>
+              <span className="py-2">등록된 쿠폰이 없습니다.</span>
               <hr className="border-t-2"></hr>
             </div>
             :
@@ -446,15 +456,15 @@ const MyPage = () => {
                 <div className="flex items-center"><button className="w-5 h-5 bg-no-repeat bg-cover sm:w-7 sm:h-7 bg-close-btn" onClick={toBack}></button></div>
               </div>
 
-              <div className="relative flex items-center justify-start mb-5 text-white">
+              <div className="relative flex items-center justify-start mb-2 text-white xsm:mb-5">
                 <div className="flex items-center">
                   <img className="w-10 md:w-12 filter-white" src="https://cdn-icons-png.flaticon.com/512/686/686589.png" alt="logo"></img>
                   <span className="pl-4 leading-none">Game Store</span>
                 </div>
               </div>
 
-              <div className="flex flex-grow overflow-y-auto text-white border-2 rounded-lg border-neutral-100">
-                <ul className="overflow-y-auto w-[6.5rem] sm:w-[8rem] md:w-[10rem] lg:w-[12rem] bg-neutral-900 border-r-2 border-neutral-100 p-2 [&_li]:my-3 [&_li]:px-2 [&_hr]:border-t-2 bg-transparent">
+              <div className="flex flex-col flex-grow overflow-y-auto text-white border-2 rounded-lg xsm:flex-row border-neutral-100">
+                <ul className="flex border-b-2 xsm:flex-col xsm:overflow-y-auto xsm:w-[6.5rem] sm:w-[8rem] md:w-[10rem] lg:w-[12rem] bg-neutral-900 xsm:border-b-0 xsm:border-r-2 border-neutral-100 p-2 [&_li]:my-3 [&_li]:px-2 [&_li]:text-center [&_li]:xsm:text-left [&_li]:basis-1/4 [&_li]:xsm:basis-0 [&_hr]:border-t-2 bg-transparent">
                   <li className={`rounded-md ${myList === 'profile' && 'bg-neutral-500'}`}><button onClick={() => { setMyList('profile') }}>내 정보</button></li>
                   <hr></hr>
                   <li className={`rounded-md ${myList === 'purchase' && 'bg-neutral-500'}`}><button onClick={() => { setMyList('purchase') }}>구매 내역</button></li>

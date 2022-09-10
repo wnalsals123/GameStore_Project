@@ -13,7 +13,7 @@ const Login = () => {
 
   const toBack = () => {
     document.body.style.overflow = 'auto'
-    navigate(-1);
+    navigate('/');
   }
 
   const toSignUp = () => {

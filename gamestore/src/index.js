@@ -9,6 +9,7 @@ import Login from './page/Login';
 import SignUp from './page/SignUp';
 import Cart from './page/Cart';
 import MyPage from './page/MyPage';
+import Payment from './page/Payment';
 import NotFound from './page/404/NotFound'
 import NotFoundGame from './page/404/NotFoundGame'
 import reportWebVitals from './test/reportWebVitals';
@@ -25,6 +26,7 @@ root.render(
             <Route path="signup" element={<SignUp />}></Route>
             <Route path="cart" element={<Cart />}></Route>
             <Route path="mypage" element={<MyPage />}></Route>
+            <Route path="payment" element={<Payment />}></Route>
           </Route>
           <Route path="/*" element={<NotFound />}></Route>
           <Route path="/NotFound" element={<NotFound />}></Route>

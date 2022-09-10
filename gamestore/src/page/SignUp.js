@@ -17,7 +17,7 @@ const SignUp = () => {
 
   const toBack = () => {
     document.body.style.overflow = 'auto'
-    navigate(-1);
+    navigate('/');
   }
 
   // 입력 값 확인 state
