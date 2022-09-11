@@ -1,5 +1,6 @@
 import CouponList from "../json/CouponList.json"
 import { useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Payment = () => {
   const location = useLocation()
@@ -8,7 +9,12 @@ const Payment = () => {
   const userData = JSON.parse(localStorage.getItem("UserData"))
   const temp = userData.filter(item => item.username === loginInfo)
   const user = temp[0]
+  const [selectedCouponBtn, setSelectedCouponBtn] = useState(false)
+  const [totalPayment, setTotalPayment] = useState(totalAmount)
+  const [coupon, setCoupon] = useState(0)
+  const [point, setPoint] = useState(0)
 
+  /* 뒤로가기 */
   const toBack = () => {
     document.body.style.overflow = 'auto'
     navigate('/');
@@ -24,18 +30,77 @@ const Payment = () => {
     return result
   }
 
-  const PaymentItemList = () => {
-    return (
-      paymentItem.map((item, index) => (
-        <div className="flex justify-between text-sm text-white border-[1px] border-t-0 md:text-base lg:text-xl" key={index}>
-          <div className="basis-[20%] shrink-0 border-r-[1px] h-[5rem] xsm:h-[6rem] sm:h-[7rem] lg:h-[8rem] p-1"><img className="object-cover w-full h-full" src={item.이미지} alt="game-logo"></img></div>
-          <div className="flex justify-center items-center basis-[30%] shrink-0 border-r-[1px]"><span>{item.게임명}</span></div>
-          <div className="flex justify-end items-center basis-[25%] shrink-0 border-r-[1px]"><span className="pr-1">{(item.가격).toLocaleString() + "원"}</span></div>
-          <div className="flex justify-end items-center basis-[25%] shrink-0"><span className="pr-1">{(item.가격 * (1 - item.할인)).toLocaleString() + "원"}</span></div>
-          {item.가격 === 0 && <div className="flex justify-end items-center basis-[45%] shrink-0"><span className="pr-1">무료 플레이</span></div>}
-        </div>
-      ))
-    )
+  /* 쿠폰 할인금액 */
+  const couponDiscountAmount = () => {
+    if (coupon === 0) return 0
+    else return totalAmount * coupon.할인율
+  }
+
+  /* 쿠폰 적용 */
+  const couponConfirm = (index, selectedCoupon) => {
+    document.getElementById('point').value = ""
+    setPoint(0)
+    selectedCoupon === 0 ? setTotalPayment(totalAmount) : setTotalPayment(totalAmount * (1 - selectedCoupon.할인율))
+    setSelectedCouponBtn(index)
+    setCoupon(selectedCoupon)
+  }
+
+  /* 포인트 전액사용 */
+  const pointMax = () => {
+    const element = document.getElementById('point')
+
+    if (totalPayment <= user.point) {
+      element.value = totalPayment
+      pointConfirm()
+    }
+    else {
+      element.value = user.point
+      pointConfirm()
+    }
+  }
+
+  /* 포인트 인풋 체인지 리스너 */
+  const pointInputCheck = (e) => {
+    let onlyNumber = e.target.value.replace(/[^0-9]/gi, "")
+    let result = "";
+    const maxLength = 5
+
+    for (let i = 0; i < onlyNumber.length && i < maxLength; i++) {
+      result += onlyNumber[i];
+    }
+
+    e.target.value = result
+  }
+
+  /* 포인트 적용 */
+  const pointConfirm = () => {
+    const inputPoint = Number(document.getElementById('point').value)
+
+    if (inputPoint === 0 || isNaN(inputPoint)) return
+
+    if (inputPoint > user.point) {
+      alert("보유 포인트 초과했습니다!")
+      return
+    }
+
+    if (inputPoint > totalPayment) {
+      alert("결제금액보다 포인트가 많습니다!")
+      return
+    }
+
+    coupon === 0 ? setTotalPayment(totalAmount - inputPoint) : setTotalPayment(totalAmount * (1 - coupon.할인율) - inputPoint)
+    setPoint(inputPoint)
+  }
+
+  /* 포인트 취소 */
+  const pointCencel = () => {
+    document.getElementById('point').value = ""
+    coupon === 0 ? setTotalPayment(totalAmount) : setTotalPayment(totalAmount * (1 - coupon.할인율))
+    setPoint(0)
+  }
+
+  const enterCheck = (e) => {
+    if (e.key === 'Enter') pointConfirm()
   }
 
   return (
@@ -50,8 +115,8 @@ const Payment = () => {
               <div className="flex items-center"><button className="w-5 h-5 bg-no-repeat bg-cover sm:w-7 sm:h-7 bg-close-btn" onClick={toBack}></button></div>
             </div>
 
-            <div className="min-h-[31.25rem] mb-2 sm:mb-5">
-              <div className="flex flex-col mb-10">
+            <div className="min-h-[31.25rem] mb-2 sm:mb-10">
+              <div className="flex flex-col mb-10 sm:mb-20">
                 <span className="pb-2 text-white">결제목록</span>
                 <div className="flex justify-between text-center text-white border-[1px] bg-neutral-500 text-base md:text-xl">
                   <span className="basis-[20%] shrink-0 border-r-[1px]">이미지</span>
@@ -59,46 +124,78 @@ const Payment = () => {
                   <span className="basis-[25%] shrink-0 border-r-[1px]">가격</span>
                   <span className="basis-[25%] shrink-0">합계</span>
                 </div>
-                <PaymentItemList></PaymentItemList>
-                <div className="flex justify-end"><span className="px-1 text-base text-white md:text-xl">{`총 합계: ${totalAmount.toLocaleString()}원`}</span></div>
-              </div>
-              
-              <div className="flex flex-col mb-10">
-                <span className="pb-2 text-white">쿠폰 할인</span>      
-                <div className="flex justify-center text-white border-[1px] bg-neutral-500 text-base md:text-xl">
-                  <span>사용가능한 쿠폰</span>
+                {paymentItem.map((item, index) => (
+                  <div className="flex justify-between text-sm text-white border-[1px] border-t-0 md:text-base lg:text-xl" key={index}>
+                    <div className="basis-[20%] shrink-0 border-r-[1px] h-[5rem] xsm:h-[6rem] sm:h-[7rem] lg:h-[8rem] p-1"><img className="object-cover w-full h-full" src={item.이미지} alt="game-logo"></img></div>
+                    <div className="flex justify-center items-center basis-[30%] shrink-0 border-r-[1px]"><span>{item.게임명}</span></div>
+                    <div className="flex xsm:flex-row justify-end items-center basis-[25%] shrink-0 border-r-[1px]">
+                      {item.가격 !== 0 && <div className="flex flex-col items-end justify-end flex-grow pr-1 xsm:items-center xsm:flex-row">
+                        <span className={`${item.할인 !== 0 && 'line-through'}`}>{(item.가격).toLocaleString() + "원"}</span>
+                        {item.할인 !== 0 && <span>{(item.가격 * (1 - item.할인)).toLocaleString() + "원"}</span>}
+                      </div>}
+                      {item.가격 === 0 && <div className="flex justify-end items-center basis-[45%] shrink-0 flex-grow"><span className="pr-1">무료 플레이</span></div>}
+                    </div>
+                    <div className="flex justify-end items-center basis-[25%] shrink-0"><span className="pr-1">{(item.가격 * (1 - item.할인)).toLocaleString() + "원"}</span></div>
+                  </div>
+                ))}
+                <div className="flex text-base text-center text-white bg-neutral-900 md:text-xl">
+                  <div className="flex-grow py-2 text-right shrink-0"><span className="px-1 mr-1 rounded-md bg-neutral-500">{`총 합계: ${totalAmount.toLocaleString()}원`}</span></div>
                 </div>
+              </div>
+
+              <div className="flex flex-col mb-10 sm:mb-20">
+                <span className="pb-2 text-white">쿠폰 할인</span>
+                <div className="flex justify-center text-white border-[1px] bg-neutral-500 text-base md:text-xl py-2">
+                  <span>쿠폰 목록</span>
+                </div>
+                {userCoupon(user.쿠폰).length !== 0 &&
+                  <div className="flex text-white border-[1px] border-t-0 text-base md:text-xl items-center py-2">
+                    <span className="px-2">쿠폰 사용안함</span>
+                    <button className={`w-3 h-3 md:w-4 md:h-4 ${selectedCouponBtn === false ? 'bg-neutral-900' : 'bg-white'} border-[2px] md:border-[3px] border-white rounded-full outline outline-1 outline-neutral-500 outline-offset-2`} onClick={() => { couponConfirm(false, 0) }}></button>
+                  </div>
+                }
                 {userCoupon(user.쿠폰).length === 0 ?
-                  <span className="text-base text-white md:text-xl">사용가능한 쿠폰이 없습니다.</span>
+                  <div className="flex text-white border-[1px] border-t-0 text-base md:text-xl items-center py-2">
+                    <span className="px-2 text-base text-white md:text-xl">사용가능한 쿠폰이 없습니다.</span>
+                  </div>
                   :
                   userCoupon(user.쿠폰).map((item, index) => (
-                    <div className="flex text-white border-[1px] border-t-0 text-base md:text-xl items-center" key={index}>
+                    <div className="flex text-white border-[1px] border-t-0 text-base md:text-xl items-center py-2" key={index}>
                       <span className="px-2">{item.혜택}</span>
-                      <button className="w-3 h-3 md:w-4 md:h-4 mr-2 bg-white border-[2px] md:border-[3px] border-white rounded-full outline outline-1 outline-neutral-500 outline-offset-2"></button>
-                      <button className="w-3 h-3 md:w-4 md:h-4 mr-2 bg-neutral-900 border-[2px] md:border-[3px] border-white rounded-full outline outline-1 outline-neutral-500 outline-offset-2"></button>
+                      <button className={`w-3 h-3 md:w-4 md:h-4 ${selectedCouponBtn === index ? 'bg-neutral-900' : 'bg-white'} border-[2px] md:border-[3px] border-white rounded-full outline outline-1 outline-neutral-500 outline-offset-2`} onClick={() => { couponConfirm(index, item) }}></button>
                     </div>
                   ))
                 }
+                <div className="flex text-base text-center text-white bg-neutral-900 md:text-xl">
+                  <div className="flex-grow py-2 text-right shrink-0"><span className="px-1 mr-1 rounded-md bg-neutral-500">{`할인 금액: ${couponDiscountAmount().toLocaleString()}원`}</span></div>
+                </div>
               </div>
 
-              <div className="flex flex-col mb-10">
+              <div className="flex flex-col mb-10 sm:mb-20">
                 <div className="flex items-center pb-2">
                   <span className="mr-2 text-white">포인트 할인</span>
-                  <span className="px-2 text-sm text-white rounded-md md:text-base bg-neutral-500">{`내 포인트: ${user.point}P`}</span>
+                  <span className="px-2 mr-2 text-sm text-white rounded-md md:text-base bg-neutral-500">{`남은 포인트: ${user.point - point}P`}</span>
+                  <button className="px-2 text-sm text-white rounded-md md:text-base bg-sky-500" onClick={pointMax}>전액사용</button>
                 </div>
-                <div className="flex justify-between text-center text-white border-[1px] bg-neutral-500 text-base md:text-xl">
-                  <input className="basis-[33.33%] border-r-[1px] w-10 px-2 bg-neutral-900 placeholder:text-white placeholder:text-opacity-50 placeholder:text-sm" placeholder="사용할 포인트"></input>
-                  <button className="basis-[33.33%] border-r-[1px]">적용</button>
-                  <button className="basis-[33.33%] border-r-[1px]">취소</button>
+                <div className="flex text-white border-[1px] bg-neutral-500 text-base md:text-xl">
+                  <div className="flex items-center basis-[33.33%] border-r-[1px]">
+                    <input className="box-border flex-grow w-10 p-2 bg-neutral-900 placeholder:text-white placeholder:text-opacity-50 outline-0" placeholder="0" id="point" autoComplete='off' onKeyUp={enterCheck} onChange={pointInputCheck}></input>
+                    <span className="p-2 bg-neutral-900">P</span>
+                  </div>
+                  <button className="basis-[33.33%] border-r-[1px]" onClick={pointConfirm}>적용</button>
+                  <button className="basis-[33.33%]" onClick={pointCencel}>취소</button>
+                </div>
+                <div className="flex justify-end py-2 text-base text-center text-white bg-neutral-900 md:text-xl">
+                  <span className="px-1 mr-1 rounded-md bg-neutral-500">{`할인 금액: ${point.toLocaleString()}원`}</span>
                 </div>
               </div>
-              
-              <div className="flex flex-col mb-10">
+
+              <div className="flex flex-col mb-10 sm:mb-20">
                 <span className="pb-2 text-white">결제 수단</span>
                 <div className="flex justify-between text-center text-white border-[1px] bg-neutral-500 text-base md:text-xl">
-                  <span className="basis-[33.33%] border-r-[1px]">신용카드</span>
-                  <span className="basis-[33.33%] border-r-[1px]">간편결제</span>
-                  <span className="basis-[33.33%] border-r-[1px]">휴대폰</span>
+                  <button className="basis-[33.33%] border-r-[1px] p-2 focus:bg-sky-500">신용카드</button>
+                  <button className="basis-[33.33%] border-r-[1px] p-2 focus:bg-sky-500">간편결제</button>
+                  <button className="basis-[33.33%]  p-2 focus:bg-sky-500">휴대폰</button>
                 </div>
               </div>
 
@@ -106,7 +203,7 @@ const Payment = () => {
 
             <div className="sticky bottom-0 p-2 bg-opacity-50 rounded-lg sm:p-5 bg-neutral-100">
               <div className="flex flex-wrap items-center justify-between">
-                <span className="p-2 rounded-lg bg-neutral-100">{`최종 결제금액: ${totalAmount.toLocaleString()}원`}</span>
+                <span className="p-2 rounded-lg bg-neutral-100">{`최종 결제금액: ${totalPayment.toLocaleString()}원`}</span>
                 <button className="p-2 text-white rounded-lg bg-sky-500" onClick={() => (alert("결제완료"))}>결제확인</button>
               </div>
             </div>
