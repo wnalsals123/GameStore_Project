@@ -1,8 +1,65 @@
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { removeCookie } from "../../function/Cookie"
 
 const SideBarContent = (props) => {
   const { isLogin, setIsLogin } = props
+
+  const [user, setUser] = useState({
+    username: '',
+    password: '',
+    passwordOk: '',
+    email: '',
+    nickname: '',
+    exp: 0,
+    point: 0,
+    구매: [],
+    리뷰: [],
+    쿠폰: [],
+  })
+
+  /* 유저 데이터 불러오기 */
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem("UserData"))
+    const loginInfo = localStorage.getItem("LoginInfo")
+    let temp = null
+
+    // 오류 시 로그인 세션 끊기
+    if (userData !== null || loginInfo !== null) {
+      temp = userData.filter(item => item.username === loginInfo)
+    }
+    else {
+      alert("오류가 발생했습니다!\n페이지를 새로고침하세요!")
+      removeCookie("LoginSession")
+      return
+    }
+
+    // 성공 시 유저 데이터 상태 업데이트
+    if(temp.length === 0) {
+      setUser({
+        username: '',
+        password: '',
+        passwordOk: '',
+        email: '',
+        nickname: '',
+        exp: 0,
+        point: 0,
+        구매: [],
+        리뷰: [],
+        쿠폰: [],
+      })
+    }else{
+      setUser(temp[0])  
+    }
+  }, [isLogin])
+
+  const userGrade = (exp) => {
+    if (exp < 1000) return "브론즈"
+    else if (exp < 3000) return "실버"
+    else if (exp < 6000) return "골드"
+    else if (exp < 10000) return "플래티넘"
+    else return "다이아"
+  }
 
   const navigate = useNavigate()
 
@@ -56,10 +113,14 @@ const SideBarContent = (props) => {
           <button className="w-full" onClick={() => { toMyPage() }}>
             <div className="flex items-center justify-center p-2">
               <div className="p-2 rounded-full bg-neutral-100"><img className="w-7" src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png" alt="user"></img></div>
-              <span className="flex-1 block pl-2">user-name</span>
+              <div className="flex flex-col flex-grow">
+                <span>{user.username}</span>
+                <div className="flex flex-wrap justify-center">
+                  <span>{`회원등급 | ${userGrade(user.exp)}`}</span>
+                  <span>{`(${user.exp}exp)`}</span>
+                </div>
+              </div>
             </div>
-            <span className="block">회원등급</span>
-            <span className="block">레벨</span>
           </button>
         </div>
 

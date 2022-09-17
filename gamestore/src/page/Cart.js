@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
+import { setCookie } from "../function/Cookie";
 
 const Cart = () => {
   const { isLogin, setCart } = useOutletContext()
@@ -86,6 +87,7 @@ const Cart = () => {
         totalAmount: getTotal(),
       }
     })
+    setCookie("PaymentSession", true, 0)
   }
 
   return (

@@ -1,6 +1,7 @@
 import CouponList from "../json/CouponList.json"
 import { useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getCookie, removeCookie } from "../function/Cookie";
 
 const Payment = () => {
   const location = useLocation()
@@ -13,6 +14,14 @@ const Payment = () => {
   const [totalPayment, setTotalPayment] = useState(totalAmount)
   const [coupon, setCoupon] = useState(0)
   const [point, setPoint] = useState(0)
+  const [paymentMethod, setPaymentMethod] = useState(null)
+
+  useEffect(()=>{
+    if(!!getCookie("PaymentSession") !== true) {
+      alert("만료된 접근입니다!")
+      navigate('/')
+    }
+  }, [navigate])
 
   /* 뒤로가기 */
   const toBack = () => {
@@ -99,8 +108,33 @@ const Payment = () => {
     setPoint(0)
   }
 
+  /* 포인트 엔터 리스너 */
   const enterCheck = (e) => {
     if (e.key === 'Enter') pointConfirm()
+  }
+
+  /* 결제수단 리스너 */
+  const paymentMethodChk = (e) => {
+    const paymentName = e.target.name
+
+    if(paymentName === paymentMethod) {
+      setPaymentMethod(null)
+      return
+    }
+
+    setPaymentMethod(paymentName)
+  }
+
+  /* 결제 확인 */
+  const paymentConfirmation = () => {
+    if(paymentMethod === null) {
+      alert("결제 수단을 선택해 주세요!")
+      return
+    }
+
+    alert("결제완료")
+    removeCookie("PaymentSession")
+    navigate('/')
   }
 
   return (
@@ -193,9 +227,9 @@ const Payment = () => {
               <div className="flex flex-col mb-10 sm:mb-20">
                 <span className="pb-2 text-white">결제 수단</span>
                 <div className="flex justify-between text-center text-white border-[1px] bg-neutral-500 text-base md:text-xl">
-                  <button className="basis-[33.33%] border-r-[1px] p-2 focus:bg-sky-500">신용카드</button>
-                  <button className="basis-[33.33%] border-r-[1px] p-2 focus:bg-sky-500">간편결제</button>
-                  <button className="basis-[33.33%]  p-2 focus:bg-sky-500">휴대폰</button>
+                  <button className={`basis-[33.33%] border-r-[1px] p-2 ${paymentMethod === 'creditCard' && 'bg-sky-500'}`} onClick={paymentMethodChk} name='creditCard'>신용카드</button>
+                  <button className={`basis-[33.33%] border-r-[1px] p-2 ${paymentMethod === 'easyPay' && 'bg-sky-500'}`} onClick={paymentMethodChk} name='easyPay'>간편결제</button>
+                  <button className={`basis-[33.33%] p-2 ${paymentMethod === 'cellPhone' && 'bg-sky-500'}`} onClick={paymentMethodChk} name='cellPhone'>휴대폰</button>
                 </div>
               </div>
 
@@ -204,7 +238,7 @@ const Payment = () => {
             <div className="sticky bottom-0 p-2 bg-opacity-50 rounded-lg sm:p-5 bg-neutral-100">
               <div className="flex flex-wrap items-center justify-between">
                 <span className="p-2 rounded-lg bg-neutral-100">{`최종 결제금액: ${totalPayment.toLocaleString()}원`}</span>
-                <button className="p-2 text-white rounded-lg bg-sky-500" onClick={() => (alert("결제완료"))}>결제확인</button>
+                <button className="p-2 text-white rounded-lg bg-sky-500" onClick={paymentConfirmation}>결제확인</button>
               </div>
             </div>
 

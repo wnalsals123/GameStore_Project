@@ -108,7 +108,7 @@ const MyPage = () => {
           </div>
 
           <span className="pb-2 text-base sm:text-xl">등급 및 혜택</span>
-          <div className="flex flex-col p-2 border-2 rounded-lg border-neutral-100">
+          <div className="flex flex-col p-2 mb-20 border-2 rounded-lg border-neutral-100">
             <div className="flex my-2 border-b-[1px] pb-2 flex-wrap flex-col xsm:flex-row">
               <span className="w-[5rem] sm:w-[8rem] bg-neutral-500 rounded-md px-2 mr-2">회원등급</span>
               <span>{userGrade(user.exp)}</span>
@@ -128,6 +128,38 @@ const MyPage = () => {
                 <span>{`${user.point}p`}</span>
               </div>
               <SpanTextHighlight className={'ml-2 text-[0.6rem] xsm:text-sm sm:text-base'} str={`*구매 금액의 "${gradeDiscount(user.exp)}" 적립`} highlightText={gradeDiscount(user.exp)} highlightColor={'text-sky-500'}></SpanTextHighlight>
+            </div>
+
+            <div>
+
+            </div>
+          </div>
+
+          <span className="pb-2 text-base sm:text-xl">회원 등급표</span>
+          <div className="flex flex-col p-2 border-2 rounded-lg border-neutral-100">
+            <div className="flex my-2 border-b-[1px] pb-2 flex-wrap flex-col xsm:flex-row">
+              <span className="w-[5rem] sm:w-[8rem] bg-neutral-500 rounded-md px-2 mr-2">브론즈</span>
+              <SpanTextHighlight str={`구매 금액의 "1%" 적립`} highlightText={'1%'} highlightColor={'text-sky-500'}></SpanTextHighlight>
+            </div>
+            <div className="flex my-2 border-b-[1px] pb-2 flex-wrap flex-col xsm:flex-row">
+              <span className="w-[5rem] sm:w-[8rem] bg-neutral-500 rounded-md px-2 mr-2">실버</span>
+              <SpanTextHighlight str={`1000exp 달성 시 구매`} highlightText={'1000exp'} highlightColor={'text-sky-500'}></SpanTextHighlight>
+              <SpanTextHighlight str={`금액의 "2%" 적립`} highlightText={'2%'} highlightColor={'text-sky-500'}></SpanTextHighlight>
+            </div>
+            <div className="flex my-2 border-b-[1px] pb-2 flex-wrap flex-col xsm:flex-row">
+              <span className="w-[5rem] sm:w-[8rem] bg-neutral-500 rounded-md px-2 mr-2">골드</span>
+              <SpanTextHighlight str={`3000exp 달성 시 구매`} highlightText={'3000exp'} highlightColor={'text-sky-500'}></SpanTextHighlight>
+              <SpanTextHighlight str={`금액의 "3%" 적립`} highlightText={'3%'} highlightColor={'text-sky-500'}></SpanTextHighlight>
+            </div>
+            <div className="flex my-2 border-b-[1px] pb-2 flex-wrap flex-col xsm:flex-row">
+              <span className="w-[5rem] sm:w-[8rem] bg-neutral-500 rounded-md px-2 mr-2">플래티넘</span>
+              <SpanTextHighlight str={`6000exp 달성 시 구매`} highlightText={'6000exp'} highlightColor={'text-sky-500'}></SpanTextHighlight>
+              <SpanTextHighlight str={`금액의 "4%" 적립`} highlightText={'4%'} highlightColor={'text-sky-500'}></SpanTextHighlight>
+            </div>
+            <div className="flex my-2 border-b-[1px] pb-2 flex-wrap flex-col xsm:flex-row">
+              <span className="w-[5rem] sm:w-[8rem] bg-neutral-500 rounded-md px-2 mr-2">다이아</span>
+              <SpanTextHighlight str={`10000exp 달성 시 구매`} highlightText={'10000exp'} highlightColor={'text-sky-500'}></SpanTextHighlight>
+              <SpanTextHighlight str={`금액의 "5%" 적립`} highlightText={'5%'} highlightColor={'text-sky-500'}></SpanTextHighlight>
             </div>
 
             <div>
