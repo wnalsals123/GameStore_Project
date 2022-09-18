@@ -16,8 +16,8 @@ const Payment = () => {
   const [point, setPoint] = useState(0)
   const [paymentMethod, setPaymentMethod] = useState(null)
 
-  useEffect(()=>{
-    if(!!getCookie("PaymentSession") !== true) {
+  useEffect(() => {
+    if (!!getCookie("PaymentSession") !== true) {
       alert("만료된 접근입니다!")
       navigate('/')
     }
@@ -117,7 +117,7 @@ const Payment = () => {
   const paymentMethodChk = (e) => {
     const paymentName = e.target.name
 
-    if(paymentName === paymentMethod) {
+    if (paymentName === paymentMethod) {
       setPaymentMethod(null)
       return
     }
@@ -125,11 +125,88 @@ const Payment = () => {
     setPaymentMethod(paymentName)
   }
 
+  /* 적립금액 확인 */
+  const getReserves = (exp) => {
+    if (exp < 1000) return 0.01
+    else if (exp < 3000) return 0.02
+    else if (exp < 6000) return 0.03
+    else if (exp < 10000) return 0.04
+    else return 0.05
+  }
+
+  /* 주문일자 확인 */
+  const getOrderDate = () => {
+    let today = new Date()
+    return `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()} ${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`
+  }
+
+  /* 결제수단 확인 */
+  const getPaymentMethod = (method) => {
+    if(method === 'creditCard') return '신용카드'
+    else if(method === 'easyPay') return '간편결제'
+    else if(method === 'cellPhone') return '휴대폰'
+    else return '결제오류'
+  }
+
   /* 결제 확인 */
   const paymentConfirmation = () => {
-    if(paymentMethod === null) {
+    if (paymentMethod === null) {
       alert("결제 수단을 선택해 주세요!")
       return
+    }
+
+    // 유저 구매 내역 업데이트
+    let purchaseUp = []
+    for(let i = 0; i < paymentItem.length; i++) {
+      
+      let temp = {
+        주문번호: '00000000',
+        상품명: paymentItem[i].게임명,
+        결제수단: getPaymentMethod(paymentMethod),
+        결제금액: totalPayment,
+        주문일자: getOrderDate(),
+        결제상태: "결제완료",
+        key: 123456789
+      }
+      purchaseUp.push(temp)
+    }
+    purchaseUp = user.구매.concat(purchaseUp)
+
+    // 유저 쿠폰 내역 업데이트
+    let couponUp = null
+    coupon === 0 ? couponUp = user.쿠폰 :  couponUp = user.쿠폰.map(item => item.쿠폰명 === coupon.쿠폰명 ? {...item, 사용: true} : item)
+
+    // 유저 포인트 내역 업데이트
+    let pointUp = user.point - point
+    pointUp = pointUp + Math.ceil(totalPayment * getReserves(user.exp))
+
+    // 유저 정보 설정
+    const updateUser = {
+      username: user.username,
+      password: user.password,
+      passwordOk: user.passwordOk,
+      email: user.email,
+      nickname: user.nickname,
+      exp: user.exp,
+      point: pointUp, // 업데이트
+      구매: purchaseUp, // 업데이트
+      리뷰: user.리뷰,
+      쿠폰: couponUp, // 업데이트
+    }
+
+    console.log(updateUser)
+
+    // 유저 데이터 업데이트
+    const userData = JSON.parse(localStorage.getItem("UserData"))
+    const loginInfo = localStorage.getItem("LoginInfo")
+    for (let i = 0; i < userData.length; i++) {
+      if (userData[i].username === loginInfo) {
+        let temp = userData
+        temp[i] = updateUser
+        console.log(temp)
+        localStorage.setItem("UserData", JSON.stringify(temp))
+        break
+      }
     }
 
     alert("결제완료")
