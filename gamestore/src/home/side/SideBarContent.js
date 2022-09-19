@@ -4,7 +4,7 @@ import { removeCookie } from "../../function/Cookie"
 
 const SideBarContent = (props) => {
   const { isLogin, setIsLogin } = props
-
+  const navigate = useNavigate()
   const [user, setUser] = useState({
     username: '',
     password: '',
@@ -18,24 +18,15 @@ const SideBarContent = (props) => {
     쿠폰: [],
   })
 
-  /* 유저 데이터 불러오기 */
-  useEffect(() => {
+  useEffect(()=>{
     const userData = JSON.parse(localStorage.getItem("UserData"))
     const loginInfo = localStorage.getItem("LoginInfo")
     let temp = null
 
-    // 오류 시 로그인 세션 끊기
-    if (userData !== null || loginInfo !== null) {
+    if(isLogin) {
       temp = userData.filter(item => item.username === loginInfo)
-    }
-    else {
-      alert("오류가 발생했습니다!\n페이지를 새로고침하세요!")
-      removeCookie("LoginSession")
-      return
-    }
-
-    // 성공 시 유저 데이터 상태 업데이트
-    if(temp.length === 0) {
+      setUser(temp[0])
+    } else{
       setUser({
         username: '',
         password: '',
@@ -48,8 +39,6 @@ const SideBarContent = (props) => {
         리뷰: [],
         쿠폰: [],
       })
-    }else{
-      setUser(temp[0])  
     }
   }, [isLogin])
 
@@ -61,8 +50,6 @@ const SideBarContent = (props) => {
     else return "다이아"
   }
 
-  const navigate = useNavigate()
-
   const toLogin = () => {
     document.body.style.overflow = 'hidden'
     navigate("/login")
@@ -72,7 +59,6 @@ const SideBarContent = (props) => {
     document.body.style.overflow = 'hidden'
     navigate("/signup")
   }
-
 
   const toLogout = () => {
     const message = "정말로 로그아웃하시겠습니까?"
@@ -100,16 +86,16 @@ const SideBarContent = (props) => {
     <div className={`w-screen sm:w-80 h-screen bg-neutral-900 text-white`}>
       <div className="flex flex-col p-5 text-xl 3xl:pl-0 3xl:pt-6">
 
-        <div className={`${isLogin ? 'hidden' : 'block'} mb-5 rounded-lg bg-neutral-500`}>
+        {isLogin === false && <div className={`mb-5 rounded-lg bg-neutral-500`}>
           <button className="w-full" onClick={() => { toLogin() }}>
             <div className="relative flex items-center p-2">
               <div className="p-2 rounded-full sm:relative bg-neutral-100"><img className="w-7" src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png" alt="user"></img></div>
               <span className="flex-1 block pl-2">로그인</span>
             </div>
           </button>
-        </div>
+        </div>}
 
-        <div className={`${isLogin ? 'block' : 'hidden'} mb-5 rounded-lg bg-neutral-500`}>
+        {isLogin === true && <div className={`mb-5 rounded-lg bg-neutral-500`}>
           <button className="w-full" onClick={() => { toMyPage() }}>
             <div className="flex items-center justify-center p-2">
               <div className="p-2 rounded-full bg-neutral-100"><img className="w-7" src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png" alt="user"></img></div>
@@ -122,16 +108,16 @@ const SideBarContent = (props) => {
               </div>
             </div>
           </button>
-        </div>
+        </div>}
 
-        <div className={`${isLogin ? 'hidden' : 'block'} mb-5 rounded-lg bg-orange-500`}>
+        {isLogin === false && <div className={`mb-5 rounded-lg bg-orange-500`}>
           <button className="w-full" onClick={() => { toSignUp() }}>
             <div className="relative flex items-center p-2">
               <div className="p-2 rounded-full sm:relative bg-neutral-100"><img className="w-7" src="https://cdn-icons-png.flaticon.com/512/684/684831.png" alt="user"></img></div>
               <span className="flex-1 block pl-2">회원가입</span>
             </div>
           </button>
-        </div>
+        </div>}
 
         <div className="mb-5 rounded-lg bg-sky-500">
           <button className="w-full" onClick={() => { toCart() }}>
