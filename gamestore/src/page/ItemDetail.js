@@ -2,18 +2,19 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 
 const ItemDetail = () => {
-  const { setCart, setIsAddCart } = useOutletContext();
+  const { setCart, setIsAddCart, isLogin } = useOutletContext();
   const { gameid } = useParams();
   const navigate = useNavigate();
+  const [write, setWrite] = useState(false)
 
   const addCart = (selectedItem) => {
     const isUserCart = localStorage.getItem("UserCart") !== null
 
     if (isUserCart) {
-      const userCart = JSON.parse(localStorage.getItem("UserCart")) 
-      const alreadyCart = userCart.filter((item)=>(item.게임명 === selectedItem.게임명)).length > 0
+      const userCart = JSON.parse(localStorage.getItem("UserCart"))
+      const alreadyCart = userCart.filter((item) => (item.게임명 === selectedItem.게임명)).length > 0
 
-      if(alreadyCart) {
+      if (alreadyCart) {
         alert("이미 장바구니에 있습니다!")
         return
       }
@@ -42,7 +43,8 @@ const ItemDetail = () => {
     할인: null,
     신작: null,
     출시일: null,
-    태그: null
+    태그: null,
+    리뷰: null,
   }
 
   const [item, setItem] = useState(temp)
@@ -185,28 +187,143 @@ const ItemDetail = () => {
     } else {
       return (
         <div className="flex flex-col p-2 mb-2 rounded-lg bg-neutral-100 sm:mb-5 sm:p-5">
-          <span className="p-2 mb-2 bg-orange-500 rounded-lg">게임정보</span>
+          <span className="p-2 mb-2 bg-orange-500 rounded-lg">게임 정보</span>
           <div className="flex flex-col p-2 rounded-lg bg-neutral-500">
             <span className={`${infoStyle}`}>게임명 : {item.게임명}</span>
             <span className={`${infoStyle}`}>유통사 : {item.유통사}</span>
             <span className={`${infoStyle}`}>출시일 : {String(item.출시일).replace(/(\d{4})(\d{2})(\d{2})/g, '$1년 $2월 $3일')}</span>
           </div>
+          <span className="p-2 text-black">{item.설명}</span>
         </div>
       )
     }
   }
 
-  const GameEx = () => {
+  const GameComment = () => {
+    const writeReivew = () => {
+      if (isLogin) {
+        setWrite(true)
+      } else {
+        const message = "로그인이 후 가능합니다.\n로그인 하시겠습니까?"
+
+        if (window.confirm(message)) {
+          navigate('/login')
+        } else {
+          console.log("취소")
+        }
+      }
+    }
+
+    const submitReview = () => {
+      const reviewContents = document.getElementById("review").value
+
+      if (reviewContents.length < 10) {
+        alert("내용은 최소 10자 이상입니다!")
+        return
+      }
+      
+      const gameData = JSON.parse(localStorage.getItem("GameList"))
+      const userData = JSON.parse(localStorage.getItem("UserData"))
+      const loginInfo = localStorage.getItem("LoginInfo")
+      const user = userData.filter(item => item.username === loginInfo)[0]
+
+      const getDate = () => {
+        let today = new Date()
+        return `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()} ${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`
+      }
+
+      const gameNewReivew = {
+        username: user.username,
+        좋아요: 0,
+        리뷰내용: reviewContents,
+        작성일: getDate()
+      }
+
+      const userNewReivew =  {
+        게임명: item.게임명,
+        좋아요: 0,
+        리뷰내용: reviewContents,
+        이미지: item.이미지
+      }
+
+      let gameUpdate = null
+
+      gameUpdate = {
+        ...item,
+        리뷰: item.리뷰.concat(gameNewReivew)
+      }
+
+      let userUpdate = null
+
+      userUpdate = {
+        ...user,
+        리뷰: user.리뷰.concat(userNewReivew)
+      }
+
+      for (let i = 0; i < gameData.length; i++) {
+        if (gameData[i].게임명 === item.게임명) {
+          let temp = gameData
+          temp[i] = gameUpdate
+          localStorage.setItem("GameList", JSON.stringify(temp))
+          break
+        }
+      }
+
+      for (let i = 0; i < userData.length; i++) {
+        if (userData[i].username === loginInfo) {
+          let temp = userData
+          temp[i] = userUpdate
+          localStorage.setItem("UserData", JSON.stringify(temp))
+          break
+        }
+      }
+
+      setItem(gameUpdate)
+    }
+
     if (item.게임명 === null) {
       return (
         <div className="flex flex-col p-2 mb-2 text-center rounded-lg bg-neutral-100 sm:mb-5 sm:p-5 animate-pulse">
-          <span className="p-2 text-black rounded-lg animate-spin">↻</span>
+          <span className="p-2 mb-2 rounded-lg bg-sky-500"><span className="block animate-spin">↻</span></span>
+          <span className="p-2 mb-2 rounded-lg bg-neutral-900"><span className="block animate-spin">↻</span></span>
         </div>
       )
     } else {
       return (
         <div className="flex flex-col p-2 mb-2 rounded-lg bg-neutral-100 sm:mb-5 sm:p-5">
-          <span className="p-2 text-black rounded-lg">{item.설명}</span>
+
+          <div className="flex items-center justify-between p-2 rounded-lg bg-sky-500">
+            <span>유저 리뷰</span>
+            <button className="px-1 text-sm text-black rounded-md xsm:text-lg bg-neutral-100" onClick={writeReivew}>+등록</button>
+          </div>
+
+          {write &&
+            <div className="relative flex flex-col p-2 mt-2 rounded-lg bg-neutral-900">
+              <textarea className="p-2 overflow-hidden text-base outline-none resize-none bg-neutral-900 sm:text-base md:text-lg lg:text-xl xl:text-2xl" placeholder="내용입력(최소 10자)" id="review"></textarea>
+              <div className="flex justify-end mt-2 xsm:text-base sm:text-xl">
+                <button className="px-1 mr-2 rounded-md bg-neutral-500" onClick={submitReview}>제출</button>
+                <button className="px-1 rounded-md bg-neutral-500" onClick={() => { setWrite(false) }}>취소</button>
+              </div>
+            </div>
+          }
+
+          {item.리뷰.length === 0 ?
+            <div className="flex flex-col p-2 mt-2 rounded-lg bg-neutral-900">
+              <span>등록된 리뷰가 없습니다.</span>
+            </div>
+            :
+            item.리뷰.map((item, index) => (
+              <div className="flex flex-col p-2 mt-2 rounded-lg bg-neutral-900" key={index}>
+                <div className="flex items-center mb-2">
+                  <span className="px-1 rounded-md bg-neutral-500">{item.username}</span>
+                  <button className="px-1 ml-2 rounded-md bg-neutral-500">{`👍 ${(item.좋아요).toLocaleString()}`}</button>
+                </div>
+                <span className="mb-2">{item.리뷰내용}</span>
+                <span className="text-sm xsm:text-base">{item.작성일}</span>
+              </div>
+            ))
+          }
+
         </div>
       )
     }
@@ -230,7 +347,7 @@ const ItemDetail = () => {
           <button className='w-[40%] py-1 sm:py-5 bg-sky-500 rounded-xl' onClick={() => { addCart(item) }}>장바구니</button>
         </div>
       )
-    } 
+    }
   }
 
   return (
@@ -252,7 +369,7 @@ const ItemDetail = () => {
             <div className="mb-2 leading-normal text-white sm:mb-5">
               <Tag></Tag>
               <GameInfo></GameInfo>
-              <GameEx></GameEx>
+              <GameComment></GameComment>
             </div>
 
             <GamePriceBox></GamePriceBox>

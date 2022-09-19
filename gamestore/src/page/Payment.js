@@ -1,9 +1,10 @@
 import CouponList from "../json/CouponList.json"
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useOutletContext } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getCookie, removeCookie } from "../function/Cookie";
 
 const Payment = () => {
+  const { setCart } = useOutletContext()
   const location = useLocation()
   const navigate = useNavigate()
   const { loginInfo, paymentItem, totalAmount } = location.state
@@ -135,7 +136,7 @@ const Payment = () => {
   }
 
   /* 주문일자 확인 */
-  const getOrderDate = () => {
+  const getDate = () => {
     let today = new Date()
     return `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()} ${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`
   }
@@ -164,7 +165,7 @@ const Payment = () => {
         상품명: paymentItem[i].게임명,
         결제수단: getPaymentMethod(paymentMethod),
         결제금액: totalPayment,
-        주문일자: getOrderDate(),
+        주문일자: getDate(),
         결제상태: "결제완료",
         key: 123456789
       }
@@ -194,21 +195,22 @@ const Payment = () => {
       쿠폰: couponUp, // 업데이트
     }
 
-    console.log(updateUser)
-
     // 유저 데이터 업데이트
     const userData = JSON.parse(localStorage.getItem("UserData"))
-    const loginInfo = localStorage.getItem("LoginInfo")
     for (let i = 0; i < userData.length; i++) {
       if (userData[i].username === loginInfo) {
         let temp = userData
         temp[i] = updateUser
-        console.log(temp)
         localStorage.setItem("UserData", JSON.stringify(temp))
         break
       }
     }
 
+    // 장바구니 비우기
+    localStorage.removeItem("UserCart")
+    setCart(0)
+
+    // 최종 결제 완료 쿠키 삭제
     alert("결제완료")
     removeCookie("PaymentSession")
     navigate('/')

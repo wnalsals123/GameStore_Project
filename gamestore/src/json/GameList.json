@@ -11,7 +11,7 @@
     "신작" : false,
     "출시일" : 20150414,
     "태그" : {"오픈월드" : true, "멀티플레이" : false, "협동" : false, "액션" : true, "공포" : false, "좀비" : false, "어드벤처" : true, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : false},
-    "리뷰" : [ {"username" : "관리자", "좋아요": 0, "리뷰내용" : "재밌어요!", "작성일" : "2022-12-12"} ]
+    "리뷰" : [ {"username" : "관리자", "좋아요": 0, "리뷰내용" : "재밌어요!", "작성일" : "2022-12-12 00:00:00"} ]
   },
   {
     "gameID" : 2,
@@ -24,7 +24,8 @@
     "할인" : 0,
     "신작" : false,
     "출시일" : 20030429,
-    "태그" : {"오픈월드" : false, "멀티플레이" : false, "협동" : false, "액션" : true, "공포" : false, "좀비" : false, "어드벤처" : true, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : true, "FPS" : false}
+    "태그" : {"오픈월드" : false, "멀티플레이" : false, "협동" : false, "액션" : true, "공포" : false, "좀비" : false, "어드벤처" : true, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : true, "FPS" : false},
+    "리뷰" : []
   },
   {
     "gameID" : 3,
@@ -37,7 +38,8 @@
     "할인" : 0.5,
     "신작" : false,
     "출시일" : 20091117,
-    "태그" : {"오픈월드" : false, "멀티플레이" : true, "협동" : true, "액션" : false, "공포" : true, "좀비" : true, "어드벤처" : false, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : true}
+    "태그" : {"오픈월드" : false, "멀티플레이" : true, "협동" : true, "액션" : false, "공포" : true, "좀비" : true, "어드벤처" : false, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : true},
+    "리뷰" : []
   },
   {
     "gameID" : 4,
@@ -50,7 +52,8 @@
     "할인" : 0,
     "신작" : false,
     "출시일" : 20191204,
-    "태그" : {"오픈월드" : false, "멀티플레이" : false, "협동" : false, "액션" : true, "공포" : false, "좀비" : false, "어드벤처" : false, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : true, "FPS" : false}
+    "태그" : {"오픈월드" : false, "멀티플레이" : false, "협동" : false, "액션" : true, "공포" : false, "좀비" : false, "어드벤처" : false, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : true, "FPS" : false},
+    "리뷰" : []
   },
   {
     "gameID" : 5,
@@ -63,7 +66,8 @@
     "할인" : 0,
     "신작" : true,
     "출시일" : 20211119,
-    "태그" : {"오픈월드" : false, "멀티플레이" : false, "협동" : false, "액션" : true, "공포" : false, "좀비" : false, "어드벤처" : false, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : true}
+    "태그" : {"오픈월드" : false, "멀티플레이" : false, "협동" : false, "액션" : true, "공포" : false, "좀비" : false, "어드벤처" : false, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : true},
+    "리뷰" : []
   },
   {
     "gameID" : 6,
@@ -76,7 +80,8 @@
     "할인" : 0.3,
     "신작" : false,
     "출시일" : 20141014,
-    "태그" : {"오픈월드" : false, "멀티플레이" : false, "협동" : false, "액션" : true, "공포" : true, "좀비" : true, "어드벤처" : false, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : false}
+    "태그" : {"오픈월드" : false, "멀티플레이" : false, "협동" : false, "액션" : true, "공포" : true, "좀비" : true, "어드벤처" : false, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : false},
+    "리뷰" : []
   },
   {
     "gameID" : 7,
@@ -89,7 +94,8 @@
     "할인" : 0,
     "신작" : true,
     "출시일" : 20220930,
-    "태그" : {"오픈월드" : false, "멀티플레이" : true, "협동" : true, "액션" : false, "공포" : false, "좀비" : false, "어드벤처" : false, "스포츠" : true, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : false}
+    "태그" : {"오픈월드" : false, "멀티플레이" : true, "협동" : true, "액션" : false, "공포" : false, "좀비" : false, "어드벤처" : false, "스포츠" : true, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : false},
+    "리뷰" : []
   },
   {
     "gameID" : 8,
@@ -102,7 +108,8 @@
     "할인" : 0.7,
     "신작" : false,
     "출시일" : 20201210,
-    "태그" : {"오픈월드" : true, "멀티플레이" : false, "협동" : true, "액션" : true, "공포" : false, "좀비" : false, "어드벤처" : true, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : true}
+    "태그" : {"오픈월드" : true, "멀티플레이" : false, "협동" : true, "액션" : true, "공포" : false, "좀비" : false, "어드벤처" : true, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : true},
+    "리뷰" : []
   },
   {
     "gameID" : 9,
@@ -115,7 +122,8 @@
     "할인" : 0.3,
     "신작" : false,
     "출시일" : 20200312,
-    "태그" : {"오픈월드" : false, "멀티플레이" : true, "협동" : false, "액션" : false, "공포" : false, "좀비" : false, "어드벤처" : false, "스포츠" : false, "리듬" : true, "인디" : false, "MMORPG" : false, "FPS" : false}
+    "태그" : {"오픈월드" : false, "멀티플레이" : true, "협동" : false, "액션" : false, "공포" : false, "좀비" : false, "어드벤처" : false, "스포츠" : false, "리듬" : true, "인디" : false, "MMORPG" : false, "FPS" : false},
+    "리뷰" : []
   },
   {
     "gameID" : 10,
@@ -128,7 +136,8 @@
     "할인" : 0,
     "신작" : false,
     "출시일" : 20111118,
-    "태그" : {"오픈월드" : true, "멀티플레이" : false, "협동" : true, "액션" : true, "공포" : false, "좀비" : true, "어드벤처" : true, "스포츠" : false, "리듬" : false, "인디" : true, "MMORPG" : false, "FPS" : false}
+    "태그" : {"오픈월드" : true, "멀티플레이" : false, "협동" : true, "액션" : true, "공포" : false, "좀비" : true, "어드벤처" : true, "스포츠" : false, "리듬" : false, "인디" : true, "MMORPG" : false, "FPS" : false},
+    "리뷰" : []
   },
   {
     "gameID" : 11,
@@ -141,7 +150,8 @@
     "할인" : 0.2,
     "신작" : false,
     "출시일" : 20180201,
-    "태그" : {"오픈월드" : true, "멀티플레이" : false, "협동" : false, "액션" : true, "공포" : false, "좀비" : false, "어드벤처" : true, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : false}
+    "태그" : {"오픈월드" : true, "멀티플레이" : false, "협동" : false, "액션" : true, "공포" : false, "좀비" : false, "어드벤처" : true, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : false},
+    "리뷰" : []
   },
   {
     "gameID" : 12,
@@ -154,6 +164,7 @@
     "할인" : 0.6,
     "신작" : false,
     "출시일" : 20110419,
-    "태그" : {"오픈월드" : false, "멀티플레이" : true, "협동" : true, "액션" : false, "공포" : false, "좀비" : false, "어드벤처" : false, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : true}
+    "태그" : {"오픈월드" : false, "멀티플레이" : true, "협동" : true, "액션" : false, "공포" : false, "좀비" : false, "어드벤처" : false, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : true},
+    "리뷰" : []
   }
 ]
