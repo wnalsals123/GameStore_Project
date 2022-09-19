@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 const GameFlex = (props) => {
-  const { setCart, setIsAddCart, isLogin, setIsLogin, category, loading, setLoading, setCategory } = props
+  const { setCart, setIsAddCart, isLogin, setIsLogin, category, loading, setLoading, setCategory, GameList } = props
   const navigate = useNavigate();
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search);
@@ -149,6 +149,11 @@ const GameFlex = (props) => {
   /* 게임 데이터에 카테고리, 정렬, 필터 적용 컴포넌트 */
   const GameFlexBox = () => {
     let filterGameData = category === 'home' ? gameData : category === 'sales' ? gameData.filter((item) => (item.할인 !== 0)) : category === 'new' ? gameData.filter((item) => (item.신작 === true)) : gameData
+
+    // 게임 데이터 불러오기 실패 시 로컬 데이터 가져오기
+    if(filterGameData === null) {
+      filterGameData = GameList
+    }
 
     if (sortState === 'sortAbc') {
       filterGameData = filterGameData.sort((a, b) => a.게임명.toLowerCase() < b.게임명.toLowerCase() ? -1 : 1);

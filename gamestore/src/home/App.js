@@ -10,7 +10,7 @@ import { getCookie } from '../function/Cookie';
 
 function App() {
   const location = useLocation()
-  const version = '2.3'
+  const version = '2.4'
   const [cart, setCart] = useState(0)
   const [sideIsOpen, setSideIsOpen] = useState(false)
   const [isAddCart, setIsAddCart] = useState(false)
@@ -50,7 +50,7 @@ function App() {
         <Header cart={cart} sideIsOpen={sideIsOpen} setSideIsOpen={setSideIsOpen} isLogin={isLogin} category={category} setCategory={setCategory} setLoading={setLoading}></Header>
         <SideBar sideIsOpen={sideIsOpen} isLogin={isLogin} setIsLogin={setIsLogin}></SideBar>
       </div>
-      <GameFlex setCart={setCart} setIsAddCart={setIsAddCart} isLogin={isLogin} setIsLogin={setIsLogin} category={category} setCategory={setCategory} loading={loading} setLoading={setLoading}></GameFlex>
+      <GameFlex setCart={setCart} setIsAddCart={setIsAddCart} isLogin={isLogin} setIsLogin={setIsLogin} category={category} setCategory={setCategory} loading={loading} setLoading={setLoading} GameList={GameList}></GameFlex>
       <Outlet context={{ setCart, setIsAddCart, isLogin, setIsLogin }}></Outlet>
       <PopDown isAddCart={isAddCart} setIsAddCart={setIsAddCart}></PopDown>
     </div>
