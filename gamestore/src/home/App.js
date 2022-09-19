@@ -10,7 +10,7 @@ import { getCookie } from '../function/Cookie';
 
 function App() {
   const location = useLocation()
-  const version = '2.4'
+  const version = '2.5'
   const [cart, setCart] = useState(0)
   const [sideIsOpen, setSideIsOpen] = useState(false)
   const [isAddCart, setIsAddCart] = useState(false)
@@ -21,11 +21,16 @@ function App() {
   useEffect(() => {
     // 데이터 유효성 검사
     const getVersion = localStorage.getItem('version')
-    if(getVersion !== null && getVersion !== version) {
+    if(getVersion === null){
+      localStorage.setItem('version', version)
+      localStorage.setItem("GameList", JSON.stringify(GameList))
+      localStorage.setItem("UserData", JSON.stringify(UserData))
+      return
+    }
+    
+    if(getVersion !== version) {
       localStorage.clear()
       alert('데이터 오류로 초기화합니다!')
-    }
-    if(getVersion === null) {
       localStorage.setItem('version', version)
       localStorage.setItem("GameList", JSON.stringify(GameList))
       localStorage.setItem("UserData", JSON.stringify(UserData))
