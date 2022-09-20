@@ -100,7 +100,7 @@ const SideBarContent = (props) => {
             <div className="flex items-center justify-center p-2">
               <div className="p-2 rounded-full bg-neutral-100"><img className="w-7" src="https://cdn-icons-png.flaticon.com/512/1077/1077063.png" alt="user"></img></div>
               <div className="flex flex-col flex-grow">
-                <span>{user.username}</span>
+                <span>{user.nickname}</span>
                 <div className="flex flex-wrap justify-center">
                   <span>{`회원등급 | ${userGrade(user.exp)}`}</span>
                   <span>{`(${user.exp}exp)`}</span>

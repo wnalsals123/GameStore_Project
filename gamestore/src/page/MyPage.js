@@ -226,10 +226,39 @@ const MyPage = () => {
   }
 
   const Review = () => {
+    const gameData = JSON.parse(localStorage.getItem("GameList"))
+
+    /* 사용자 리뷰 데이터 불러오기 */
+    const getReviewData = () => {
+      let reviewList = []
+      for(let i = 0; i < user.리뷰.length; i++) {
+        const selectGame = gameData.filter(item => item.게임명 === user.리뷰[i].게임명)[0]
+        const selectReview = selectGame.리뷰.filter(item => item.commentId === user.리뷰[i].commentId)[0]
+        const reviewDetail = {
+          게임명: selectGame.게임명,
+          이미지: selectGame.이미지,
+          좋아요: selectReview.좋아요,
+          리뷰내용: selectReview.리뷰내용,
+          작성일: selectReview.작성일,
+        }
+        reviewList = reviewList.concat(reviewDetail)
+      }
+      return reviewList
+    }
+    const reviewData = user.리뷰.length === 0 ? [] : getReviewData()
+
+    /* 좋아요 많은 리뷰 */
+    const getPopularReview = () => {
+      const temp = reviewData.filter(() => true)
+      temp.sort((a, b) => a.좋아요 > b.좋아요 ? -1 : 1);
+      return temp[0]
+    }
+    const popularReview = user.리뷰.length === 0 ? [] : getPopularReview()
+
     /* 리뷰 등급 */
     const reviewGrade = (reviews) => {
       const reviewCount = reviews.length
-      if (reviewCount < 1) return "초보자"
+      if (reviewCount < 2) return "초보자"
       else if (reviewCount < 5) return "게이머"
       else if (reviewCount < 10) return "리뷰어"
       else if (reviewCount < 20) return "평론가"
@@ -250,13 +279,6 @@ const MyPage = () => {
       return total
     }
 
-    /* 좋아요 많은 리뷰 */
-    const popularReviews = (reviews) => {
-      const temp = reviews.filter(() => true)
-      temp.sort((a, b) => a.좋아요 > b.좋아요 ? -1 : 1);
-      return temp[0]
-    }
-
     /* 게임 상세 페이지로 이동 */
     const toDetail = (page) => {
       navigate(`/games/${page}`);
@@ -274,15 +296,15 @@ const MyPage = () => {
           <div className="flex flex-col p-2 mb-20 border-2 rounded-lg border-neutral-100">
             <div className="flex my-2 border-b-[1px] pb-2 flex-wrap">
               <span className="w-[7rem] sm:w-[10rem] bg-neutral-500 rounded-md px-2 mr-2">등급</span>
-              <span>{reviewGrade(user.리뷰)}</span>
+              <span>{reviewGrade(reviewData)}</span>
             </div>
             <div className="flex my-2 border-b-[1px] pb-2 flex-wrap">
               <span className="w-[7rem] sm:w-[10rem] bg-neutral-500 rounded-md px-2 mr-2">총 리뷰 수</span>
-              <span>{`${totalReview(user.리뷰).toLocaleString()}개`}</span>
+              <span>{`${totalReview(reviewData).toLocaleString()}개`}</span>
             </div>
             <div className="flex my-2 border-b-[1px] pb-2 flex-wrap">
               <span className="w-[7rem] sm:w-[10rem] bg-neutral-500 rounded-md px-2 mr-2">받은 좋아요 수</span>
-              <span>{`👍${totalLike(user.리뷰).toLocaleString()}`}</span>
+              <span>{`👍${totalLike(reviewData).toLocaleString()}`}</span>
             </div>
           </div>
         </div>
@@ -292,20 +314,24 @@ const MyPage = () => {
             <span className="pb-2 text-base sm:text-xl">가장 인기있는 리뷰</span>
             <div className="flex flex-col p-2 mb-20 border-2 rounded-lg border-neutral-100">
               <div className="flex flex-col xsm:flex-row">
-                <button className="xsm:w-[6rem] sm:w-[9rem] xsm:mr-4 flex-shrink-0 flex-grow xsm:flex-grow-0" onClick={() => { toDetail(popularReviews(user.리뷰).게임명) }}><img className="object-cover w-full h-full rounded-md" src={popularReviews(user.리뷰).이미지} alt="game-logo"></img></button>
+                <button className="xsm:w-[6rem] sm:w-[9rem] xsm:mr-4 flex-shrink-0 flex-grow xsm:flex-grow-0" onClick={() => { toDetail(popularReview.게임명) }}><img className="object-cover w-full h-full rounded-md" src={popularReview.이미지} alt="game-logo"></img></button>
 
                 <div className="flex flex-col flex-grow">
                   <div className="flex my-2 border-b-[1px] pb-2 flex-wrap flex-col xsm:flex-row">
                     <span className="w-[6rem] sm:w-[6rem] lg:w-[10rem] bg-neutral-500 rounded-md px-2 mr-2">게임명</span>
-                    <span>{popularReviews(user.리뷰).게임명}</span>
+                    <span>{popularReview.게임명}</span>
                   </div>
                   <div className="flex my-2 border-b-[1px] pb-2 flex-wrap flex-col xsm:flex-row">
                     <span className="w-[6rem] sm:w-[6rem] lg:w-[10rem] bg-neutral-500 rounded-md px-2 mr-2">좋아요 수</span>
-                    <span>{`👍${popularReviews(user.리뷰).좋아요.toLocaleString()}`}</span>
+                    <span>{`👍${popularReview.좋아요.toLocaleString()}`}</span>
                   </div>
                   <div className="flex my-2 border-b-[1px] pb-2 flex-wrap flex-col xsm:flex-row">
                     <span className="w-[6rem] sm:w-[6rem] lg:w-[10rem] bg-neutral-500 rounded-md px-2 mr-2">리뷰 내용</span>
-                    <span>{popularReviews(user.리뷰).리뷰내용}</span>
+                    <span>{popularReview.리뷰내용}</span>
+                  </div>
+                  <div className="flex my-2 border-b-[1px] pb-2 flex-wrap flex-col xsm:flex-row">
+                    <span className="w-[6rem] sm:w-[6rem] lg:w-[10rem] bg-neutral-500 rounded-md px-2 mr-2">작성일</span>
+                    <span>{popularReview.작성일}</span>
                   </div>
                 </div>
               </div>
@@ -322,7 +348,7 @@ const MyPage = () => {
               <hr className="border-t-2"></hr>
             </div>
             :
-            (user.리뷰).map((item, index) => (
+            (reviewData).map((item, index) => (
               <div className="flex flex-col" key={index}>
                 <div className="flex flex-col p-2 border-2 rounded-lg border-neutral-100">
                   <div className="flex flex-col xsm:flex-row">
@@ -340,6 +366,10 @@ const MyPage = () => {
                       <div className="flex my-2 border-b-[1px] pb-2 flex-wrap flex-col xsm:flex-row">
                         <span className="w-[6rem] sm:w-[6rem] lg:w-[10rem] bg-neutral-500 rounded-md px-2 mr-2">리뷰 내용</span>
                         <span>{item.리뷰내용}</span>
+                      </div>
+                      <div className="flex my-2 border-b-[1px] pb-2 flex-wrap flex-col xsm:flex-row">
+                        <span className="w-[6rem] sm:w-[6rem] lg:w-[10rem] bg-neutral-500 rounded-md px-2 mr-2">작성일</span>
+                        <span>{item.작성일}</span>
                       </div>
                     </div>
                   </div>

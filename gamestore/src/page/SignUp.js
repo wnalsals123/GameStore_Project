@@ -32,6 +32,7 @@ const SignUp = () => {
     구매: [],
     리뷰: [],
     쿠폰: [],
+    좋아요: [],
   });
   const { username, password, passwordOk, email, nickname } = inputValue;
   const [tempEmail, setTempEmail] = useState('') // autoEmail props 용도
