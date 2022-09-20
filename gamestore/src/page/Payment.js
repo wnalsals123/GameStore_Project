@@ -183,15 +183,9 @@ const Payment = () => {
 
     // 유저 정보 설정
     const updateUser = {
-      username: user.username,
-      password: user.password,
-      passwordOk: user.passwordOk,
-      email: user.email,
-      nickname: user.nickname,
-      exp: user.exp,
+      ...user,
       point: pointUp, // 업데이트
       구매: purchaseUp, // 업데이트
-      리뷰: user.리뷰,
       쿠폰: couponUp, // 업데이트
     }
 
