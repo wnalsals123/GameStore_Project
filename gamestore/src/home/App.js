@@ -34,6 +34,7 @@ function App() {
       localStorage.setItem('version', version)
       localStorage.setItem("GameList", JSON.stringify(GameList))
       localStorage.setItem("UserData", JSON.stringify(UserData))
+      console.log("App", JSON.stringify(GameList))
     }
 
     // 로그인 쿠키 확인
