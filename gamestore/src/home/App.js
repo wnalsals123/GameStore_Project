@@ -10,7 +10,7 @@ import { getCookie } from '../function/Cookie';
 
 function App() {
   const location = useLocation()
-  const version = '3.0'
+  const version = '3.1'
   const [cart, setCart] = useState(0)
   const [sideIsOpen, setSideIsOpen] = useState(false)
   const [isAddCart, setIsAddCart] = useState(false)
