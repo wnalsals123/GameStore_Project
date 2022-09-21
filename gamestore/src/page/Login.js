@@ -36,13 +36,19 @@ const Login = () => {
       return
     }
 
-    if(userInfo.length !== 0) {
+    if(userInfo.length === 0) {
+      alert("가입된 회원이 아니거나 비밀번호 오류입니다!")
+      return
+    }
+
+    const isPassWordOk = password === userInfo[0].password
+
+    if(isPassWordOk) {
       localStorage.setItem("LoginInfo", id)
       setCookie('LoginSession', true, 0)
       setIsLogin(true)
       navigate(-1)
     } else {
-      console.log(userInfo)
       alert("가입된 회원이 아니거나 비밀번호 오류입니다!")
     }
   }
