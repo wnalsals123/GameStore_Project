@@ -151,7 +151,7 @@ const GameFlex = (props) => {
     let filterGameData = category === 'home' ? gameData : category === 'sales' ? gameData.filter((item) => (item.할인 !== 0)) : category === 'new' ? gameData.filter((item) => (item.신작 === true)) : gameData
 
     // 게임 데이터 불러오기 실패 시 로컬 데이터 가져오기
-    if(filterGameData === null) {
+    if (filterGameData === null) {
       filterGameData = GameList
     }
 
@@ -218,9 +218,44 @@ const GameFlex = (props) => {
     )
   }
 
+  /* 페이지네이션 */
+  const Page = () => {
+    return (
+      <div className='flex justify-center'>
+        <div className='inline-flex items-center -space-x-px'>
+          <button className="block px-3 py-2 ml-0 leading-tight text-black border border-gray-300 rounded-l-lg bg-neutral-100 hover:bg-neutral-300 hover:text-neutral-700">
+            <span className="sr-only">Previous</span>
+            <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>
+          </button>
+
+          <button className="block px-3 py-2 leading-tight text-white border border-gray-300 bg-sky-500">1</button>
+
+          <button className="block px-3 py-2 leading-tight text-black border border-gray-300 rounded-r-lg bg-neutral-100 hover:bg-neutral-300 hover:text-neutral-700">
+            <span className="sr-only">Next</span>
+            <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg>
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  const FlexFooter = () => {
+    return (
+      <div className="flex justify-between pt-[3rem] xsm:pt-[10rem] text-white mx-3 lg:mx-6 text-sm xsm:text-base sm:text-xl">
+        <div className="flex items-center">
+          <img className="w-8 sm:w-10 filter-white" src="https://cdn-icons-png.flaticon.com/512/686/686589.png" alt="logo"></img>
+          <span className="pl-2 !leading-none sm:pl-4">Game Store</span>
+        </div>
+        <div>
+          <div className="flex items-center h-full"><span>Made by JMJ</span></div>
+        </div>
+      </div>
+    )
+  }
+
   /* 메인 렌더링 */
   return (
-    <div className='relative flex justify-center pb-[10rem]'>
+    <div className='relative flex justify-center pb-5'>
       <div className='hidden'>
         {gameTag.map((item, index) => <input key={index} id={item} type='checkbox'></input>)}
       </div>
@@ -234,6 +269,8 @@ const GameFlex = (props) => {
           <Banner></Banner>
           <FlexHeader></FlexHeader>
           <GameFlexBox></GameFlexBox>
+          <Page></Page>
+          <FlexFooter></FlexFooter>
         </div>
       }
 

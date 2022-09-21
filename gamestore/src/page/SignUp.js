@@ -234,13 +234,13 @@ const SignUp = () => {
                     <div><span className="absolute hidden px-2 text-sm rounded-md top-1/2 left-1/2 group-hover:block bg-sky-500">{!onSummit && "불가능한 입력이 있습니다"}</span></div>
                   </div>
                   {/* 회원가입 하단 */}
-                  <div className="flex justify-between pt-5 text-white">
+                  <div className="flex justify-between pt-5 text-sm text-white xsm:text-base sm:text-xl">
                     <div className="flex items-center">
-                      <img className="w-8 sm:w-10 lg:w-12 filter-white" src="https://cdn-icons-png.flaticon.com/512/686/686589.png" alt="logo"></img>
-                      <span className="pl-2 !leading-none sm:pl-4 text-base sm:text-xl md:text-2xl">Game Store</span>
+                      <img className="w-8 sm:w-10 filter-white" src="https://cdn-icons-png.flaticon.com/512/686/686589.png" alt="logo"></img>
+                      <span className="pl-2 !leading-none sm:pl-4">Game Store</span>
                     </div>
                     <div>
-                      <div className="flex items-end h-full"><span className="text-sm sm:text-base">Made by JMJ</span></div>
+                      <div className="flex items-center h-full"><span>Made by JMJ</span></div>
                     </div>
                   </div>
                 </div>
