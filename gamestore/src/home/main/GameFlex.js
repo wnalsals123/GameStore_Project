@@ -23,7 +23,7 @@ const GameFlex = (props) => {
   useEffect(() => {
     const gameList = JSON.parse(localStorage.getItem("GameList"))
     setGameData(gameList)
-  }, [])
+  }, [GameList])
 
   /* 게임 데이터 로딩 애니메이션 */
   useEffect(() => {
