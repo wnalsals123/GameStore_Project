@@ -12,7 +12,7 @@ const GameFlex = (props) => {
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search);
   const keyword = searchParams.get('keyword')
-  const [gameData, setGameData] = useState([])
+  const [gameData, setGameData] = useState(GameList)
   const gameTag = ['오픈월드', '멀티플레이', '협동', '액션', '공포', '좀비', '어드벤처', '스포츠', 'MMORPG', 'FPS']
   const [sortName, setSortName] = useState('이름 순')
   const [sortState, setsortState] = useState('sortAbc')
@@ -21,7 +21,8 @@ const GameFlex = (props) => {
 
   /* 게임 데이터 불러오기 */
   useEffect(() => {
-    setGameData(JSON.parse(localStorage.getItem("GameList")))
+    const gameList = JSON.parse(localStorage.getItem("GameList"))
+    setGameData(gameList)
   }, [])
 
   /* 게임 데이터 로딩 애니메이션 */
