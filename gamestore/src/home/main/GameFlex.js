@@ -7,24 +7,16 @@ import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 const GameFlex = (props) => {
-  const { setCart, setIsAddCart, isLogin, setIsLogin, category, loading, setLoading, setCategory, GameList } = props
+  const { setCart, setIsAddCart, isLogin, setIsLogin, category, loading, setLoading, setCategory, GameList, gameData } = props
   const navigate = useNavigate();
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search);
   const keyword = searchParams.get('keyword')
-  const [gameData, setGameData] = useState(GameList)
   const gameTag = ['오픈월드', '멀티플레이', '협동', '액션', '공포', '좀비', '어드벤처', '스포츠', 'MMORPG', 'FPS']
   const [sortName, setSortName] = useState('이름 순')
   const [sortState, setsortState] = useState('sortAbc')
   const [isTagListOn, setIsTagListOn] = useState(false)
   const [isFilter, setIsFilter] = useState(false)
-
-  /* 게임 데이터 불러오기 */
-  useEffect(() => {
-    const gameList = JSON.parse(localStorage.getItem("GameList"))
-    setGameData(gameList)
-    console.log("GameFlex", gameList)
-  }, [])
 
   /* 게임 데이터 로딩 애니메이션 */
   useEffect(() => {

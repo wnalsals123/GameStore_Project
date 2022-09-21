@@ -6,11 +6,12 @@ import GameList from '../json/GameList.json'
 import UserData from '../json/UserData.json'
 import { useEffect, useState } from "react"
 import { Outlet, useLocation } from 'react-router-dom';
-import { getCookie } from '../function/Cookie';
+import { getCookie, removeCookie } from '../function/Cookie';
 
 function App() {
   const location = useLocation()
-  const version = '3.2'
+  const version = '3.4'
+  const [gameData, setGameData] = useState(GameList)
   const [cart, setCart] = useState(0)
   const [sideIsOpen, setSideIsOpen] = useState(false)
   const [isAddCart, setIsAddCart] = useState(false)
@@ -19,23 +20,32 @@ function App() {
   const [loading, setLoading] = useState('block')
 
   useEffect(() => {
-    // 데이터 유효성 검사
     const getVersion = localStorage.getItem('version')
+    
+    // 첫 접속 시 데이터 설정
     if(getVersion === null){
+      removeCookie('LoginSession')
       localStorage.setItem('version', version)
       localStorage.setItem("GameList", JSON.stringify(GameList))
       localStorage.setItem("UserData", JSON.stringify(UserData))
       return
     }
     
+    // 버전 다를 시 데이터 초기화
     if(getVersion !== version) {
-      localStorage.clear()
       alert('데이터 오류로 초기화합니다!')
+      removeCookie('LoginSession')
+      localStorage.clear()
       localStorage.setItem('version', version)
       localStorage.setItem("GameList", JSON.stringify(GameList))
       localStorage.setItem("UserData", JSON.stringify(UserData))
-      console.log("App", JSON.stringify(GameList))
+      setGameData(GameList)
+      return
     }
+
+    // 게임 데이터 불러오기
+    const gameList = JSON.parse(localStorage.getItem("GameList"))
+    setGameData(gameList)
 
     // 로그인 쿠키 확인
     const loginSession = !!getCookie("LoginSession")
@@ -56,7 +66,7 @@ function App() {
         <Header cart={cart} sideIsOpen={sideIsOpen} setSideIsOpen={setSideIsOpen} isLogin={isLogin} category={category} setCategory={setCategory} setLoading={setLoading}></Header>
         <SideBar sideIsOpen={sideIsOpen} isLogin={isLogin} setIsLogin={setIsLogin}></SideBar>
       </div>
-      <GameFlex setCart={setCart} setIsAddCart={setIsAddCart} isLogin={isLogin} setIsLogin={setIsLogin} category={category} setCategory={setCategory} loading={loading} setLoading={setLoading} GameList={GameList}></GameFlex>
+      <GameFlex setCart={setCart} setIsAddCart={setIsAddCart} isLogin={isLogin} setIsLogin={setIsLogin} category={category} setCategory={setCategory} loading={loading} setLoading={setLoading} GameList={GameList} gameData={gameData}></GameFlex>
       <Outlet context={{ setCart, setIsAddCart, isLogin, setIsLogin }}></Outlet>
       <PopDown isAddCart={isAddCart} setIsAddCart={setIsAddCart}></PopDown>
     </div>
