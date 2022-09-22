@@ -27,7 +27,7 @@ const Payment = () => {
   /* 뒤로가기 */
   const toBack = () => {
     document.body.style.overflow = 'auto'
-    navigate('/');
+    JSON.parse(sessionStorage.getItem('FirstPage')) ? navigate('/') : navigate(-1);
   }
 
   /* 유저 쿠폰 불러오기 */

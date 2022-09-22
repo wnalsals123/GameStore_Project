@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { removeCookie } from "../../function/Cookie"
 
 const SideBarContent = (props) => {
   const { isLogin, setIsLogin } = props
   const navigate = useNavigate()
+  const location = useLocation()
   const [user, setUser] = useState({
     username: '',
     password: '',
@@ -42,22 +43,36 @@ const SideBarContent = (props) => {
     }
   }, [isLogin])
 
+  const toLogin = () => {
+    document.body.style.overflow = 'hidden'
+    sessionStorage.setItem('FirstPage', false)
+    navigate(`/login${location.search}`)
+  }
+
+  const toSignUp = () => {
+    document.body.style.overflow = 'hidden'
+    sessionStorage.setItem('FirstPage', false)
+    navigate(`/signup${location.search}`)
+  }
+
+  const toMyPage = () => {
+    document.body.style.overflow = 'hidden'
+    sessionStorage.setItem('FirstPage', false)
+    isLogin ? navigate(`/mypage${location.search}`) : navigate(`/login${location.search}`)
+  }
+
+  const toCart = () => {
+    document.body.style.overflow = 'hidden'
+    sessionStorage.setItem('FirstPage', false)
+    navigate(`/cart${location.search}`)
+  }
+
   const userGrade = (exp) => {
     if (exp < 1000) return "브론즈"
     else if (exp < 3000) return "실버"
     else if (exp < 6000) return "골드"
     else if (exp < 10000) return "플래티넘"
     else return "다이아"
-  }
-
-  const toLogin = () => {
-    document.body.style.overflow = 'hidden'
-    navigate("/login")
-  }
-
-  const toSignUp = () => {
-    document.body.style.overflow = 'hidden'
-    navigate("/signup")
   }
 
   const toLogout = () => {
@@ -70,16 +85,6 @@ const SideBarContent = (props) => {
     } else {
       console.log("취소")
     }
-  }
-
-  const toCart = () => {
-    document.body.style.overflow = 'hidden'
-    navigate("/cart")
-  }
-
-  const toMyPage = () => {
-    document.body.style.overflow = 'hidden'
-    navigate("/mypage")
   }
 
   return (

@@ -10,11 +10,13 @@ function Header(props) {
 
   const toCart = () => {
     document.body.style.overflow = 'hidden'
+    sessionStorage.setItem('FirstPage', false)
     navigate(`/cart${location.search}`)
   }
 
   const toMyPage = () => {
     document.body.style.overflow = 'hidden'
+    sessionStorage.setItem('FirstPage', false)
     isLogin ? navigate(`/mypage${location.search}`) : navigate(`/login${location.search}`)
   }
 

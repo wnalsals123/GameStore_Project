@@ -16,6 +16,7 @@ const PopDown = (props) => {
 
   const toCart = () => {
     document.body.style.overflow = 'hidden'
+    sessionStorage.setItem('FirstPage', false)
     navigate(`/cart${location.search}`)
   }
 

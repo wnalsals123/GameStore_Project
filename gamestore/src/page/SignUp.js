@@ -17,7 +17,7 @@ const SignUp = () => {
 
   const toBack = () => {
     document.body.style.overflow = 'auto'
-    navigate('/');
+    JSON.parse(sessionStorage.getItem('FirstPage')) ? navigate('/') : navigate(-1);
   }
 
   // 입력 값 확인 state

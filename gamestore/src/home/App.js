@@ -21,6 +21,7 @@ function App() {
 
   useEffect(() => {
     const getVersion = localStorage.getItem('version')
+    sessionStorage.setItem('FirstPage', true)
     
     // 첫 접속 시 데이터 설정
     if(getVersion === null){
@@ -66,7 +67,7 @@ function App() {
         <Header cart={cart} sideIsOpen={sideIsOpen} setSideIsOpen={setSideIsOpen} isLogin={isLogin} category={category} setCategory={setCategory} setLoading={setLoading}></Header>
         <SideBar sideIsOpen={sideIsOpen} isLogin={isLogin} setIsLogin={setIsLogin}></SideBar>
       </div>
-      <GameFlex setCart={setCart} setIsAddCart={setIsAddCart} isLogin={isLogin} setIsLogin={setIsLogin} category={category} setCategory={setCategory} loading={loading} setLoading={setLoading} GameList={GameList} gameData={gameData}></GameFlex>
+      <GameFlex setCart={setCart} setIsAddCart={setIsAddCart} isLogin={isLogin} setIsLogin={setIsLogin} category={category} setCategory={setCategory} loading={loading} setLoading={setLoading} gameData={gameData}></GameFlex>
       <Outlet context={{ setCart, setIsAddCart, isLogin, setIsLogin }}></Outlet>
       <PopDown isAddCart={isAddCart} setIsAddCart={setIsAddCart}></PopDown>
     </div>
