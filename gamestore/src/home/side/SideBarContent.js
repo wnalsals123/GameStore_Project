@@ -16,33 +16,26 @@ const SideBarContent = (props) => {
     point: 0,
     구매: [],
     리뷰: [],
-    쿠폰: [],
+    쿠폰: []
   })
 
-  /* 사이드바 유저 정보 불러오기 */
+  /* 유저 정보 불러오기 */
   useEffect(()=>{
     const userData = JSON.parse(localStorage.getItem("UserData"))
     const loginInfo = localStorage.getItem("LoginInfo")
-    let temp = null
+
+    const userLoadError = () => {
+      localStorage.removeItem("LoginInfo")
+      removeCookie("LoginSession")
+      setIsLogin(false)
+      alert("세션 만료로 로그아웃 되었습니다.")
+    }
 
     if(isLogin) {
-      temp = userData.filter(item => item.username === loginInfo)
-      setUser(temp[0])
-    } else{
-      setUser({
-        username: '',
-        password: '',
-        passwordOk: '',
-        email: '',
-        nickname: '',
-        exp: 0,
-        point: 0,
-        구매: [],
-        리뷰: [],
-        쿠폰: [],
-      })
+      let temp = userData.filter(item => item.username === loginInfo)
+      temp.length === 0 ? userLoadError() : setUser(temp[0])
     }
-  }, [isLogin])
+  }, [isLogin, setIsLogin])
 
   /* 로그인으로 이동 */
   const toLogin = () => {

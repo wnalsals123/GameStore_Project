@@ -31,15 +31,18 @@ function App() {
       removeCookie('LoginSession')
     }
 
-    // 브라우저 첫 페이지 확인
-    sessionStorage.setItem('FirstPage', true)
+    // 데이터 초기화
+    const dataInit = () => {
+      localStorage.setItem('version', version)
+      localStorage.setItem("GameList", JSON.stringify(GameList))
+      localStorage.setItem("UserData", JSON.stringify(UserData))
+      sessionStorage.setItem('FirstPage', true)
+    }
 
     // 첫 접속 시 데이터 설정
     if (getVersion === null) {
       cacheReset()
-      localStorage.setItem('version', version)
-      localStorage.setItem("GameList", JSON.stringify(GameList))
-      localStorage.setItem("UserData", JSON.stringify(UserData))
+      dataInit()
       return
     }
 
@@ -47,21 +50,21 @@ function App() {
     if (getVersion !== version) {
       alert('데이터 오류로 초기화합니다!')
       cacheReset()
-      localStorage.clear()
-      localStorage.setItem('version', version)
-      localStorage.setItem("GameList", JSON.stringify(GameList))
-      localStorage.setItem("UserData", JSON.stringify(UserData))
-      setGameData(GameList)
+      dataInit()
       return
     }
+
+    // 브라우저 첫 페이지 확인
+    sessionStorage.setItem('FirstPage', true)
 
     // 게임 데이터 불러오기
     const gameList = JSON.parse(localStorage.getItem("GameList"))
     setGameData(gameList)
 
-    // 로그인 쿠키 확인
+    // 로그인 상태 확인
+    const loginInfo = localStorage.getItem("LoginInfo")
     const loginSession = !!getCookie("LoginSession")
-    if (loginSession) setIsLogin(true)
+    if (!!loginInfo && !!loginSession) setIsLogin(true)
 
     // 장바구니 확인
     const isUserCart = localStorage.getItem("UserCart") !== null

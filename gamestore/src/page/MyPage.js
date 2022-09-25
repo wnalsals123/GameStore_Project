@@ -1,7 +1,7 @@
 import SpanTextHighlight from "../function/SpanTextHighlight";
 import { Navigate, useNavigate, useOutletContext } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { removeCookie } from "../function/Cookie";
+import { getCookie } from "../function/Cookie";
 import CouponList from "../json/CouponList.json"
 
 /* 마이페이지 */
@@ -19,25 +19,21 @@ const MyPage = () => {
     point: 0,
     구매: [],
     리뷰: [],
-    쿠폰: [],
+    쿠폰: []
   })
 
   /* 유저 데이터 불러오기 */
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("UserData"))
     const loginInfo = localStorage.getItem("LoginInfo")
-    let temp = null
+    const loginSession = !!getCookie("LoginSession")
 
-    // 오류 시 로그인 세션 끊기
-    if (userData !== null || loginInfo !== null) temp = userData.filter(item => item.username === loginInfo)
-    else {
-      alert("오류가 발생했습니다!\n페이지를 새로고침하세요!")
-      removeCookie("LoginSession")
-      return
-    }
+    const userLoadError = () => alert("불러오기에 실패했습니다!\n로그아웃 후 다시 시도해 주세요.")
 
-    // 성공 시 유저 데이터 상태 업데이트
-    setUser(temp[0])
+    if (!!userData && !!loginInfo && !!loginSession) {
+      let temp = userData.filter(item => item.username === loginInfo)
+      temp.length === 0 ? userLoadError() : setUser(temp[0])
+    } else userLoadError()
   }, [])
 
   const toBack = () => {
@@ -104,7 +100,7 @@ const MyPage = () => {
               <span className="w-[5rem] sm:w-[8rem] bg-neutral-500 rounded-md px-2 mr-2">닉네임</span>
               <div className="flex items-center justify-between flex-grow">
                 <span>{user.nickname}</span>
-                <button className="px-2 py-1 text-sm rounded-lg sm:text-base bg-sky-500 !leading-none">변경</button>
+                <button className="px-2 py-1 text-sm rounded-lg sm:text-base bg-sky-500 !leading-none" onClick={()=>{ alert("추후 변경이 가능합니다.") }}>변경</button>
               </div>
             </div>
           </div>
@@ -137,7 +133,7 @@ const MyPage = () => {
             </div>
           </div>
 
-          <span className="pb-2 text-base sm:text-xl">회원 등급표</span>
+          <span className="pb-2 text-base sm:text-xl">등급표</span>
           <div className="flex flex-col p-2 border-2 rounded-lg border-neutral-100">
             <div className="flex my-2 border-b-[1px] pb-2 flex-wrap flex-col xsm:flex-row">
               <span className="w-[5rem] sm:w-[8rem] bg-neutral-500 rounded-md px-2 mr-2">브론즈</span>
