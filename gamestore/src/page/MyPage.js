@@ -1,12 +1,12 @@
 import SpanTextHighlight from "../function/SpanTextHighlight";
 import { Navigate, useNavigate, useOutletContext } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getCookie } from "../function/Cookie";
+import { getCookie, removeCookie } from "../function/Cookie";
 import CouponList from "../json/CouponList.json"
 
 /* 마이페이지 */
 const MyPage = () => {
-  const { isLogin } = useOutletContext()
+  const { isLogin, setIsLogin } = useOutletContext()
   const navigate = useNavigate()
   const [myList, setMyList] = useState('profile')
   const [user, setUser] = useState({
@@ -39,6 +39,19 @@ const MyPage = () => {
   const toBack = () => {
     document.body.style.overflow = 'auto'
     JSON.parse(sessionStorage.getItem('FirstPage')) ? navigate('/') : navigate(-1);
+  }
+
+  /* 로그아웃 */
+  const toLogout = () => {
+    const message = "정말로 로그아웃하시겠습니까?"
+
+    if (window.confirm(message)) {
+      localStorage.removeItem("LoginInfo")
+      removeCookie("LoginSession")
+      setIsLogin(false)
+    } else {
+      console.log("취소")
+    }
   }
 
   /* 프로필 탭 */
@@ -100,7 +113,7 @@ const MyPage = () => {
               <span className="w-[5rem] sm:w-[8rem] bg-neutral-500 rounded-md px-2 mr-2">닉네임</span>
               <div className="flex items-center justify-between flex-grow">
                 <span>{user.nickname}</span>
-                <button className="px-2 py-1 text-sm rounded-lg sm:text-base bg-sky-500 !leading-none" onClick={()=>{ alert("추후 변경이 가능합니다.") }}>변경</button>
+                <button className="px-2 py-1 text-sm rounded-lg sm:text-base bg-sky-500 !leading-none" onClick={() => { alert("추후 변경이 가능합니다.") }}>변경</button>
               </div>
             </div>
           </div>
@@ -231,7 +244,7 @@ const MyPage = () => {
     /* 사용자 리뷰 데이터 불러오기 */
     const getReviewData = () => {
       let reviewList = []
-      for(let i = 0; i < user.리뷰.length; i++) {
+      for (let i = 0; i < user.리뷰.length; i++) {
         const selectGame = gameData.filter(item => item.게임명 === user.리뷰[i].게임명)[0]
         const selectReview = selectGame.리뷰.filter(item => item.commentId === user.리뷰[i].commentId)[0]
         const reviewDetail = {
@@ -446,7 +459,7 @@ const MyPage = () => {
 
     // 엔터키 리스너
     const enterListen = (e) => {
-      if(e.key === 'Enter') couponConfirmation()
+      if (e.key === 'Enter') couponConfirmation()
     }
 
     return (
@@ -517,11 +530,12 @@ const MyPage = () => {
                 <div className="flex items-center"><button className="w-5 h-5 bg-no-repeat bg-cover sm:w-7 sm:h-7 bg-close-btn" onClick={toBack}></button></div>
               </div>
 
-              <div className="relative flex items-center justify-start mb-2 text-white xsm:mb-5">
+              <div className="relative flex items-center justify-between mb-2 text-white xsm:mb-5">
                 <div className="flex items-center">
                   <img className="w-10 md:w-12 filter-white" src="https://cdn-icons-png.flaticon.com/512/686/686589.png" alt="logo"></img>
                   <span className="pl-4 leading-none">Game Store</span>
                 </div>
+                <li><button onClick={toLogout}>로그아웃</button></li>
               </div>
 
               <div className="flex flex-col flex-grow overflow-y-auto text-white border-2 rounded-lg xsm:flex-row border-neutral-100">
