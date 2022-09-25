@@ -3,12 +3,12 @@ import { useEffect, useState } from "react"
 /* 게임 필터 */
 const GameFilter = (props) => {
   const { setIsFilter, setIsTagListOn } = props
-  const gameTag = ['오픈월드', '멀티플레이', '협동', '액션', '공포', '좀비', '어드벤처', '스포츠', 'MMORPG', 'FPS']
+  const gameTag = ["오픈월드", "멀티플레이", "협동", "액션", "공포", "좀비", "어드벤처", "스포츠", "리듬", "인디", "MMORPG", "FPS"]
   const [checkedTag, setCheckedTag] = useState({ "오픈월드": false, "멀티플레이": false, "협동": false, "액션": false, "공포": false, "좀비": false, "어드벤처": false, "스포츠": false, "리듬": false, "인디": false, "MMORPG": false, "FPS": false })
 
   /* 필터 값 가져오기 */
   const updateFilter = () => {
-    const tempTag = ['오픈월드', '멀티플레이', '협동', '액션', '공포', '좀비', '어드벤처', '스포츠', 'MMORPG', 'FPS']
+    const tempTag = ["오픈월드", "멀티플레이", "협동", "액션", "공포", "좀비", "어드벤처", "스포츠", "리듬", "인디", "MMORPG", "FPS"]
     let temp = {}
     for (let i = 0; i < tempTag.length; i++) {
       temp[tempTag[i]] = document.getElementById(tempTag[i]).checked

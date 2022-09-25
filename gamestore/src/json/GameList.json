@@ -452,5 +452,44 @@
     "출시일" : 20200904,
     "태그" : {"오픈월드" : false, "멀티플레이" : true, "협동" : true, "액션" : true, "공포" : false, "좀비" : false, "어드벤처" : true, "스포츠" : true, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : false},
     "리뷰" : []
+  },
+  {
+    "게임명" : "세키로:섀도우 다이 트와이스",
+    "유통사" : "Activision",
+    "설명" : "`세키로: 섀도우 다이 트와이스`에서 당신은 명예와 온전한 신체를 모두 잃은, 죽음 직전에서 구조된 전사 “외팔의 늑대”가 됩니다. 고대 혈통의 계승자인 어린 주군을 보호하기로 맹세한 당신은, 위협적인 아시나 가문을 포함한 다양하고 잔혹한 적들의 표적입니다. 어린 주군이 포로로 잡힌다면, 그 무엇도 당신이 명예를 회복하기 위한 위험한 여정을 떠나는 것을 막을 수 없습니다. 죽음 그 자체도 말이죠.",
+    "이미지" : "https://assets1.ignimgs.com/2018/09/04/sekiro---button-1536103897438.jpg",
+    "동영상" : "https://www.youtube-nocookie.com/embed/mcdkexoJeDQ",
+    "가격" : 59800,
+    "할인" : 0.2,
+    "신작" : false,
+    "출시일" : 20190322,
+    "태그" : {"오픈월드" : false, "멀티플레이" : false, "협동" : false, "액션" : true, "공포" : false, "좀비" : false, "어드벤처" : false, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : false},
+    "리뷰" : []
+  },
+  {
+    "게임명" : "이지투온 리부트:R",
+    "유통사" : "NeoNovice",
+    "설명" : "EZ2ON REBOOT : R은 EZ2AC 시리즈의 수록곡 판권 계약을 체결하여 개발된 PC 건반형 리듬 게임으로, 네오노비스와 스퀘어픽셀즈가 공동으로 개발하고 있다. RETRO EZ2ON (2008), EZ2ON REBOOT (2013)에 이어 출시된 EZ2ON 시리즈의 세 번째 작품이기도 하며 2022년 현재 스팀 플랫폼을 통해 서비스 중이다.",
+    "이미지" : "https://i.ytimg.com/vi/Ry4AJ6WuG2E/maxresdefault.jpg",
+    "동영상" : "https://www.youtube-nocookie.com/embed/tax4e4hBBZc",
+    "가격" : 44800,
+    "할인" : 0,
+    "신작" : true,
+    "출시일" : 20220414,
+    "태그" : {"오픈월드" : false, "멀티플레이" : true, "협동" : false, "액션" : false, "공포" : false, "좀비" : false, "어드벤처" : true, "스포츠" : false, "리듬" : true, "인디" : false, "MMORPG" : false, "FPS" : false},
+    "리뷰" : []
+  },
+  {
+    "게임명" : "다크 소울 3",
+    "유통사" : "FromSoftware",
+    "설명" : "불이 꺼지고 세계가 멸망함에 따라 더 거대한 적과 환경으로 가득 찬 우주로 여행하십시오. 플레이어는 더 빠른 게임 플레이와 증폭된 전투 강도를 통해 장엄한 분위기와 어둠의 세계에 빠져들게 될 것입니다. 팬과 신규 사용자 모두 게임 플레이와 몰입형 그래픽을 제공하는 게임의 특징에 길을 잃을 것입니다.",
+    "이미지" : "https://image.api.playstation.com/cdn/HP0700/CUSA03434_00/8h7cWRisC1eoKS3dNjsSt7bMM59QDsJhh2VpJ5v0j18T57tUOabxc3QaG8A5HAJw.png",
+    "동영상" : "https://www.youtube-nocookie.com/embed/tax4e4hBBZc",
+    "가격" : 49800,
+    "할인" : 0.2,
+    "신작" : false,
+    "출시일" : 20220414,
+    "태그" : {"오픈월드" : false, "멀티플레이" : true, "협동" : false, "액션" : true, "공포" : true, "좀비" : false, "어드벤처" : false, "스포츠" : false, "리듬" : false, "인디" : false, "MMORPG" : false, "FPS" : false},
+    "리뷰" : [ {"commentId" : "commentTestId-JHJ", "username" : "JHJ", "nickname" : "로그라이크소울",  "좋아요": 3, "리뷰내용" : "태양만세!", "작성일" : "2022-12-24 00:00:00"} ]
   }
 ]

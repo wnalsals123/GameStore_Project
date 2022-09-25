@@ -11,6 +11,7 @@ const SearchResult = (props) => {
   /* 상세보기 */
   const toDetail = (item) => {
     document.body.style.overflow = 'hidden'
+    sessionStorage.setItem('FirstPage', false)
     navigate(`/games/${item.게임명}/?keyword=${keyword}`);
   }
 

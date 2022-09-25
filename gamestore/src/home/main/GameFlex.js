@@ -14,7 +14,7 @@ const GameFlex = (props) => {
   const location = useLocation()
   const searchParams = new URLSearchParams(location.search);
   const keyword = searchParams.get('keyword')
-  const gameTag = ['오픈월드', '멀티플레이', '협동', '액션', '공포', '좀비', '어드벤처', '스포츠', 'MMORPG', 'FPS']
+  const gameTag = ["오픈월드", "멀티플레이", "협동", "액션", "공포", "좀비", "어드벤처", "스포츠", "리듬", "인디", "MMORPG", "FPS"]
   const [sortState, setsortState] = useState('sortAbc')
   const [isFilter, setIsFilter] = useState(false)
   const [totalPage, setTotalPage] = useState(100)
