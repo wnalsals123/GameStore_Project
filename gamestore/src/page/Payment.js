@@ -3,6 +3,7 @@ import { useLocation, useNavigate, useOutletContext } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getCookie, removeCookie } from "../function/Cookie";
 
+/* 주문결제 페이지 */
 const Payment = () => {
   const { setCart } = useOutletContext()
   const location = useLocation()
@@ -17,6 +18,7 @@ const Payment = () => {
   const [point, setPoint] = useState(0)
   const [paymentMethod, setPaymentMethod] = useState(null)
 
+  /* 세션 만료 시 리디렉션 */
   useEffect(() => {
     if (!!getCookie("PaymentSession") !== true) {
       alert("만료된 접근입니다!")

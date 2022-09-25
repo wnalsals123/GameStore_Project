@@ -2,15 +2,16 @@ import AutoCompleteEmail from "../function/AutoCompleteEmail";
 import { useEffect, useRef, useState } from "react";
 import { Navigate, useNavigate, useOutletContext } from "react-router-dom";
 
+/* 회원가입 페이지 */
 const SignUp = () => {
   const navigate = useNavigate()
   const emailRef = useRef()
   const [userData, setUserData] = useState([])
   const { isLogin } = useOutletContext()
 
+  // 유저 정보 가져오기
   useEffect(() => {
     document.body.style.overflow = 'hidden'
-    // 유저 정보 가져오기
     const serverUserDate = JSON.parse(localStorage.getItem('UserData'))
     serverUserDate === null ? setUserData([]) : setUserData(serverUserDate)
   }, [])

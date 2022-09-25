@@ -1,17 +1,20 @@
 import { createFuzzyMatcher } from "./StringMatcher";
 import { useNavigate } from "react-router-dom";
 
+/* 검색 결과 페이지 */
 const SearchResult = (props) => {
   const { gameData, keyword, addCart } = props
   const navigate = useNavigate();
   const regex = createFuzzyMatcher(keyword.toLowerCase());
   const filterGameData = gameData.filter((item) => (regex.test(item.게임명.toLowerCase())))
 
+  /* 상세보기 */
   const toDetail = (item) => {
     document.body.style.overflow = 'hidden'
     navigate(`/games/${item.게임명}/?keyword=${keyword}`);
   }
 
+  /* 검색 결과 리스트 */
   const ResultFlex = () => {
     return (
       filterGameData.map((item) => (

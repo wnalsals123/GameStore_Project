@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { setCookie } from "../function/Cookie";
 
+/* 로그인 페이지 */
 const Login = () => {
   const navigate = useNavigate()
   const { setIsLogin } = useOutletContext()
@@ -11,16 +12,19 @@ const Login = () => {
     document.body.style.overflow = 'hidden'
   }, [])
 
+  /* 뒤로가기 */
   const toBack = () => {
     document.body.style.overflow = 'auto'
     JSON.parse(sessionStorage.getItem('FirstPage')) ? navigate('/') : navigate(-1);
   }
 
+  /* 회원가입으로 이동 */
   const toSignUp = () => {
     document.body.style.overflow = 'auto'
     navigate("/signup");
   }
 
+  /* 로그인 요청 */
   const toLogin = () => {
     const id = document.getElementById('id').value
     const password = document.getElementById('password').value
@@ -53,6 +57,7 @@ const Login = () => {
     }
   }
 
+  /* 로그인 엔터키 리스너 */
   const enterLogin = (e) => {
     if(e.key === 'Enter') toLogin()
   }

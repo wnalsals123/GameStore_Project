@@ -1,3 +1,4 @@
+/* 게임 목록 하단 */
 const GameFlexFooter = () => {
   return (
     <div className="flex justify-between pt-[3rem] xsm:pt-[10rem] text-white mx-3 lg:mx-6 text-sm xsm:text-base sm:text-xl">

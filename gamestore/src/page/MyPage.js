@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { removeCookie } from "../function/Cookie";
 import CouponList from "../json/CouponList.json"
 
+/* 마이페이지 */
 const MyPage = () => {
   const { isLogin } = useOutletContext()
   const navigate = useNavigate()
@@ -44,6 +45,7 @@ const MyPage = () => {
     JSON.parse(sessionStorage.getItem('FirstPage')) ? navigate('/') : navigate(-1);
   }
 
+  /* 프로필 탭 */
   const Profile = () => {
     /* 유저 등급 */
     const userGrade = (exp) => {
@@ -172,6 +174,7 @@ const MyPage = () => {
     )
   }
 
+  /* 구매 내역 탭 */
   const Purchase = () => {
     return (
       <div className="overflow-y-auto scrollbar-hide xsm:w-[calc(100%-12rem)] p-2 sm:p-5 !ml-0 rounded-lg bg-neutral-900 flex-grow">
@@ -225,6 +228,7 @@ const MyPage = () => {
     )
   }
 
+  /* 리뷰 관리 탭 */
   const Review = () => {
     const gameData = JSON.parse(localStorage.getItem("GameList"))
 
@@ -384,6 +388,7 @@ const MyPage = () => {
     )
   }
 
+  /* 쿠폰함 탭 */
   const Coupon = () => {
     /* 유저 쿠폰 불러오기 */
     const userCoupon = (userCouponHistory) => {
@@ -443,7 +448,7 @@ const MyPage = () => {
       alert("쿠폰을 등록했습니다!")
     }
 
-    // 엔터로 제출
+    // 엔터키 리스너
     const enterListen = (e) => {
       if(e.key === 'Enter') couponConfirmation()
     }

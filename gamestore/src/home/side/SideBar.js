@@ -5,6 +5,7 @@ const SideBar = (props) => {
   const { sideIsOpen, isLogin, setIsLogin } = props
   const [sideBarAni, setSideBarAni] = useState(false)
 
+  /* 사이드바 애니메이션 */
   useEffect(() => {
     let timer = null
 

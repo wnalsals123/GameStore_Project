@@ -10,7 +10,7 @@ import { getCookie, removeCookie } from '../function/Cookie';
 
 function App() {
   const location = useLocation()
-  const version = '3.4'
+  const version = '1.0'
   const [gameData, setGameData] = useState(GameList)
   const [cart, setCart] = useState(0)
   const [sideIsOpen, setSideIsOpen] = useState(false)
@@ -19,23 +19,34 @@ function App() {
   const [category, setCategory] = useState('home')
   const [loading, setLoading] = useState('block')
 
+  /* 사이트 연결 설정 */
   useEffect(() => {
+    // 버전 불러오기
     const getVersion = localStorage.getItem('version')
-    sessionStorage.setItem('FirstPage', true)
-    
-    // 첫 접속 시 데이터 설정
-    if(getVersion === null){
+
+    // 캐시 초기화
+    const cacheReset = () => {
+      localStorage.clear()
+      sessionStorage.clear()
       removeCookie('LoginSession')
+    }
+
+    // 브라우저 첫 페이지 확인
+    sessionStorage.setItem('FirstPage', true)
+
+    // 첫 접속 시 데이터 설정
+    if (getVersion === null) {
+      cacheReset()
       localStorage.setItem('version', version)
       localStorage.setItem("GameList", JSON.stringify(GameList))
       localStorage.setItem("UserData", JSON.stringify(UserData))
       return
     }
-    
+
     // 버전 다를 시 데이터 초기화
-    if(getVersion !== version) {
+    if (getVersion !== version) {
       alert('데이터 오류로 초기화합니다!')
-      removeCookie('LoginSession')
+      cacheReset()
       localStorage.clear()
       localStorage.setItem('version', version)
       localStorage.setItem("GameList", JSON.stringify(GameList))
@@ -50,13 +61,14 @@ function App() {
 
     // 로그인 쿠키 확인
     const loginSession = !!getCookie("LoginSession")
-    if(loginSession) setIsLogin(true)
-    
+    if (loginSession) setIsLogin(true)
+
     // 장바구니 확인
     const isUserCart = localStorage.getItem("UserCart") !== null
-    if(isUserCart) setCart(JSON.parse(localStorage.getItem("UserCart")).length)
+    if (isUserCart) setCart(JSON.parse(localStorage.getItem("UserCart")).length)
   }, [])
 
+  /* 스크롤바 초기화 */
   useEffect(() => {
     location.pathname === '/' && (document.body.style.overflow = 'auto')
   }, [location])

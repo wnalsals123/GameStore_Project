@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+/* 게임 목록 박스 */
 const GameFlexBox = (props) => {
   const { category, gameData, addCart, isFilter, loading, sortState, setTotalPage, currentPage, setCurrentPage } = props
   const navigate = useNavigate()
@@ -14,6 +15,7 @@ const GameFlexBox = (props) => {
     navigate(`/games/${item.게임명}`);
   }
 
+  /* 해당 게임 목록 불러오기 */
   useEffect(() => {
     let filterGameData = category === 'home' ? gameData : category === 'sales' ? gameData.filter((item) => (item.할인 !== 0)) : category === 'new' ? gameData.filter((item) => (item.신작 === true)) : gameData
 

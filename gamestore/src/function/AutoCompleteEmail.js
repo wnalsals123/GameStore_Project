@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react"
 
+/* 이메일 자동완성  */
 const AutoCompleteEmail = (props) => {
   const { tempEmail, inputValue, setInputValue, isVaild, setIsVaild, isDuplicate, setIsDuplicate, userData, emailRef } = props
-
   const [isHaveInputValue, setIsHaveInputValue] = useState(false)
   const [dropList, setDropList] = useState([])
   let resultTextArray = useRef([])
 
+  /* 이메일 값 리스너 */
   useEffect(() => {
     const mailList = ['naver.com', 'gmail.com', 'daum.net', 'nate.com', 'hanmail.net']
 
@@ -27,6 +28,7 @@ const AutoCompleteEmail = (props) => {
     }
   }, [tempEmail])
 
+  /* 이메일 클릭 리스너 */
   const clickDropDownItem = clickedItem => {
     emailRef.current.value = clickedItem
     setInputValue({ ...inputValue, email: clickedItem })
@@ -35,6 +37,7 @@ const AutoCompleteEmail = (props) => {
     setIsHaveInputValue(false)
   }
 
+  /* 이메일 자동완성 리스트 */
   const DropDown = () => {
     return (
       dropList.map((dropDownItem, dropDownIndex) => (

@@ -1,3 +1,4 @@
+/* 404 페이지 */
 const NotFound = () => {
   return (
     <div className="flex items-center justify-center w-screen h-screen text-white">

@@ -19,6 +19,7 @@ const SideBarContent = (props) => {
     쿠폰: [],
   })
 
+  /* 사이드바 유저 정보 불러오기 */
   useEffect(()=>{
     const userData = JSON.parse(localStorage.getItem("UserData"))
     const loginInfo = localStorage.getItem("LoginInfo")
@@ -43,30 +44,35 @@ const SideBarContent = (props) => {
     }
   }, [isLogin])
 
+  /* 로그인으로 이동 */
   const toLogin = () => {
     document.body.style.overflow = 'hidden'
     sessionStorage.setItem('FirstPage', false)
     navigate(`/login${location.search}`)
   }
 
+  /* 회원가입으로 이동 */
   const toSignUp = () => {
     document.body.style.overflow = 'hidden'
     sessionStorage.setItem('FirstPage', false)
     navigate(`/signup${location.search}`)
   }
 
+  /* 마이페이지로 이동 */
   const toMyPage = () => {
     document.body.style.overflow = 'hidden'
     sessionStorage.setItem('FirstPage', false)
     isLogin ? navigate(`/mypage${location.search}`) : navigate(`/login${location.search}`)
   }
 
+  /* 장바구니로 이동 */
   const toCart = () => {
     document.body.style.overflow = 'hidden'
     sessionStorage.setItem('FirstPage', false)
     navigate(`/cart${location.search}`)
   }
 
+  /* 유저 등급 */
   const userGrade = (exp) => {
     if (exp < 1000) return "브론즈"
     else if (exp < 3000) return "실버"
@@ -75,6 +81,7 @@ const SideBarContent = (props) => {
     else return "다이아"
   }
 
+  /* 로그아웃 */
   const toLogout = () => {
     const message = "정말로 로그아웃하시겠습니까?"
 

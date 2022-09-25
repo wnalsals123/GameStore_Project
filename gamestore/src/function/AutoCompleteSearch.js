@@ -2,6 +2,7 @@ import { createFuzzyMatcher } from "./StringMatcher";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+/* 검색 자동완성 */
 const AutoCompleteSearch = (props) => {
   const { setSearchVis } = props
   const navigate = useNavigate()
@@ -10,6 +11,7 @@ const AutoCompleteSearch = (props) => {
   const [dropDownList, setDropDownList] = useState([])
   const [dropDownItemIndex, setDropDownItemIndex] = useState(-1)
 
+  /* 검색 리스트 설정 */
   const showDropDownList = () => {
     if (inputValue === '') {
       setIsHaveInputValue(false)
@@ -29,11 +31,13 @@ const AutoCompleteSearch = (props) => {
     }
   }
 
+  /* 검색 값 리스너 */
   const changeInputValue = event => {
     setInputValue(event.target.value)
     event.target.value !== "" ? setIsHaveInputValue(true) : setIsHaveInputValue(false)
   }
 
+  /* 검색 값 클릭 리스너 */
   const clickDropDownItem = clickedItem => {
     setInputValue(clickedItem)
     setIsHaveInputValue(false)
@@ -41,6 +45,7 @@ const AutoCompleteSearch = (props) => {
     navigate(`/?keyword=${clickedItem}`)
   }
 
+  /* 방향키 리스너 */
   const handleDropDownKey = event => {
     //input에 값이 있을때만 작동
     if (isHaveInputValue) {
@@ -58,12 +63,14 @@ const AutoCompleteSearch = (props) => {
     }
   }
 
+  /* 블러 시 숨기기 */
   const blurAuto = () => {
     setIsHaveInputValue(false)
   }
 
   useEffect(showDropDownList, [inputValue])
 
+  /* 검색 리스트 뷰 */
   const Result = () => {
     return (
       <ul className="absolute top-[85%] -left-[2px] w-[16rem] bg-white border-2 border-neutral-900 rounded-b-lg border-t-0 py-2 text-left">

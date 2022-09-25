@@ -2,7 +2,7 @@ import GameFilter from "../../function/GameFilter"
 import Dropdown from "../../function/DropDown"
 import { useState } from "react"
 
-/* 카테고리, 정렬 컴포넌트 */
+/* 게임 카테고리, 정렬 설정 헤더 */
 const GameFlexHeader = (props) => {
   const { category, setCategory, setLoading, setsortState, setIsFilter, isFilter, scroolRef } = props
   const [isTagListOn, setIsTagListOn] = useState(false)
@@ -23,7 +23,7 @@ const GameFlexHeader = (props) => {
     setsortState(sortState)
   }
 
-  // 필터 적용 시 활성화
+  // 게임 필터 적용 시 활성화
   const Tag = () => {
     const tagStyle = 'bg-neutral-500 rounded-lg px-3 ml-3'
 
@@ -35,6 +35,7 @@ const GameFlexHeader = (props) => {
     )
   }
 
+  // 게임 필터
   const TagList = () => {
     return (
       <div className={`${isTagListOn ? 'block' : 'hidden'} absolute top-0 -right-3 sm:right-0 z-40 3xl:block 3xl:fixed 3xl:top-[initial] 3xl:bottom-[1.25rem] 3xl:right-[calc(50%+39.2rem)]`}>
@@ -43,6 +44,7 @@ const GameFlexHeader = (props) => {
     )
   }
 
+  // 드롭박스 뷰 state
   const [categoryVis, setCategoryVis] = useState(false)
   const [sortVis, setSortVis] = useState(false)
 

@@ -1,3 +1,4 @@
+/* 글자색 강조 */
 const SpanTextHighlight = (props) => {
   const { className, str, highlightText, highlightColor } = props
   const strSplite = str.split(highlightText)

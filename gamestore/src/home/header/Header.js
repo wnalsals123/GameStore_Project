@@ -8,18 +8,21 @@ function Header(props) {
   const navigate = useNavigate()
   const location = useLocation()
 
+  /* 장바구니로 이동 */
   const toCart = () => {
     document.body.style.overflow = 'hidden'
     sessionStorage.setItem('FirstPage', false)
     navigate(`/cart${location.search}`)
   }
 
+  /* 마이페이지로 이동 */
   const toMyPage = () => {
     document.body.style.overflow = 'hidden'
     sessionStorage.setItem('FirstPage', false)
     isLogin ? navigate(`/mypage${location.search}`) : navigate(`/login${location.search}`)
   }
 
+  /* 카테고리 설정 */
   const toCategory = (currentCategory) => {
     navigate('/')
     if (category === currentCategory) return
@@ -28,6 +31,7 @@ function Header(props) {
     setLoading('block')
   }
 
+  /* 검색창 뷰 state */
   const [searchVis, setSearchVis] = useState(false)
 
   return (

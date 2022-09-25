@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 
-//hook
+/* 페이지 이동 시 스크롤 이동 */
 function useMoveScrool() {
   const element = useRef(null);
   const onMoveToElement = () => {

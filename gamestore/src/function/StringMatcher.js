@@ -1,3 +1,4 @@
+/* 한글 패턴 */
 function korPattern(ch) {
   const offset = 44032; /* '가'의 코드 */
   // 한국어 음절
@@ -33,6 +34,7 @@ function korPattern(ch) {
   return (ch);
 }
 
+/* 한글 패턴 정규식 */
 function createFuzzyMatcher(input) {
   const pattern = input.split('').map(korPattern).join('.*?');
   return new RegExp(pattern);

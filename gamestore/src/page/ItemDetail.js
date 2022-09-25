@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 
+/* 상세보기 페이지 */
 const ItemDetail = () => {
   const { setCart, setIsAddCart, isLogin } = useOutletContext();
   const { gameid } = useParams();

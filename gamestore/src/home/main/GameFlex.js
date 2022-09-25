@@ -29,7 +29,7 @@ const GameFlex = (props) => {
     return () => { clearTimeout(timer) }
   }, [category, setLoading])
 
-  /* 장바구니에 추가 함수 */
+  /* 장바구니에 추가*/
   const addCart = (selectedItem) => {
     const isUserCart = localStorage.getItem("UserCart") !== null
 

@@ -2,22 +2,26 @@ import { useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { setCookie } from "../function/Cookie";
 
+/* 장바구니 페이지 */
 const Cart = () => {
   const { isLogin, setCart } = useOutletContext()
   const navigate = useNavigate()
   const [userCart, setUserCart] = useState([])
 
+  /* 장바구니 목록 불러오기 */
   useEffect(() => {
     const isUserCart = localStorage.getItem("UserCart") !== null
 
     if (isUserCart) setUserCart(JSON.parse(localStorage.getItem("UserCart")))
   }, [])
 
+  /* 뒤로가기 */
   const toBack = () => {
     document.body.style.overflow = 'auto'
     JSON.parse(sessionStorage.getItem('FirstPage')) ? navigate('/') : navigate(-1);
   }
 
+  /* 장바구니 게임 삭제 */
   const deleteCart = (gameID) => {
     const temp = userCart.filter((item) => (item.gameID !== gameID))
     setCart(temp.length)
@@ -30,6 +34,7 @@ const Cart = () => {
     navigate(`/games/${page}`);
   }
 
+  /* 장바구니 목록 리스트 뷰 */
   const CartList = () => {
     return (
       userCart.map((item, index) => (
@@ -59,6 +64,7 @@ const Cart = () => {
     )
   }
 
+  /* 총 가격 */
   const getTotal = () => {
     let total = 0
 
@@ -73,6 +79,7 @@ const Cart = () => {
     return total
   }
 
+  /* 결제 페이지 이동 */
   const toPayment = () => {
     if (!isLogin) {
       alert("로그인이 필요합니다!")

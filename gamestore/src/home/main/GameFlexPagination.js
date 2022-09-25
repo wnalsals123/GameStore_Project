@@ -1,13 +1,15 @@
-/* 페이지네이션 */
+/* 게임 목록 페이지네이션 */
 const GameFlexPagination = (props) => {
   const { totalPage, currentPage, setCurrentPage, onMoveToElement } = props
 
+  // 이전 페이지
   const pageDown = () => {
     if(currentPage === 1) return
     onMoveToElement()
     setCurrentPage(currentPage - 1)
   }
 
+  // 다음 페이지
   const pageUp = () => {
     if(currentPage === totalPage) return
     onMoveToElement()

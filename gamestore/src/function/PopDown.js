@@ -1,11 +1,13 @@
 import { useEffect } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 
+/* 장바구니 담기 팝업 */
 const PopDown = (props) => {
   const { isAddCart, setIsAddCart } = props
   const navigate = useNavigate()
   const location = useLocation()
 
+  /* 팝업 애니메이션 설정 */
   useEffect(() => {
     let timer = null
 
@@ -20,6 +22,7 @@ const PopDown = (props) => {
     navigate(`/cart${location.search}`)
   }
 
+  /* 팝업 렌더링 */
   const CartView = () => {
     return (
       <div className="flex justify-center mt-16 sm:mt-32">
