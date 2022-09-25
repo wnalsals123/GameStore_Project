@@ -345,7 +345,6 @@ const ItemDetail = () => {
       if(!isLogin) return false
 
       const isLike = user.좋아요.filter(item => item === commentId).length === 1
-      
       if(isLike) return true
       else return false
     }

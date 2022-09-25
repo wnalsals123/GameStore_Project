@@ -32,7 +32,10 @@ const SignUp = () => {
     point: 0,
     구매: [],
     리뷰: [],
-    쿠폰: [],
+    쿠폰: [{
+      "쿠폰명": "welcome2022",
+      "사용": false
+    }],
     좋아요: [],
   });
   const { username, password, passwordOk, email, nickname } = inputValue;

@@ -429,15 +429,7 @@ const MyPage = () => {
       // 유저 쿠폰 업데이트
       const addCoupon = { 쿠폰명: couponValue, 사용: false }
       const updateUser = {
-        username: user.username,
-        password: user.password,
-        passwordOk: user.passwordOk,
-        email: user.email,
-        nickname: user.nickname,
-        exp: user.exp,
-        point: user.point,
-        구매: user.구매,
-        리뷰: user.리뷰,
+        ...user,
         쿠폰: [...user.쿠폰, addCoupon],
       }
       setUser(updateUser)
@@ -449,7 +441,6 @@ const MyPage = () => {
         if (userData[i].username === loginInfo) {
           let temp = userData
           temp[i] = updateUser
-          console.log(temp)
           localStorage.setItem("UserData", JSON.stringify(temp))
           break
         }
