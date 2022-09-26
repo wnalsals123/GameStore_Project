@@ -8,7 +8,7 @@ const Payment = () => {
   const { setCart } = useOutletContext()
   const location = useLocation()
   const navigate = useNavigate()
-  const { loginInfo, paymentItem, totalAmount } = location.state
+  const { loginInfo, paymentItem, totalAmount } = location.state === null ? { loginInfo: 'temp', paymentItem: [], totalAmount: 0 } : location.state
   const userData = JSON.parse(localStorage.getItem("UserData"))
   const temp = userData.filter(item => item.username === loginInfo)
   const user = temp[0]
@@ -21,7 +21,7 @@ const Payment = () => {
   /* 세션 만료 시 리디렉션 */
   useEffect(() => {
     if (!!getCookie("PaymentSession") !== true) {
-      alert("만료된 접근입니다!")
+      alert("만료된 페이지입니다!")
       navigate('/')
     }
   }, [navigate])

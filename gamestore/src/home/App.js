@@ -10,7 +10,7 @@ import { getCookie, removeCookie } from '../function/Cookie';
 
 function App() {
   const location = useLocation()
-  const version = 'v2'
+  const version = 'v1'
   const [gameData, setGameData] = useState(GameList)
   const [cart, setCart] = useState(0)
   const [sideIsOpen, setSideIsOpen] = useState(false)

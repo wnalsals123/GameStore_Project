@@ -50,6 +50,24 @@
     "point": 99999,
     "구매": [],
     "리뷰": [],
+    "쿠폰": [
+      {
+        "쿠폰명": "welcome2022",
+        "사용": false
+      }
+    ],
+    "좋아요": []
+  },
+  {
+    "username": "temp",
+    "password": "temp",
+    "passwordOk": "temp",
+    "email": "temp",
+    "nickname": "temp",
+    "exp": 0,
+    "point": 0,
+    "구매": [],
+    "리뷰": [],
     "쿠폰": [],
     "좋아요": []
   }

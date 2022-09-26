@@ -9,7 +9,7 @@ const GameFlexHeader = (props) => {
   const [sortName, setSortName] = useState('이름 순')
   const buttonFilter = 'flex items-center p-2 !leading-none w-full'
 
-  // 해당 게임 카테고리 설정
+  // 게임 카테고리 설정
   const toCategory = (currentCategory) => {
     if (category === currentCategory) return
 

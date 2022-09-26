@@ -19,23 +19,26 @@ const MyPage = () => {
     point: 0,
     구매: [],
     리뷰: [],
-    쿠폰: []
+    쿠폰: [],
+    좋아요: []
   })
 
   /* 유저 데이터 불러오기 */
   useEffect(() => {
+    if(!isLogin) return
+    
     const userData = JSON.parse(localStorage.getItem("UserData"))
     const loginInfo = localStorage.getItem("LoginInfo")
     const loginSession = !!getCookie("LoginSession")
-
     const userLoadError = () => alert("불러오기에 실패했습니다!\n로그아웃 후 다시 시도해 주세요.")
 
     if (!!userData && !!loginInfo && !!loginSession) {
       let temp = userData.filter(item => item.username === loginInfo)
       temp.length === 0 ? userLoadError() : setUser(temp[0])
     } else userLoadError()
-  }, [])
+  }, [isLogin])
 
+  /* 뒤로가기 */
   const toBack = () => {
     document.body.style.overflow = 'auto'
     JSON.parse(sessionStorage.getItem('FirstPage')) ? navigate('/') : navigate(-1);
@@ -556,7 +559,7 @@ const MyPage = () => {
 
   return (
     <>
-      {isLogin ? <MyPageWrap /> : <Navigate to="/"></Navigate>}
+      {isLogin ? <MyPageWrap /> : <Navigate to="/login"></Navigate>}
     </>
   )
 }
