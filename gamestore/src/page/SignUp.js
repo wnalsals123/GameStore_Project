@@ -16,6 +16,7 @@ const SignUp = () => {
     serverUserDate === null ? setUserData([]) : setUserData(serverUserDate)
   }, [])
 
+  // 뒤로가기
   const toBack = () => {
     document.body.style.overflow = 'auto'
     JSON.parse(sessionStorage.getItem('FirstPage')) ? navigate('/') : navigate(-1);

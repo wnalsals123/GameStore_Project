@@ -23,7 +23,7 @@
 
 #### gamestore\src\home - 메인 페이지
 * \header - 헤더
-  * <a href="https://github.com/wnalsals123/GameStore_Project/blob/master/gamestore/src/home/header/Header.js">*\Header.js*</a> : 장바구니, 마이페이지, 카테고리 이동
+  * <a href="https://github.com/wnalsals123/GameStore_Project/blob/master/gamestore/src/home/header/Header.js">*\Header.js*</a> : 검색창, 장바구니, 마이페이지, 카테고리 이동
 * \main - 컨텐츠
   * <a href="https://github.com/wnalsals123/GameStore_Project/blob/master/gamestore/src/home/main/GameFlex.js">*\GameFlex.js*</a> : 페이지 컨포넌트 관리
   * <a href="https://github.com/wnalsals123/GameStore_Project/blob/master/gamestore/src/home/main/GameFlexBanner.js">*\GameFlexBanner.js*</a> : 페이지 배너
@@ -31,7 +31,7 @@
   * <a href="https://github.com/wnalsals123/GameStore_Project/blob/master/gamestore/src/home/main/GameFlexHeader.js">*\GameFlexHeader.js*</a> : 게임, 카테고리, 정렬, 필터 설정
   * <a href="https://github.com/wnalsals123/GameStore_Project/blob/master/gamestore/src/home/main/GameFlexPagination.js">*\GameFlexPagination.js*</a> : 게임 리스트 페이지네이션
 * \side - 사이드바
-  * <a href="https://github.com/wnalsals123/GameStore_Project/blob/master/gamestore/src/home/side/SideBar.js">*\SideBar.js*</a> : PC 미만 해상도 용 사이드바 
+  * <a href="https://github.com/wnalsals123/GameStore_Project/blob/master/gamestore/src/home/side/SideBar.js">*\SideBar.js*</a> : 반응형 사이드바 
   * <a href="https://github.com/wnalsals123/GameStore_Project/blob/master/gamestore/src/home/side/SideBarContent.js">*\SideBarContent.js*</a> : 사이드바 컨텐츠
 
 #### gamestore\src\json - 사이트 DB
@@ -44,11 +44,11 @@
   * <a href="https://github.com/wnalsals123/GameStore_Project/blob/master/gamestore/src/page/404/NotFound.js">*\NotFound.js*</a> : 잘못된 페이지 리디렉션
   * <a href="https://github.com/wnalsals123/GameStore_Project/blob/master/gamestore/src/page/404/NotFoundGame.js">*\NotFoundGame.js*</a> : 존재하지 않는 게임 리디렉션
 * <a href="https://github.com/wnalsals123/GameStore_Project/blob/master/gamestore/src/page/Cart.js">*\Cart.js*</a> : 장바구니 페이지
-* <a href="https://github.com/wnalsals123/GameStore_Project/blob/master/gamestore/src/page/ItemDetail.js">*\ItemDetail.json*</a> : 게임 상세보기 페이지
-* <a href="https://github.com/wnalsals123/GameStore_Project/blob/master/gamestore/src/page/Login.js">*\Login.json*</a> : 로그인 페이지
-* <a href="https://github.com/wnalsals123/GameStore_Project/blob/master/gamestore/src/page/MyPage.js">*\MyPage.json*</a> : 마이 페이지
-* <a href="https://github.com/wnalsals123/GameStore_Project/blob/master/gamestore/src/page/Payment.js">*\Payment.json*</a> : 결제 페이지
-* <a href="https://github.com/wnalsals123/GameStore_Project/blob/master/gamestore/src/page/SignUp.js">*\SignUp.json*</a> : 회원가입 페이지
+* <a href="https://github.com/wnalsals123/GameStore_Project/blob/master/gamestore/src/page/ItemDetail.js">*\ItemDetail.js*</a> : 게임 상세보기 페이지
+* <a href="https://github.com/wnalsals123/GameStore_Project/blob/master/gamestore/src/page/Login.js">*\Login.js*</a> : 로그인 페이지
+* <a href="https://github.com/wnalsals123/GameStore_Project/blob/master/gamestore/src/page/MyPage.js">*\MyPage.js*</a> : 마이 페이지
+* <a href="https://github.com/wnalsals123/GameStore_Project/blob/master/gamestore/src/page/Payment.js">*\Payment.js*</a> : 결제 페이지
+* <a href="https://github.com/wnalsals123/GameStore_Project/blob/master/gamestore/src/page/SignUp.js">*\SignUp.js*</a> : 회원가입 페이지
 
 ***
 
@@ -57,13 +57,13 @@
 * 반응형 웹, 서버 및 DB → 배열 함수와 localStorage로 대체
 
 #### 1. 메인 페이지 - <a href="https://jmj-game-store.netlify.app/">Link</a>
-* 게임 리스트 뷰, 게임 검색, 게임 필터링, 페이지 이동, 장바구니 애니메이션 렌더링
+* 검색창, 필터링, 게임 리스트 뷰, 애니메이션 동작, 각 페이지로 이동
 
 #### 2. 로그인 페이지 - <a href="https://jmj-game-store.netlify.app/login">Link</a>
 * 로그인 시 세션 쿠키 및 사용자 정보 생성
 
 #### 3. 회원가입 페이지 - <a href="https://jmj-game-store.netlify.app/signup">Link</a>
-* 실시간으로 사용자 입력 값 확인
+* 사용자 입력 값 추적 및 확인
 
 #### 4. 장바구니 페이지 - <a href="https://jmj-game-store.netlify.app/cart">Link</a>
 * 장바구니 데이터 불러오기, 결제 페이지에 결제정보 전달
